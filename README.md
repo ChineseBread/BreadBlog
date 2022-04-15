@@ -20,3 +20,5 @@
   * 追评回复发表
 ## install
  请根据package.json中的依赖自行安装所需依赖
+## 注意事项
+ package.json中proxy为开发时的服务器代理地址,自己部署需要删除
