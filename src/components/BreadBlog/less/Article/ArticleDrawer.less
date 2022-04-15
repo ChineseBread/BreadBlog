@@ -1,0 +1,62 @@
+.editor-site-layout-content{
+    //抽屉
+    .ant-drawer-body{
+
+        .ant-form{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+
+            & > span{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                .ant-btn-primary:hover{
+                    background-color:#096dd9;
+                }
+            }
+            //每个表单项
+            .ant-form-item{
+                margin: 0;
+            }
+            //选择分类的图标
+            .anticon-bars,.anticon-user{
+                margin-right: 8px;
+                font-size: 16px;
+            }
+            //分割线
+            .ant-divider{
+                margin: 5px 0;
+            }
+            //选择项
+            .ant-radio-group{
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                flex-wrap: wrap;
+                user-select: none;
+                label{
+                    text-align: center;
+                    margin: 4px 2px;
+                    width: 20%;
+                }
+            }
+            .custom_category_header{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-right: 70%;
+            }
+            textarea{
+                max-height: 180px;
+                min-height: 180px;
+            }
+        }
+
+
+    }
+
+}

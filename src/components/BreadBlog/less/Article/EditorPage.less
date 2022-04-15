@@ -1,0 +1,106 @@
+@headerHeight:62px;
+@input_title_width:500px;
+.Editor_Container{
+  .ant-layout-header{
+    height:@headerHeight;
+    width: 100%;
+    padding: 0 20px;
+    background-color: #f5f5f5;
+    box-shadow: 0 1px 4px 2px #d9d9d9;
+    transition: ease-out 0.2s;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    &:hover{
+      box-shadow: 0 3px 4px 2px #bfbfbf;
+    }
+    //头部左边标签
+    div:first-child{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: @input_title_width + 20px;
+      span{
+        display: block;
+        margin-right: 10px;
+      }
+      input{
+        width: @input_title_width;
+        font-size: 20px;
+      }
+    }
+
+    .user_editor_operation{
+      display: flex;
+      justify-content: space-around;
+      flex-direction: row;
+      align-items: center;
+      padding-left: 10px;
+      //width: 320px;
+      .anticon-swap{
+        font-size: 20px;
+      }
+      span{
+        display: block;
+        margin: 0 5px;
+      }
+      img{
+        cursor: pointer;
+      }
+    }
+  }
+  .ant-layout-content{
+    padding: 15px 20px;
+    height: calc(100vh - @headerHeight);
+    overflow: hidden;
+    position: relative;
+    .editor-site-layout-content{
+      overflow: hidden;
+      height: 100%;
+      //markdown组件
+      .markdown_editor{
+        height: 100%;
+        box-shadow: 1px 1px 4px 2px #d9d9d9;
+        .md-preview-wrapper{
+          user-select: none;
+        }
+        .anticon-smile,.anticon-highlight{
+          font-size: 14px;
+          height: 24px;
+          width: 22px;
+          //line-height: 24px;
+          //margin-right: 2px;
+        }
+        .emojis{
+          display: flex;
+          flex-wrap: wrap;
+          width: 300px;
+          li{
+            height: 30px;
+            width: 30px;
+            border: 1px solid #f0f0f0;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+            &::marker{
+              content: '';
+            }
+            &:hover{
+              background-color: #d9d9d9;
+            }
+          }
+        }
+      }
+      .editor-wrapper{
+        height: 100%;
+        background-color: #fff;
+        box-shadow: 1px 1px 4px 2px #d9d9d9;
+        .bf-content{
+          height: 86%;
+        }
+      }
+
+    }
+  }
+}

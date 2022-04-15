@@ -1,0 +1,63 @@
+.article-dropdown{
+    width: 100px;
+    .anticon-edit,.anticon-delete{
+        margin-right: 20px;
+    }
+}
+@import "./UserHomePage";
+.user-home-container{
+    height: 100%;
+    width: 70%;
+    max-width: 100%;
+    padding: 15px 0;
+    //background-color: #eff1f4;
+    display: flex;
+    justify-content: space-around;
+
+    //卡片阴影
+    .user-header-container,.user-minor-card,.ant-list-empty-text,.article-list-item{
+        box-shadow: 1px 1px 4px 2px #d9d9d9;
+        //box-shadow: 1px 1px 5px 2px #8c8c8c;
+    }
+    //左边list区域
+    .user-card-list-container{
+        width: 65%;
+        margin-right: 20%;
+
+        .user-header{
+            margin-bottom: 10px;
+        }
+
+
+        //防止最后一个元素被遮住
+        /*        .ant-list-items{
+                    padding-bottom: 1px;
+                }*/
+    }
+    //右边框
+    .user-minor-container{
+        top: 77px;
+        right: 8%;
+        position: fixed;
+        width: 20%;
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .ant-card-head-title:hover{
+            animation: headShake;
+            animation-duration: 1s;
+        }
+        .user-minor-card{
+            width: 100%;
+            margin-bottom: 20px;
+
+            .tags-list-container{
+                span{
+                    margin: 5px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
