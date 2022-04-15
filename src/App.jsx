@@ -3,7 +3,8 @@ import {BrowserRouter} from "react-router-dom";
 import Particles from 'particlesjs/dist/particles.min'
 import Loading from "./components/Loading/Loading";
 import ParticleCanvas from "./components/BreadBlog/utilsComponents/ParticleCanvas";
-import './App.less';
+// App中无样式设置
+// import './App.less';
 /**
  * @version 1.0
  * @description 基于react开发的博客管理系统
