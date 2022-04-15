@@ -1,7 +1,6 @@
 # BreadBlog
 基于React 17 开发的博客系统
-[Braft-Editor]: https://braft.margox.cn
-[MdEditorRT]: https://imzbf.github.io/md-editor-rt/
+
 ### 包含以下功能
 #### 1. 公共文章
   * 文章按热度随机最新推送
