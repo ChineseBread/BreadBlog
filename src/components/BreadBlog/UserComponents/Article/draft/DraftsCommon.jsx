@@ -15,15 +15,14 @@ export default function DraftsCommon(props) {
 	const location = useLocation()
 	const [visible,setVisible] = useState(false)
 	const [title,setTitle] = useState('')
-
 	const [editorState,setEditorState] = useState(BraftEditor.createEditorState(''))
 
 	useEffect(() => {
-		if (!draftid){
+		if (!draftid || !location?.state?.Versions){
 			message.warn('未找到草稿信息')
-			navigator('/')
+			navigator('/user/drafts')
 		}else{
-			let {Version:{title,content}} = location.state;
+			let {Versions:{title,content}} = location.state;
 			setTitle(title)
 			setEditorState(BraftEditor.createEditorState(content))
 			ArticleDraftStorage.saveArticleDraftID(draftid)

@@ -3,15 +3,18 @@
  * @description 博客主界面
  * @version 1.0
  */
-import {Avatar, BackTop, Badge, Dropdown, Input, Layout, Menu} from 'antd';
 import React, {Suspense} from "react";
 import {Outlet, useNavigate} from "react-router-dom";
+import {Avatar, BackTop, Badge, Dropdown, Input, Layout, Menu} from 'antd';
 import {ArrowUpOutlined, CommentOutlined, SearchOutlined} from "@ant-design/icons";
-import AvatarDropMenu from "./utilsComponents/AvatarDropMenu";
+
 import ContentLoading from "../Loading/ContentLoading";
+import AvatarDropMenu from "./utilsComponents/AvatarDropMenu";
+
 import CustomStorage from "../../utils/StorageUtils/CustomStorage";
 import logo from "../../static/Logo.png";
 import './less/index.less'
+
 const { Header, Content } = Layout;
 
 export default function BreadBlog(){

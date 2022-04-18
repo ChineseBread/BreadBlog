@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect, useState} from "react";
-import {Avatar, Comment, message} from "antd";
+import {Avatar, Comment, message, Popover} from "antd";
 import {CommentOutlined, LikeFilled, LikeOutlined} from "@ant-design/icons";
 import moment from "moment";
 import SubCommentList from "./SubCommentList";
@@ -11,17 +11,16 @@ export default function CommentItem({commentItem:{isanonymous,userid,username,co
 
 	const [likes, setLikes] = useState({isLike:false,action:''});
 	// const [action, setAction] = useState(null);
-
 	const [commentVisible,setVisible] = useState(false)
 	//子评论数组
-	const [CommentsListInfo,setCommentsListInfo] = useState({CommentsList:[],hasMore:true})
+	const [SubCommentsListInfo,setSubCommentsListInfo] = useState({CommentsList:[],hasMore:true})
 	const [page,setPage] = useState(0)
-	useEffect(() => {
-		PublicDataRequest.getArticleSubComment(page + 1,commentsid,commentid).then(result => {
-			if (result.Ok){
-				let{ SubComments } = result
-				setCommentsListInfo({CommentsList: SubComments.CommentsList,hasMore: true})
 
+	useEffect(() => {
+		fcount >= 1 && PublicDataRequest.getArticleSubComment(page + 1,commentsid,commentid).then(result => {
+			if (result.Ok){
+				let {SubComments:{total,CommentsList}} = result
+				setSubCommentsListInfo({CommentsList,hasMore: true})
 			}else{
 				message.warn(result.Msg)
 			}
@@ -31,7 +30,7 @@ export default function CommentItem({commentItem:{isanonymous,userid,username,co
 
 	const likeComment = () => {
 		UserOperationRequest[likes.isLike ? 'unlikeComment' : 'likeComment'](commentsid,commentid).then(result => {
-			if (result?.Ok){
+			if (result.Ok){
 				setLikes(likes => {
 					return{
 						isLike: !likes.isLike,
@@ -42,7 +41,6 @@ export default function CommentItem({commentItem:{isanonymous,userid,username,co
 				message.warn(result.Msg)
 			}
 		})
-
 	};
 
 	return (
@@ -56,7 +54,7 @@ export default function CommentItem({commentItem:{isanonymous,userid,username,co
 					<span onClick={() => setVisible(commentVisible => !commentVisible)}>
         				<CommentOutlined />
 						<span className="comment-action">{fcount}</span>
-						<span className="comment-action">回复</span>
+						<span className="comment-action">{commentVisible ? "返回" : "回复"}</span>
 					</span>
 				]}
 				author={<a>{isanonymous? '匿名用户' : username}</a>}
@@ -69,17 +67,18 @@ export default function CommentItem({commentItem:{isanonymous,userid,username,co
 							username={username}
 							commentsid={commentsid}
 							commentid={commentid}
-							setCommentsListInfo={setCommentsListInfo}
+							setSubCommentsListInfo={setSubCommentsListInfo}
+							setVisible={setVisible}
 						/>}
 					</div>
 				}
 			>
-				{fcount >= 1 && <SubCommentList
-					CommentsListInfo={CommentsListInfo}
+				<SubCommentList
+					SubCommentsListInfo={SubCommentsListInfo}
 					commentsid={commentsid}
 					commentid={commentid}
-					setCommentsListInfo={setCommentsListInfo}
-				/>}
+					setSubCommentsListInfo={setSubCommentsListInfo}
+				/>
 			</Comment>
 		</Fragment>
 

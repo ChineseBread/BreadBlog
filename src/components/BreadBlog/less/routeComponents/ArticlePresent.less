@@ -135,14 +135,10 @@
                 .comment-list{
 
                     .ant-comment{
-                        margin-bottom: 10px;
-                        .comment-action {
-                            padding-left: 8px;
-                            cursor: auto;
-                        }
-                        [class*='-col-rtl'] .comment-action {
-                            padding-right: 8px;
-                            padding-left: 0;
+                        margin: 5px 0;
+                        // 用户发布时间
+                        .ant-comment-content-author-time{
+                            color: #8c8c8c;
                         }
                         //追平区背景
                         .subcomment-container{
@@ -152,6 +148,23 @@
                         }
                         // 评论内容区 分为内容和评论发送器
                         .comment-content-container{
+                            .comment{
+                                margin: 5px 0;
+                                font-family: -apple-system,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial
+                            }
+                            // 被回复者的评论
+                            .reply-comment{
+                                border: 1px solid #bfbfbf;
+                                border-radius: 4px;
+                                background-color: #f0f0f0;
+                                color: #8c8c8c;
+                                padding: 0 5px;
+
+                            }
+                            // 文章评论文字大小
+                            .comment-content{
+                                color: #434343;
+                            }
                             .comment-editor{
                                 padding: 10px 20px;
                                 textarea{
@@ -165,13 +178,31 @@
                             }
                         }
 
+                        .comment-action {
+                            padding-left: 8px;
+                            cursor: auto;
+                        }
+                        // 底部图标
+                        .ant-comment-actions{
+                            margin-top: 5px;
+                            [class*='-col-rtl'] .comment-action {
+                                padding-right: 8px;
+                                padding-left: 0;
+                            }
+                        }
+
+
                     }
                 }
             }
         }
 
     }
-
+    @media(max-width: 1000px){
+        .article-minor-container{
+            display: none;
+        }
+    }
     .article-minor-container{
         position: fixed;
         right: 6%;

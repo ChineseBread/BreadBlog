@@ -1,6 +1,5 @@
-import {useNavigate} from "react-router-dom";
 import React, {Fragment, useState} from "react";
-import CustomStorage from "../../../utils/StorageUtils/CustomStorage";
+import {useLocation, useNavigate} from "react-router-dom";
 import {Menu, Modal} from "antd";
 import {
 	EditOutlined,
@@ -10,16 +9,18 @@ import {
 	UserAddOutlined,
 	UserOutlined
 } from "@ant-design/icons";
+import CustomStorage from "../../../utils/StorageUtils/CustomStorage";
 
 export default function AvatarDropMenu() {
 
 	const navigator = useNavigate()
 	const [visible,setVisible] = useState(false)
-
+	const location = useLocation()
 	let handleExit = () => {
 		CustomStorage.removeAccount()
 		setVisible(false)
-		navigator('/')
+		if (location.pathname.startsWith('/user') || location.pathname.startsWith('/article')) navigator('/')
+
 	}
 	return(
 		<Fragment>

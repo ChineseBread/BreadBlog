@@ -3,7 +3,9 @@ import {Card, Divider, Input, Form, Button} from "antd";
 import { LeftOutlined } from "@ant-design/icons";
 import {useNavigate} from "react-router-dom";
 import CustomStorage from "../../../../../utils/StorageUtils/CustomStorage";
+
 const {User,pwd} = CustomStorage.getAccount()
+
 export default function UserProfile(props) {
 	const navigator = useNavigate()
 	let onFinish = data => {

@@ -139,7 +139,6 @@ function Subscribe({articleid}){
 	const createFav = () => {
 		message.loading({content:'创建新收藏夹',key:'creating'})
 		UserOperationRequest.createFav(text).then(result => {
-			// message[result?.Ok ? 'success' : 'warn'](result.Msg)
 			if (result.Ok){
 				message.success({content:'创建成功',key:'creating'})
 				setFavs(favs => [...favs,result.FavInfo])

@@ -19,9 +19,9 @@ export default function DraftsMarkDown(props) {
 	const [text,setText] = useState('')
 
 	useEffect(() => {
-		if (!draftid){
+		if (!draftid || !location?.state?.Versions){
 			message.warn('未找到草稿信息')
-			navigator('/')
+			navigator('/user/drafts')
 		}else{
 			let {Versions:{title,content}} = location.state
 			setTitle(title)

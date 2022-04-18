@@ -1,9 +1,8 @@
-import CustomComment from "./CustomComment";
+import React, {Fragment, useEffect, useMemo, useState} from "react";
 import {Divider, message, Skeleton} from "antd";
 import CommentItem from "./CommentItem";
-import React, {Fragment, useEffect, useMemo, useState} from "react";
+import CustomComment from "./CustomComment";
 import PublicDataRequest from "../../../../../utils/RequestUtils/PublicDataRequest";
-import {nanoid} from "nanoid";
 
 export default function CommentsList({articleid}) {
 	const [commentsList,setCommentList] = useState([])
@@ -34,7 +33,7 @@ export default function CommentsList({articleid}) {
 							useMemo(() => {
 								return(
 									commentsList?.length >= 1 ? commentsList.map(comment => {
-											return <CommentItem key={nanoid()} commentItem={{...comment, commentsid}}/>
+											return <CommentItem key={comment.commentid} commentItem={{...comment, commentsid}}/>
 										}) :
 									<span><h3>暂无评论...</h3></span>
 								)

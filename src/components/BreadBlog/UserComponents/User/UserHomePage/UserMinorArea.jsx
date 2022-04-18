@@ -1,9 +1,9 @@
 import React, {Fragment} from "react";
-import TimeShow from "../../../utilsComponents/TimeShow";
-import {EditOutlined, StarOutlined} from "@ant-design/icons";
 import {Card, Tag} from "antd";
-import {nanoid} from "nanoid";
+import {EditOutlined, StarOutlined} from "@ant-design/icons";
 import {useNavigate} from "react-router-dom";
+import {nanoid} from "nanoid";
+import TimeShow from "../../../utilsComponents/TimeShow";
 
 function UserMinorArea({ArticleCategoryList,changeCategory}) {
 	const navigator = useNavigate()

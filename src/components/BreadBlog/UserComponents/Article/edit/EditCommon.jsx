@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Layout, message} from "antd";
+import {Layout} from "antd";
 import ArticleDrawer from "../Drawer/ArticleDrawer";
 import BraftEditor from "braft-editor";
 import ArticleEditor from "../editor/ArticleEditor";
@@ -12,13 +12,8 @@ export default function EditCommon(){
 	const [visible,setVisible] = useState(false)
 	const [title,setTitle] = useState('')
 
-	// const [text,setText] = useState('## 写点东西呗')
 	const [editorState,setEditorState] = useState(BraftEditor.createEditorState('<p>写点东西呗...</p>'))
 
-	// useEffect(() => {
-	// 	//创建草稿箱
-	// 	UserOperationRequest.addArticleDraft(title,location.pathname === '/article/')
-	// },[])
 	useEffect(() => {
 		ArticleDraftStorage.createArticleDraft(title,editorState.toHTML(),'common')
 	},[])

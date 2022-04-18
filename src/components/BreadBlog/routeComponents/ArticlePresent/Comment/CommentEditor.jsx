@@ -5,11 +5,13 @@ import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperatio
 
 /**
  * @description 子评论列表
+ * @param username 用户名
  * @param commentid 评论id -> 单个评论
  * @param commentsid 评论组id
+ * @param setCommentsListInfo
  */
 
-export default function CommentEditor({username,commentid,commentsid,setCommentsListInfo}) {
+export default function CommentEditor({username,commentid,commentsid,setSubCommentsListInfo,setVisible}) {
 	const [isAnonymous,setAnonymous] = useState(false)
 	const [text,setText] = useState('')
 	const changeAnonymous = () => {
@@ -19,9 +21,13 @@ export default function CommentEditor({username,commentid,commentsid,setComments
 		setText(target.value)
 	}
 	const sendSubComment = () => {
+		if (!text) {
+			message.warn('请输入评论')
+			return
+		}
 		UserOperationRequest.sendSubComment(text,commentsid,commentid,isAnonymous).then(result => {
 			if (result.Ok){
-				setCommentsListInfo(CommentsInfo => {
+				setSubCommentsListInfo(CommentsInfo => {
 					return{
 						hasMore:CommentsInfo.hasMore,
 						CommentsList:[result.FComment,...CommentsInfo.CommentsList]
@@ -31,7 +37,9 @@ export default function CommentEditor({username,commentid,commentsid,setComments
 			}else {
 				message.warn(result.Msg)
 			}
+			setAnonymous(false)
 			setText('')
+			setVisible(false)
 		})
 	}
 	return (

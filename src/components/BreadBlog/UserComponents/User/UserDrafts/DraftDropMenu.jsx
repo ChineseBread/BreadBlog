@@ -1,6 +1,6 @@
+import React from "react";
 import {Button, Dropdown, Menu} from "antd";
 import {DeleteOutlined, MoreOutlined} from "@ant-design/icons";
-import React from "react";
 
 const menu = (DraftId,deleteDraft) => {
 

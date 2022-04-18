@@ -70,7 +70,7 @@ export default function HomePage(){
                     </div>
                     <div className="home-page-minor-container">
                         <div className='home-page-card-item'>
-                                <TimeShow/>
+                            <TimeShow/>
                         </div>
                         <div className='home-page-card-item'>
                             <Card title="今天想看什么?">

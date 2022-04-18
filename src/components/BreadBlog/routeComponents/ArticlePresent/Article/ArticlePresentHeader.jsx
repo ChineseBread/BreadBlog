@@ -11,7 +11,7 @@ export default function ArticlePresentHeader({ArticleInfo}){
 		<PageHeader
 			title={ArticleInfo.authorname}
 			className="site-page-header"
-			subTitle={moment(Number(ArticleInfo.createdtime) * 1000).format('YYYY-MM-DD')}
+			subTitle={moment(ArticleInfo.createdtime * 1000).format('YYYY-MM-DD')}
 			onBack={() => navigator(-1)}
 			tags={ArticleInfo.tags.map(ele => <Tag key={nanoid()}>{JSON.parse(ele)}</Tag>)}
 			// subTitle="This is a subtitle"

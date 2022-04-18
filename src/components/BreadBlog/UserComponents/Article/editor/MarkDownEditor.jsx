@@ -106,7 +106,7 @@ export default function MarkDownEditor(props){
                     toolbars={toolbars}
                     onChange={(value) => setText(value)}
                 />
-            },[text])}
+            },[text,emojiVisible])}
         </Fragment>
         // <Editor editorClass='markdown_editor' toolbarsExclude={['fullscreen','pageFullscreen','github','save']} modelValue={text} onChange={setText} />
     )

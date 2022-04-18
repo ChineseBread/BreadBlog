@@ -1,6 +1,6 @@
+import React from "react";
 import {Button, Card} from "antd";
 import {SettingOutlined, StarOutlined} from "@ant-design/icons";
-import React from "react";
 import {Outlet, useNavigate} from "react-router-dom";
 
 export default function UserCollection(props) {

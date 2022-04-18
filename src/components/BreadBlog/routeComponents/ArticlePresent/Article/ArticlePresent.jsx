@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
-import {useNavigate, useSearchParams} from "react-router-dom";
-import {Card, Divider, message, Skeleton} from "antd";
+import React, {Fragment, useEffect, useState} from "react";
+import {useSearchParams} from "react-router-dom";
+import {Card, Divider,Skeleton} from "antd";
 import TimeShow from "../../../utilsComponents/TimeShow";
 import ArticlePresentHeader from "./ArticlePresentHeader";
 import ArticleActionNav from "./ArticleActionNav";
@@ -8,33 +8,37 @@ import ArticleContent from "./ArticleContent";
 import MarkDownContent from "./MarkDownContent";
 import CommentsList from "../Comment/CommentsList";
 import PublicDataRequest from "../../../../../utils/RequestUtils/PublicDataRequest";
+import NotFoundPage from "../../../utilsComponents/NotFoundPage";
 export default function ArticlePresent(props) {
 
-	const navigator = useNavigate()
+	// const navigator = useNavigate()
 	const [search,setSearch] = useSearchParams()
 	const [ArticleInfo,setArticleInfo] = useState({title:'',authorname:'',sortname:'',tags:[],content:'',createdtime:'',type:''})
 	const [loading,setLoading] = useState(true)
-
+	const [isError,setError] = useState({status:false,errText:''})
 	useEffect(()=>{
 		let articleid = search.get('articleid')
 		if (!articleid) {
-			message.warn('文章ID为空!')
-			navigator('/')
+			// message.warn('文章ID为空!')
+			setError({status: true,errText: '文章ID为空'})
+			// navigator('/')
 		}else {
 			PublicDataRequest.getArticleInfo(articleid).then(result => {
 				if (result?.Ok){
 					setArticleInfo(result.ArticleInfo)
 					setLoading(false)
 				}else {
-					message.warn(result.Msg)
-					navigator('/')
+					// message.warn(result.Msg)
+					setError({status: true,errText:result.Msg})
+					// navigator('/')
 				}
 			})
 		}
 	},[])
 
 	return (
-		<div className='article-present-container'>
+		<Fragment>
+			{!isError.status ? <div className='article-present-container'>
 				<div className='article-action-nav'>
 					<ArticleActionNav ArticleInfo={ArticleInfo} articleid={search.get('articleid')}/>
 				</div>
@@ -64,7 +68,7 @@ export default function ArticlePresent(props) {
 				<div className='article-minor-container'>
 					<TimeShow/>
 				</div>
-		</div>
-
+			</div> : <NotFoundPage errText={isError.errText}/>}
+		</Fragment>
 	);
 }

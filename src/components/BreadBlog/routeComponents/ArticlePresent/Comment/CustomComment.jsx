@@ -5,17 +5,18 @@ import CustomStorage from "../../../../../utils/StorageUtils/CustomStorage";
 import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperationRequest";
 
 
-export default function CustomComment({articleid,setCommentList}){
-	const [isOpen,setAnonymous] = useState(true);
+function CustomComment({articleid,setCommentList}){
+	const [isAnonymous,setAnonymous] = useState(false);
 	const [comment,setComment] = useState("")
 	let sendComment = async () =>{
 		if (!comment){
 			message.warn("请输入评论")
 			return
 		}
-		let result = await UserOperationRequest.sendComment(comment,articleid,isOpen)
+		let result = await UserOperationRequest.sendComment(comment,articleid,isAnonymous)
 		if (result?.Ok){
-			setCommentList(CommentsList => [{isanonymous:false,userid:CustomStorage.getAccount().UserID,createdtime:Date.now() / 1000,comment},...CommentsList])
+			let {UserID,User} = CustomStorage.getAccount()
+			setCommentList(CommentsList => [{like:0,fcount:0,isanonymous:isAnonymous,userid:UserID,username:User,createdtime:Date.now() / 1000,comment},...CommentsList])
 			setComment('')
 			message.success('评论成功')
 		}else{
@@ -26,8 +27,8 @@ export default function CustomComment({articleid,setCommentList}){
 	let handleCommentChange = ({target}) => {
 		setComment(target.value)
 	}
-	let onChange = (checked) => {
-		setAnonymous(checked)
+	let onChange = () => {
+		setAnonymous(isAnonymous => !isAnonymous)
 	}
 	return(
 		<div className='custom-comment-form' id='custom_comment'>
@@ -45,3 +46,4 @@ export default function CustomComment({articleid,setCommentList}){
 		</div>
 	)
 }
+export default React.memo(CustomComment,() => true)

@@ -1,3 +1,4 @@
+// https://getemoji.com/
 const emojis = [
 	'😀',
 	'😃',

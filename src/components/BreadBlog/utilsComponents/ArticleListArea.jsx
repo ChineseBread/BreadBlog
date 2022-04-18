@@ -1,8 +1,8 @@
 import React, {Fragment, useMemo} from "react";
+import {useNavigate} from "react-router-dom";
 import {Avatar, Card, Divider, List, Skeleton, Space} from "antd";
 import {EyeOutlined, LikeOutlined, MessageOutlined} from "@ant-design/icons";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {useNavigate} from "react-router-dom";
 
 import moment from "moment/moment";
 import CustomStorage from "../../../utils/StorageUtils/CustomStorage";

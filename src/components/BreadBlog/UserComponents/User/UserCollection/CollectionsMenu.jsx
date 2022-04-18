@@ -1,4 +1,4 @@
-import {Fragment} from "react";
+import React, {Fragment} from "react";
 import {Menu} from "antd";
 
 export default function CollectionsMenu({changeFav,favs}) {
