@@ -5,7 +5,7 @@ import {Navigate} from "react-router-dom";
 const BreadBlog = lazy(() => import("../components/BreadBlog/BreadBlog"));
 const HomePage = lazy(() => import("../components/BreadBlog/routeComponents/HomePage/HomePage"));
 
-const ArticleComponentsRouter = lazy(() => import("../components/BreadBlog/UserComponents/Article"))
+const UserComponentsRouterCuard = lazy(() => import("./UserComponentsRouterCuard"));
 
 const EditCommon = lazy(() => import("../components/BreadBlog/UserComponents/Article/edit/EditCommon"));
 const EditMarkDown = lazy(() => import("../components/BreadBlog/UserComponents/Article/edit/EditMarkDown"));
@@ -16,11 +16,7 @@ const DraftsCommon = lazy(() => import("../components/BreadBlog/UserComponents/A
 const UpdateMarkDown = lazy(() => import("../components/BreadBlog/UserComponents/Article/update/UpdateMarkDown")) ;
 const UpdateCommon = lazy(() => import("../components/BreadBlog/UserComponents/Article/update/UpdateCommon")) ;
 
-const Account = lazy(() => import("../components/UserAccount/Account"));
-
-// const EditorPage = lazy(() => import("../components/BreadBlog/UserComponents/Article/edit/EditorPage"));
-// const ArticleEditor = lazy(() => import("../components/BreadBlog/UserComponents/Article/editor/ArticleEditor"));
-// const MarkDownEditor = lazy(() => import("../components/BreadBlog/UserComponents/Article/editor/MarkDownEditor"));
+const Account = lazy(() => import("../components/BreadBlog/routeComponents/Account/Account"));
 
 const About = lazy(() => import("../components/BreadBlog/routeComponents/About/About"))
 const News = lazy(() => import("../components/BreadBlog/routeComponents/News")) ;
@@ -29,7 +25,6 @@ const Comments = lazy(() => import("../components/BreadBlog/routeComponents/Comm
 const Search = lazy(() => import("../components/BreadBlog/routeComponents/Search")) ;
 const ArticlePresent = lazy(() => import( "../components/BreadBlog/routeComponents/ArticlePresent/Article/ArticlePresent"));
 
-const UserComponentsRouter = lazy(() => import("../components/BreadBlog/UserComponents/User"))
 const UserDrafts = lazy(() => import("../components/BreadBlog/UserComponents/User/UserDrafts/UserDrafts")) ;
 const UserHomePage = lazy(() => import("../components/BreadBlog/UserComponents/User/UserHomePage/UserHomePage")) ;
 
@@ -37,7 +32,6 @@ const UserCollection = lazy(() => import("../components/BreadBlog/UserComponents
 const CollectionsArticle = lazy( () => import("../components/BreadBlog/UserComponents/User/UserCollection/CollectionsArticle"));
 const CollectionsManage = lazy(() => import("../components/BreadBlog/UserComponents/User/UserCollection/CollectionsManage"));
 
-// const TagsManagement = lazy(() => import("../components/BreadBlog/UserComponents/User/TagsManagement")) ;
 const UserProfile = lazy(() => import("../components/BreadBlog/UserComponents/User/UserProfile/UserProfile"))
 
 const routesForm = [
@@ -79,7 +73,7 @@ const routesForm = [
             },
             {
                 path: '/user',
-                element: <UserComponentsRouter/>,
+                element: <UserComponentsRouterCuard/>,
                 children:[
 
                     {
@@ -119,7 +113,7 @@ const routesForm = [
     },
     {
       path: '/article',
-      element: <ArticleComponentsRouter/>,
+      element: <UserComponentsRouterCuard/>,
       children: [
           {
               path:'/article/edit/common',

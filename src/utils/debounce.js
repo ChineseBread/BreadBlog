@@ -1,5 +1,5 @@
 /**
- * @debounce 用户防抖操作
+ * @debounce 防抖时间为0.5秒
  */
 export default function debounce(method, wait, immediate) {
 	let timeout, result

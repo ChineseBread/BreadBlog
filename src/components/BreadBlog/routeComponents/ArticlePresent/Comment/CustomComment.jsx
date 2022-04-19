@@ -5,18 +5,26 @@ import CustomStorage from "../../../../../utils/StorageUtils/CustomStorage";
 import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperationRequest";
 
 
-function CustomComment({articleid,setCommentList}){
+function CustomComment({articleid,setCommentListInfo}){
 	const [isAnonymous,setAnonymous] = useState(false);
 	const [comment,setComment] = useState("")
+
 	let sendComment = async () =>{
 		if (!comment){
 			message.warn("请输入评论")
 			return
 		}
 		let result = await UserOperationRequest.sendComment(comment,articleid,isAnonymous)
-		if (result?.Ok){
+		if (result.Ok){
 			let {UserID,User} = CustomStorage.getAccount()
-			setCommentList(CommentsList => [{like:0,fcount:0,isanonymous:isAnonymous,userid:UserID,username:User,createdtime:Date.now() / 1000,comment},...CommentsList])
+			let { commentid } = result
+			setCommentListInfo(CommentsListInfo => {
+				return{
+					CommentsList:[{commentid,like:0,fcount:0,isanonymous:isAnonymous,userid:UserID,username:User,createdtime:Date.now() / 1000,comment},...CommentsListInfo.CommentsList],
+					hasMore:CommentsListInfo.hasMore,
+					commentsid:CommentsListInfo.commentsid
+				}
+			})
 			setComment('')
 			message.success('评论成功')
 		}else{

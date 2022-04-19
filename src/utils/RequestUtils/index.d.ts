@@ -3,7 +3,7 @@
  * @version 1.0
  * @Author Watish
  * @Author Chinesebread
- * @deprecated 该定义文件不作为utils约束规范,仅在开发初期作为参考
+ * @deprecated 仅在构建初期作为参考
  */
 
 /**

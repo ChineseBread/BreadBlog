@@ -22,6 +22,11 @@ class PublicDataRequest{
             }
         })
     }
+
+    /**
+     * @description 文章展示页获取文章信息
+     * @param articleid
+     */
     static getArticleInfo(articleid:string):Promise<object>{
         return new Promise(async resolve => {
             try {
@@ -34,10 +39,15 @@ class PublicDataRequest{
                     resolve({Ok:false,Msg:result?.Msg || '获取文章信息失败'})
                 }
             }catch (e){
-                resolve({Ok:false})
+                resolve({Ok:false,Msg:errMsg})
             }
         })
     }
+
+    /**
+     * @description 根据选取最热分类获取文章
+     * @param sortname 最热分类
+     */
     static getArticleByCategory(sortname:string):Promise<object>{
         return new Promise(async (resolve,reject) => {
             try {
@@ -89,6 +99,24 @@ class PublicDataRequest{
     }
 
     /**
+     *@description 最新的文章
+     */
+    private static getNewestArticle():Promise<object>{
+        return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doDataRequest({url:'article/public/new',data:{},method:'GET'})
+                if (result?.length){
+                    resolve({Ok:true,ArticleList:result})
+                }else {
+                    resolve({Ok:false})
+                }
+            }catch (e){
+                resolve({Ok:false})
+            }
+
+        })
+    }
+    /**
      * @description 最热的几个分类
      */
     static getHottestArticleCategory():Promise<object>{
@@ -107,24 +135,6 @@ class PublicDataRequest{
         })
     }
 
-    /**
-     *@description 最新的文章
-     */
-    private static getNewestArticle():Promise<object>{
-        return new Promise(async (resolve,reject) => {
-            try {
-                let result = await doDataRequest({url:'article/public/new',data:{},method:'GET'})
-                if (result?.length){
-                    resolve({Ok:true,ArticleList:result})
-                }else {
-                    resolve({Ok:false})
-                }
-            }catch (e){
-                resolve({Ok:false})
-            }
-
-        })
-    }
 
     private static _getHomePageData(category:string):Promise<object>{
         switch (category){
@@ -145,15 +155,23 @@ class PublicDataRequest{
         }
     }
     static getHomePageData = debounce(this._getHomePageData,500,true)
-    static getArticleComment(articleid:string){
+
+    /**
+     * @description 获取文章评论 需要分页
+     * @param articleid
+     * @param page
+     */
+    static getArticleComment(articleid:string,page:number){
         return new Promise(async (resolve,reject) => {
             try {
-                let result = await doDataRequest({url:'article/comments',data:{articleid},method:'GET'})
+                let token = CustomStorage.getAccount().Token;
+                let data = token ? {articleid,page,token} : {articleid,page}
+                let result = await doDataRequest({url:'article/comments',data,method:'GET'})
                 if (result?.Comments?.length){
-                    resolve({Ok:true,CommentsList:result.Comments,CommentsId:result.CommentsId})
+                    resolve({Ok:true,CommentsList:result.Comments,CommentsId:result.CommentsId,total:result.Count})
                 }else {
                     if (result?.Comments == null){
-                        resolve({Ok:true,CommentsList:[]})
+                        resolve({Ok:true,CommentsList:[],total:-1})
                     }else{
                         resolve({Ok:false})
                     }
@@ -164,15 +182,24 @@ class PublicDataRequest{
             }
         })
     }
+
+    /**
+     * @description 传token则作为是否点赞的依据
+     */
     static getArticleSubComment(page:number,commentsid:string,commentid:string):Promise<object>{
         return new Promise(async (resolve,reject) => {
             try {
-                let result = await doDataRequest({url:'fcomment/list',data:{page,commentsid,commentid},method:'GET'})
+                let token = CustomStorage.getAccount().Token;
+                let data = token ? {page,commentsid,commentid,token} : {page,commentsid,commentid}
+                // let data = {page,commentsid,commentid}
+                let result = await doDataRequest({url:'fcomment/list',data,method:'GET'})
                 if (result?.Ok && result?.FComments?.fcomments){
                     let {FComments:{count,fcomments}} = result
                     resolve({Ok:true,SubComments:{total:count,CommentsList:fcomments}})
+                    // resolve({Ok:true,CommentsList:result.FComments})
                 }else{
                     if (result.FComments === null) resolve({Ok:true,SubComments:{total:0,CommentsList:[]}})
+                    // if (result.FComments === null) resolve({Ok:true,CommentsList:[]})
                     else resolve({Ok:false,Msg:result?.Msg || errMsg})
                 }
             }catch (e){

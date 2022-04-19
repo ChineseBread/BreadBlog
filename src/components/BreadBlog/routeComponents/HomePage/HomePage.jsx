@@ -9,19 +9,25 @@ import PublicDataRequest from "../../../../utils/RequestUtils/PublicDataRequest"
 
 export default function HomePage(){
     useEffect(() => {
+        message.loading({content:'获取文章中',key:"loading"})
+        // 获取公共文章
         PublicDataRequest.getHomePageData("random").then(result => {
-            if (result?.Ok){
+            if (result.Ok){
                 setArticleListInfo(ListInfo => {
                     return {
                         ArticleList: result.ArticleList,
                         hasMore: false
                     }
                 })
+                message.success({content:'文章获取成功',key:'loading'})
+            }else {
+                message.warn({content:'获取文章失败',key:'loading'})
             }
         })
     },[])
 
     useEffect(() => {
+        // 热门分类
         PublicDataRequest.getHottestArticleCategory().then(result =>{
             if (result?.Ok){
                 setCateGoryList(result.HottestCateGory)

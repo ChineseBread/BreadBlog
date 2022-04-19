@@ -8,7 +8,7 @@ import {Outlet, useNavigate} from "react-router-dom";
 import {Avatar, BackTop, Badge, Dropdown, Input, Layout, Menu} from 'antd';
 import {ArrowUpOutlined, CommentOutlined, SearchOutlined} from "@ant-design/icons";
 
-import ContentLoading from "../Loading/ContentLoading";
+import ContentLoading from "./utilsComponents/Loading/ContentLoading";
 import AvatarDropMenu from "./utilsComponents/AvatarDropMenu";
 
 import CustomStorage from "../../utils/StorageUtils/CustomStorage";

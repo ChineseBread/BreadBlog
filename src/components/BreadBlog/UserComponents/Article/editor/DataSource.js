@@ -63,8 +63,6 @@ const emojis = [
 	'❤',
 	'⭕',
 	'❌',
-
-
 ];
 const MarkDownExtension = {
 	name: 'MarkExtension',

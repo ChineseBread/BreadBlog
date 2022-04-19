@@ -1,6 +1,6 @@
 import TextArea from "antd/es/input/TextArea";
 import {Button, message, Switch} from "antd";
-import React, {useMemo, useState} from "react";
+import React, {useState} from "react";
 import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperationRequest";
 
 /**
@@ -43,16 +43,13 @@ export default function CommentEditor({username,commentid,commentsid,setSubComme
 		})
 	}
 	return (
-		useMemo(() => {
-			return(
-				<div className='comment-editor'>
-					<TextArea showCount value={text} maxLength={100} placeholder={`回复给${username || '匿名用户'}:`} onChange={changeComment}/>
-					<Button htmlType="submit" type="primary" onClick={sendSubComment}>
-						回复
-					</Button>
-					<Switch defaultChecked={true} checkedChildren='公开' unCheckedChildren='私人' onChange={changeAnonymous}/>
-				</div>
-			)
-		},[text])
+
+		<div className='comment-editor'>
+			<TextArea showCount value={text} maxLength={100} placeholder={`回复给${username || '匿名用户'}:`} onChange={changeComment}/>
+			<Button htmlType="submit" type="primary" onClick={sendSubComment}>
+				回复
+			</Button>
+			<Switch defaultChecked={true} checkedChildren='公开' unCheckedChildren='私人' onChange={changeAnonymous}/>
+		</div>
 	)
 }
