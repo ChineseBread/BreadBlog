@@ -98,10 +98,6 @@ const routesForm = [
                             }
                         ]
                     },
-                    // {
-                    //     path: '/user/tags',
-                    //     element: <TagsManagement/>
-                    // },
                     {
                         path: "/user/profile",
                         element: <UserProfile/>
@@ -123,20 +119,6 @@ const routesForm = [
               path:'/article/edit/md',
               element: <EditMarkDown/>
           },
-          // {
-          //     path: '/article/edit',
-          //     element: <EditorPage/>,
-          //     children:[
-          //         {
-          //             path:'/article/edit/common',
-          //             element:<ArticleEditor/>
-          //         },
-          //         {
-          //             path:'/article/edit/md',
-          //             element: <MarkDownEditor/>
-          //         }
-          //     ]
-          // },
           {
               path:'/article/update/md',
               element:<UpdateMarkDown/>
