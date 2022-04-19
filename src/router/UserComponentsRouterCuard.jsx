@@ -7,8 +7,6 @@ import UserOperationRequest from "../utils/RequestUtils/UserOperationRequest";
 export default function UserComponentsRouterCuard(props) {
 
 	const navigator = useNavigate()
-	// const [isPending,startTransition] = useTransition()
-	// const [startTransition,isPending] = useTransition()
 	const [pending,setPending] = useState(true)
 	useEffect( () => {
 		UserOperationRequest.beforeDoUserOperations().then(result => {
