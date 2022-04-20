@@ -26,4 +26,4 @@
 ## 注意事项
  目前进行React18版本开发,请参考[React18分支](https://github.com/ChineseBread/BreadBlog/tree/React-18)
  
- [React17](https://github.com/ChineseBread/BreadBlog/tree/React-17)版本会在后期合并，对于特殊的兼容性api会明确指出
+ [React17](https://github.com/ChineseBread/BreadBlog/tree/React-17)版本会在后期合并，对于特殊的兼容问题api会明确指出
