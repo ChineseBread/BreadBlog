@@ -20,7 +20,8 @@ function doDataRequest({url,data,method}){
     return new Promise((resolve, reject) => {
         axios.request({
             url:`/data/${url}?${data}`,
-            // data
+            // data,
+            // _data,
             method,
             timeout:10000
         }).then(value => {
@@ -35,5 +36,13 @@ function getQueryData(data){
             if (type === 'value' || type === 'key') return encodeURIComponent(str);
         }})
 }
+/*function _multipleRequest(requestArr){
+    let resultArr = requestArr.map(request => {
+        return doRequest(request)
+    })
+    return Promise.all(requestArr)
+}*/
+//let debounceRequest = debounce(doRequest,500,true)
 
+// let multipleRequest = debounce(_multipleRequest,500,true)
 export {doRequest,doDataRequest}

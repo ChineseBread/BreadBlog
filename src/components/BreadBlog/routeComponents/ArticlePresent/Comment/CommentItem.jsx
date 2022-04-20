@@ -4,18 +4,19 @@ import {CommentOutlined, LikeFilled, LikeOutlined} from "@ant-design/icons";
 import moment from "moment";
 import SubCommentList from "./SubCommentList";
 import CommentEditor from "./CommentEditor";
+import {CommentContextProvider} from "./CommentContext";
 import PublicDataRequest from "../../../../../utils/RequestUtils/PublicDataRequest";
 import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperationRequest";
-import {CommentContextProvider} from "./CommentContext";
 
 /**
  * @attention token过期拿不到数据
  * @attention 评论的reply需要放在fcommentdata
+ * @param commentsid 评论集对应的id
+ * @param CommentId 评论id
  */
-export default function CommentItem({commentItem:{isanonymous,userid,username,comment,createdtime,commentid,like,fcount,commentsid}}) {
+export default function CommentItem({commentItem:{isanonymous,userid,username,comment,createdtime,commentid,like,fcount,isliked},commentsid}) {
 
-	const [likes, setLikes] = useState({isLike:false,action:''});
-	// const [action, setAction] = useState(null);
+	const [likes, setLikes] = useState({isLike:isliked,action:isliked ? 'liked' : 'unliked'});
 	const [commentVisible,setVisible] = useState(false)
 	//子评论数组
 	const [SubCommentsListInfo,setSubCommentsListInfo] = useState({CommentsList:[],hasMore:false})

@@ -27,7 +27,7 @@ function About(props) {
 					>
 						<Content>
 							<Paragraph>
-								负责前端界面搭建和逻辑实现
+								前端界面搭建和逻辑实现
 							</Paragraph>
 						</Content>
 					</PageHeader>
@@ -115,7 +115,7 @@ function About(props) {
 						<Content
 						>
 							<Paragraph>
-								基于React的在线MarkDown编辑器
+								React版本MarkDown编辑器
 							</Paragraph>
 							<Paragraph>
 								<div className='link-container'>

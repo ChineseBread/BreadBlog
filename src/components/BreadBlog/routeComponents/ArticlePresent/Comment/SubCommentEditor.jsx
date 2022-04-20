@@ -4,6 +4,12 @@ import React, {useContext, useState} from "react";
 import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperationRequest";
 import {CommentContext} from "./CommentContext";
 
+/**
+ * @description 追评间互相回复
+ * @param username
+ * @param fcommentid
+ * @param setVisible
+ */
 export default function SubCommentEditor({username,fcommentid,setVisible}) {
 	const {commentid,commentsid,setSubCommentsListInfo} = useContext(CommentContext);
 	const [text,setText] = useState('')

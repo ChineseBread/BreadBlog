@@ -80,6 +80,7 @@ export default function AvatarDropMenu() {
 						</Menu.Item>
 				}
 			</Menu>
+
 		</Fragment>
 	)
 

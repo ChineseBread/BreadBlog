@@ -160,6 +160,7 @@ class PublicDataRequest{
      * @description 获取文章评论 需要分页
      * @param articleid
      * @param page
+     * @deprecated 没有返回isliked参数
      */
     static getArticleComment(articleid:string,page:number){
         return new Promise(async (resolve,reject) => {
@@ -168,7 +169,8 @@ class PublicDataRequest{
                 let data = token ? {articleid,page,token} : {articleid,page}
                 let result = await doDataRequest({url:'article/comments',data,method:'GET'})
                 if (result?.Comments?.length){
-                    resolve({Ok:true,CommentsList:result.Comments,CommentsId:result.CommentsId,total:result.Count})
+                    resolve({Ok:true,CommentsList:result.Comments,total:result.Count})
+                    // resolve({Ok:true,CommentsList:result.Comments,CommentsId:result.CommentsId,total:result.Count})
                 }else {
                     if (result?.Comments == null){
                         resolve({Ok:true,CommentsList:[],total:-1})
@@ -184,6 +186,61 @@ class PublicDataRequest{
     }
 
     /**
+     * @Response
+     "CommentId": "1650286064382c4ddfcf60a778",
+     "CommentData": {
+        "isanonymous": false,
+        "userid": "ce356f323920a2196108e9057a2bcf94",
+        "comment": "4444",
+        "createdtime": 1650286064,
+        "fcomments": "F1650362405b8de63f142744ab5",
+        "inrank": true,
+        "like": 1,
+        "username": "admin"
+        },
+     "FcommentCount": 1,
+     "HotFCommentsData": null
+     * @param commentsid
+     * @param page
+     */
+    static getArticleComments(commentsid:string,page:number){
+        return new Promise(async (resolve,reject) => {
+            try {
+                let token = CustomStorage.getAccount().Token;
+                let data = token ? {commentsid,page,token} : {commentsid,page}
+                let result = await doDataRequest({url:'comments/get',data,method:'GET'})
+                if (result?.CommentsData){
+                    resolve({Ok:true,CommentsList:result.CommentsData,total:result.TotalCount})
+                }else {
+                    if (result?.CommentsData === null) resolve({Ok: true, total: 0, CommentsList: []})
+                    else resolve({Ok: false, Msg: result?.Msg || errMsg})
+                }
+            }catch (e){
+                resolve({Ok:false,Msg:errMsg})
+            }
+        })
+    }
+    /**
+     * @Response
+     "fcommentid": "f1650177482673e82482b4ea5aa",
+     "replydata": {
+        "isanonymous": false,
+        "userid": "ce356f323920a2196108e9057a2bcf94",
+        "comment": "测试渲染",
+        "createdtime": 1649944325,
+        "username": "admin",
+        "like": 1,
+        "replyid": "f1649944325fd800ebf1ccd85c3"
+    },
+     "fcommentdata": {
+        "isanonymous": false,
+        "userid": "a3da316e135bbb098dcbde07b9019c4a",
+        "comment": "你渲染个鸡儿",
+        "createdtime": 1650177482,
+        "reply": "f1649944325fd800ebf1ccd85c3",
+        "username": "Chinesebread",
+        "like": -3
+    }
      * @description 传token则作为是否点赞的依据
      */
     static getArticleSubComment(page:number,commentsid:string,commentid:string):Promise<object>{
