@@ -5,7 +5,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "animate.css": "^4.1.1",
-    "antd": "^4.19.5",
+    "antd": "^4.20.0-alpha.1",
     "axios": "^0.26.0",
     "braft-editor": "^2.3.9",
     "md-editor-rt": "^1.6.3",
@@ -13,8 +13,8 @@
     "nanoid": "3.3.1",
     "particlesjs": "^2.2.3",
     "qs": "^6.10.3",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-infinite-scroll-component": "^6.1.0",
     "react-router-dom": "^6.3.0"
   },
@@ -157,5 +157,6 @@
     "presets": [
       "react-app"
     ]
-  }
+  },
+  "proxy": "http://192.168.1.10:9501"
 }
