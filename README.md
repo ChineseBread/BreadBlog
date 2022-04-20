@@ -24,4 +24,4 @@
 ## install
  请根据package.json中的依赖自行安装所需依赖
 ## 注意事项
- 目前进行React18版本开发,main下为未开发完成的React17版本不包含搜索功能,解决兼容性问题后会merge
+ 目前进行React18版本开发,请参考[React-18分支](https://github.com/ChineseBread/BreadBlog/tree/React-18)
