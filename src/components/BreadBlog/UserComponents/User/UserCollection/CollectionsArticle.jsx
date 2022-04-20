@@ -68,7 +68,7 @@ export default function CollectionsArticle(props) {
 	}
 	const unsubscribeArticle = (articleid,favname) => {
 		return () => {
-			UserOperationRequest.unSubscribeArticle(articleid,favname).then(result => {
+			UserOperationRequest.unsubscribeArticle(articleid,favname).then(result => {
 				if (result.Ok){
 					setArticleListInfo(ArticleListInfo => {
 						return{

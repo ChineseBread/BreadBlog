@@ -122,8 +122,6 @@ class UserOperationRequest{
     static updateFav(favnames:string[],articleid:string):Promise<object>{
         return new Promise(async (resolve,reject) => {
             try {
-                // let favnamesJSON = JSON.stringify(favnamesArr)
-                // let result = await doRequest({url:'fav/update',data:{favnames:favnamesJSON.substring(1,favnamesJSON.length - 1),articleid,token:CustomStorage.getAccount().Token},method:'GET'})
                 let result = await doRequest({url:'fav/update',data:{favnames:JSON.stringify(favnames),articleid,token:CustomStorage.getAccount().Token},method:'GET'})
                 resolve({Ok:result?.Ok,Msg:result?.Msg || '服务器异常请稍后...'})
             }catch (e){
@@ -168,7 +166,7 @@ class UserOperationRequest{
             })
 
     }
-    static unSubscribeArticle(articleid:string,favname:string):Promise<object>{
+    static unsubscribeArticle(articleid:string,favname:string):Promise<object>{
         return new Promise(async (resolve,reject) => {
             try {
                 let result = await doRequest({url:'fav/del',data:{token:CustomStorage.getAccount().Token,articleid,favname},method:'GET'})
@@ -211,7 +209,7 @@ class UserOperationRequest{
             try {
                 let result = await doRequest({url:'comment/article',data:{comment,articleid,anonymous:anonymous ? 1 : -1,token},method:'POST'})
                 if(result.Ok){
-                    resolve({Ok:true,commentid:result.CommentId})
+                    resolve({Ok:true,CommentId:result.CommentId})
                 }else{
                     resolve({Ok:false,Msg:result.Msg || errMsg})
                 }
@@ -254,8 +252,8 @@ class UserOperationRequest{
             try {
                 let result = await doRequest({url:'fcomment/reply',data:{commentsid,commentid,anonymous:anonymous ? 1 : -1,comment,reply,token},method:"POST"})
                 if (result?.Ok){
-                    let {FCommentData:{fcommentid,isanonymous,comment,createdtime,username,like,reply}} = result
-                    resolve({Ok:true,FComment:{fcommentid,fcommentdata:{isanonymous,comment,createdtime,username,like,reply}}})
+                    let {FCommentData,ReplyData} = result
+                    resolve({Ok:true,FComment:{fcommentid:FCommentData.fcommentid,fcommentdata:FCommentData,replydata:ReplyData}})
                 }else{
                     resolve({Ok:false,Msg:result?.Msg || errMsg})
                 }

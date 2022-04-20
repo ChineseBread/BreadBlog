@@ -4,7 +4,11 @@ import React, {useState} from "react";
 import CustomStorage from "../../../../../utils/StorageUtils/CustomStorage";
 import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperationRequest";
 
-
+/**
+ *
+ * @param articleid
+ * @param setCommentListInfo
+ */
 function CustomComment({articleid,setCommentListInfo}){
 	const [isAnonymous,setAnonymous] = useState(false);
 	const [comment,setComment] = useState("")
@@ -17,12 +21,11 @@ function CustomComment({articleid,setCommentListInfo}){
 		let result = await UserOperationRequest.sendComment(comment,articleid,isAnonymous)
 		if (result.Ok){
 			let {UserID,User} = CustomStorage.getAccount()
-			let { commentid } = result
+			let { CommentId } = result
 			setCommentListInfo(CommentsListInfo => {
 				return{
-					CommentsList:[{commentid,like:0,fcount:0,isanonymous:isAnonymous,userid:UserID,username:User,createdtime:Date.now() / 1000,comment},...CommentsListInfo.CommentsList],
+					CommentsList:[{CommentId,CommentData:{like:0,fcount:0,isanonymous:isAnonymous,userid:UserID,username:User,createdtime:Date.now() / 1000,comment},isliked:false},...CommentsListInfo.CommentsList],
 					hasMore:CommentsListInfo.hasMore,
-					commentsid:CommentsListInfo.commentsid
 				}
 			})
 			setComment('')
