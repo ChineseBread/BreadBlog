@@ -22,7 +22,7 @@ const About = lazy(() => import("../components/BreadBlog/routeComponents/About/A
 const News = lazy(() => import("../components/BreadBlog/routeComponents/News")) ;
 const HotSpot = lazy(() => import("../components/BreadBlog/routeComponents/HotSpot")) ;
 const Comments = lazy(() => import("../components/BreadBlog/routeComponents/Comments")) ;
-const Search = lazy(() => import("../components/BreadBlog/routeComponents/Search")) ;
+const Search = lazy(() => import("../components/BreadBlog/routeComponents/Search/Search")) ;
 const ArticlePresent = lazy(() => import( "../components/BreadBlog/routeComponents/ArticlePresent/Article/ArticlePresent"));
 
 const UserDrafts = lazy(() => import("../components/BreadBlog/UserComponents/User/UserDrafts/UserDrafts")) ;

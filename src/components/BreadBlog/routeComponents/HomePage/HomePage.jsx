@@ -3,8 +3,8 @@ import {Card, message, Tag} from "antd";
 import Banner from "./Banner";
 import Nav from "./Nav";
 import {nanoid} from "nanoid";
-import ArticleListArea from "../../utilsComponents/ArticleListArea";
-import TimeShow from "../../utilsComponents/TimeShow";
+import ArticleListArea from "../../utilsComponents/Present/ArticleListArea";
+import TimeShow from "../../utilsComponents/Present/TimeShow";
 import PublicDataRequest from "../../../../utils/RequestUtils/PublicDataRequest";
 
 export default function HomePage(){

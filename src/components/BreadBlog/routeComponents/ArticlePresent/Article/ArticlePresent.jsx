@@ -1,13 +1,13 @@
 import React, {Fragment, useEffect, useState} from "react";
 import {useSearchParams} from "react-router-dom";
 import {Card, Divider,Skeleton} from "antd";
-import TimeShow from "../../../utilsComponents/TimeShow";
+import TimeShow from "../../../utilsComponents/Present/TimeShow";
 import ArticlePresentHeader from "./ArticlePresentHeader";
 import ArticleActionNav from "./ArticleActionNav";
 import ArticleContent from "./ArticleContent";
 import MarkDownContent from "./MarkDownContent";
 import CommentsList from "../Comment/CommentsList";
-import NotFoundPage from "../../../utilsComponents/NotFoundPage";
+import NotFoundPage from "../../../utilsComponents/Present/NotFoundPage";
 import PublicDataRequest from "../../../../../utils/RequestUtils/PublicDataRequest";
 export default function ArticlePresent(props) {
 
@@ -36,7 +36,7 @@ export default function ArticlePresent(props) {
 		<Fragment>
 			{!isError.status ? <div className='article-present-container'>
 				<div className='article-action-nav'>
-					<ArticleActionNav ArticleInfo={ArticleInfo} articleid={search.get('articleid')}/>
+					{!loading && <ArticleActionNav articleid={search.get('articleid')}/>}
 				</div>
 				<div className='article-present-major-container'>
 					<Skeleton active loading={loading}>

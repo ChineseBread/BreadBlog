@@ -34,8 +34,15 @@ export default function SubCommentList({SubCommentsListInfo,getMoreSubComment}){
  * @param isliked 是否点赞
  * @param fcommentid 追评对应的id
  * @param reply 该追评若为回复了其他的评论reply则是一个对应的fcommentid
+ * @param isanonymous
+ * @param username
+ * @param createdtime
+ * @param comment
+ * @param like
+ * @param userid
+ * @param replydata
  */
-function SubCommentItem({fcommentid,fcommentdata:{isanonymous,username,createdtime,comment,like,reply,isliked},replydata}){
+function SubCommentItem({fcommentid,fcommentdata:{isanonymous,username,createdtime,comment,like,reply,isliked,userid},replydata}){
 
 	const {commentsid,commentid} = useContext(CommentContext);
 	const [likes, setLikes] = useState({isLike:isliked,action:isliked ? 'liked' : 'unliked'});
@@ -70,7 +77,7 @@ function SubCommentItem({fcommentid,fcommentdata:{isanonymous,username,createdti
 				</span>
 			]}
 			author={<a>{isanonymous ? '匿名用户' : reply ? `${username} 回复 ${replydata.username || '匿名用户'}` : username}</a>}
-			avatar={<Avatar src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae361584a42c48df9e9930f36319cadd~tplv-k3u1fbpfcp-no-mark:200:200:200:200.awebp?" alt="admin" />}
+			avatar={<Avatar src={isanonymous ? '/sources/Anonymous.png' : `/data/logo/${userid}`}/>}
 			datetime={moment(createdtime * 1000).format('YYYY-MM-DD HH:mm:ss')}
 			content={
 				<div className='comment-content-container'>

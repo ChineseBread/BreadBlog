@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Card,Segmented} from "antd";
+import { Card,Segmented } from "antd";
 import {SettingOutlined, StarOutlined} from "@ant-design/icons";
 import {Outlet, useNavigate} from "react-router-dom";
 

@@ -71,12 +71,12 @@ export default function CommentItem({commentItem:{isanonymous,userid,username,co
 					</span>,
 					<span onClick={() => setVisible(commentVisible => !commentVisible)}>
         				<CommentOutlined />
-						<span className="comment-action">{fcount}</span>
+						<span className="comment-action">{fcount || 0}</span>
 						<span className="comment-action">{commentVisible ? "返回" : "回复"}</span>
 					</span>
 				]}
 				author={<a>{isanonymous? '匿名用户' : username}</a>}
-				avatar={<Avatar src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae361584a42c48df9e9930f36319cadd~tplv-k3u1fbpfcp-no-mark:200:200:200:200.awebp?" alt="admin" />}
+				avatar={<Avatar src={isanonymous ? '/sources/Anonymous.png' : `/data/logo/${userid}`}/>}
 				datetime={moment(createdtime * 1000).format('YYYY-MM-DD HH:mm:ss')}
 				content={
 					<div className='comment-content-container'>

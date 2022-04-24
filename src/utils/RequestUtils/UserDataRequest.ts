@@ -1,6 +1,6 @@
 import {doDataRequest} from "../request";
 import CustomStorage from "../StorageUtils/CustomStorage";
-
+const errMsg = '服务器异常请稍后'
 class UserDataRequest {
 
     //---------------------------//
@@ -101,16 +101,18 @@ class UserDataRequest {
     //     })
     // }
     static getUserFavorites():Promise<object>{
-        return new Promise(async (resolve,reject) => {
+        let token = CustomStorage.getAccount().Token;
+        if (!token) return Promise.resolve({Ok:false,Msg:'请先登录'})
+        else return new Promise(async (resolve,reject) => {
             try {
                 let result = await doDataRequest({url:'fav/list',data:{token:CustomStorage.getAccount().Token},method:'GET'})
                 if (result?.Ok){
                     resolve({Ok:true,Favs:result.Favs || []})
                 }else{
-                    resolve({Ok:false})
+                    resolve({Ok:false,Msg:result?.Msg || errMsg})
                 }
             }catch (e){
-                resolve({Ok:false})
+                resolve({Ok:false,Msg:errMsg})
             }
         })
     }

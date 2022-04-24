@@ -1,8 +1,8 @@
 import React, { useEffect, useState} from "react";
 import UserInfoArea from "./UserInfoArea";
 import UserMinorArea from "./UserMinorArea";
-import ArticleListArea from "../../../utilsComponents/ArticleListArea";
-import ArticleDropMenu from "../../../utilsComponents/ArticleDropMenu";
+import ArticleListArea from "../../../utilsComponents/Present/ArticleListArea";
+import ArticleDropMenu from "../../../utilsComponents/Present/ArticleDropMenu";
 import UserDataRequest from "../../../../../utils/RequestUtils/UserDataRequest";
 import {message} from "antd";
 // import ArticleDropMenu from "../../../utilsComponents/ArticleDropMenu";

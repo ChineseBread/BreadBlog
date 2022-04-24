@@ -51,7 +51,7 @@ function CustomComment({articleid,setCommentListInfo}){
 				</div>
 			</div>
 			<div className='comment-input'>
-				<Avatar size={65} src='https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae361584a42c48df9e9930f36319cadd~tplv-k3u1fbpfcp-no-mark:200:200:200:200.awebp?' />
+				<Avatar size={65} src={CustomStorage.getAvatarUrl()} />
 				<TextArea showCount maxLength={100} placeholder='留下你的足迹...' value={comment} onChange={handleCommentChange}/>
 			</div>
 		</div>

@@ -16,10 +16,10 @@ export default function CommentsList({articleid,commentsid}) {
 			if (result?.Ok){
 				let {CommentsList,total} = result
 				setCommentListInfo({CommentsList,hasMore:result.CommentsList.length < total})
-				setLoading(false)
 			}else {
 				message.warn("获取评论失败")
 			}
+			setLoading(false)
 		})
 	},[])
 	const getMoreArticleComment = () => {

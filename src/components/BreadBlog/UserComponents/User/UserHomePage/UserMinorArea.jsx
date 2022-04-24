@@ -3,7 +3,7 @@ import {Card, Tag} from "antd";
 import {EditOutlined, StarOutlined} from "@ant-design/icons";
 import {useNavigate} from "react-router-dom";
 import {nanoid} from "nanoid";
-import TimeShow from "../../../utilsComponents/TimeShow";
+import TimeShow from "../../../utilsComponents/Present/TimeShow";
 
 function UserMinorArea({ArticleCategoryList,changeCategory}) {
 	const navigator = useNavigate()

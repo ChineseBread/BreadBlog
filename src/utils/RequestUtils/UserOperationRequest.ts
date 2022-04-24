@@ -6,6 +6,7 @@ const errMsg = '服务器异常请稍后'
 class UserOperationRequest{
     /**
      * @description 心跳token
+     * @deprecated 不能做全局token使用
      */
     static beforeDoUserOperations():Promise<object>{
         return new Promise(async (resolve,reject) => {
@@ -115,7 +116,11 @@ class UserOperationRequest{
     static doModifyUserName(name: string): Promise<object> {
         return this.doModifyOperation(CustomStorage.getAccount().Token,{name},'user/changename','username')
     }
+    static uploadAvatar(file:object):Promise<object>{
+        return new Promise(async (resolve,reject) => {
 
+        })
+    }
     /**
      * @description 收藏夹
      */

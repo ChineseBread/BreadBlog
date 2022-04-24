@@ -1,6 +1,5 @@
-import TextArea from "antd/es/input/TextArea";
-import {Button, message, Switch} from "antd";
 import React, {useState} from "react";
+import {Button, message, Switch,Input} from "antd";
 import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperationRequest";
 
 /**
@@ -10,7 +9,7 @@ import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperatio
  * @param commentsid 评论组id
  * @param setCommentsListInfo
  */
-
+const {TextArea} = Input
 export default function CommentEditor({username,commentid,commentsid,setSubCommentsListInfo,setVisible}) {
 	const [isAnonymous,setAnonymous] = useState(false)
 	const [text,setText] = useState('')

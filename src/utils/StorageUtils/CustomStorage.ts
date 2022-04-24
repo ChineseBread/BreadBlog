@@ -1,4 +1,3 @@
-// import {account, customStorageUtils} from "./index";
 import {doRequest} from "../request";
 
 declare type account = {
@@ -17,20 +16,8 @@ class CustomStorage {
     // 心跳token
     static heartbeat:any;
 
-    // static getUserInfoByID(userid:string):Promise<UserInfo | undefined>{
-    //     return new Promise(async (resolve,reject) => {
-    //         resolve(this.UserInfoArr.find(ele => ele.userid === userid))
-    //     })
-    // }
-
-    // static async addUserInfo(User:UserInfo):Promise<void>{
-    //     let user = await this.getUserInfoByID(User.userid);
-    //     if (user) return;
-    //     else this.UserInfoArr.push(User)
-    // }
-
     static getAvatarUrl():string{
-        return 'https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae361584a42c48df9e9930f36319cadd~tplv-k3u1fbpfcp-no-mark:200:200:200:200.awebp?'
+        return `/data/logo/${CustomStorage.getAccount().UserID || 'null'}`
     }
 
     static getAccount(): account {
@@ -58,11 +45,12 @@ class CustomStorage {
 
     static saveAccount(Account:account): void {
         sessionStorage.setItem('account',JSON.stringify(Account))
+        this.doHearBeat();
     }
 
     static removeAccount():void{
         sessionStorage.removeItem("account")
-        // if (this.heartbeat) clearInterval(this.heartbeat)
+        if (this.heartbeat) clearInterval(this.heartbeat)
     }
 
     static checkAccount():Promise<{Ok:boolean,Msg:string | undefined}>{
