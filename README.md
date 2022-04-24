@@ -24,6 +24,7 @@
 ## install
  请根据package.json中的依赖自行安装所需依赖
 ## 注意事项
+ main下为18版本
  目前进行React18版本开发,请参考[React18分支](https://github.com/ChineseBread/BreadBlog/tree/React-18)
  
  [React17](https://github.com/ChineseBread/BreadBlog/tree/React-17)版本会在后期合并，对于特殊的兼容问题api会明确指出
