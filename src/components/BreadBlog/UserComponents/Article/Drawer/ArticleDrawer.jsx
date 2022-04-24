@@ -20,6 +20,7 @@ const DrawerCategoryChoice = [
     // {value:'8',choice:'个人'},
 ]
 function _ArticleDrawer({visible,onClose,title,markdown,editorState,isMarkdown}){
+
     const navigator = useNavigate()
 
     let onFinish =  async ({publicsort,ispublic,sortname,tag,description}) => {
@@ -61,7 +62,6 @@ function _ArticleDrawer({visible,onClose,title,markdown,editorState,isMarkdown})
             style={{ position: 'absolute' }}
             width={500}
             // forceRender={false}
-
         >
             <Form
                 onFinish={onFinish}

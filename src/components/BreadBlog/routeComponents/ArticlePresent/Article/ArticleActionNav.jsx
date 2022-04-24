@@ -1,31 +1,47 @@
-import {Button, Checkbox, Input, message, Modal, Skeleton, Space, Typography} from "antd";
-import {
-	LikeFilled,
-	LikeOutlined,
-	MessageOutlined, PlusOutlined,
-	PrinterOutlined,
-	StarFilled,
-	StarOutlined
-} from "@ant-design/icons";
 import React, {Fragment, useEffect, useState} from "react";
+import {Button, Checkbox, Input, message, Modal, Popover, Skeleton, Space, Typography} from "antd";
+import {
+	LikeFilled, LikeOutlined, MessageOutlined, PlusOutlined,
+	PrinterOutlined, ShareAltOutlined, StarFilled, StarOutlined
+} from "@ant-design/icons";
 import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperationRequest";
 import UserDataRequest from "../../../../../utils/RequestUtils/UserDataRequest";
-import CustomStorage from "../../../../../utils/StorageUtils/CustomStorage";
 
-export default function ArticleActionNav({ArticleInfo,articleid}) {
+export default function ArticleActionNav({articleid}) {
 
 	let toComment = () => {
 		let element = document.getElementById('custom_comment')
 		element.scrollIntoView({behavior:'smooth',block:'center'})
 	}
 
-	let printPDF = () => {
+	return (
+		<Fragment>
+			<Like articleid={articleid}/>
+			<Button shape="circle" size='large' icon={<MessageOutlined />} onClick={toComment}/>
+			<Subscribe articleid={articleid}/>
+			<Share/>
+		</Fragment>
+	);
+}
+function Share(){
+	return(
+		<Popover content={window.location.href} title="分享" trigger="click" placement='right'>
+			<Button size='large' shape='circle' icon={<ShareAltOutlined />}/>
+		</Popover>
+	)
+}
+/**
+ *@deprecated 该功能不必要
+ */
+function Print({title}){
+
+	const printPDF = () => {
 		message.loading('生成PDF中').then(() => {
 			if (window.printJS){
 				window.printJS({
 					printable:'pdf_viewer',
 					type:"html",
-					header:`<h1>${ArticleInfo.title}</h1>`,
+					header:`<h1>${title}</h1>`,
 					documentTitle:'',
 					style:'a{text-decoration:none;color:#141414};code{color:#434343}',
 					onError:err => {
@@ -39,17 +55,10 @@ export default function ArticleActionNav({ArticleInfo,articleid}) {
 		})
 
 	}
-
-	return (
-		<Fragment>
-			<Like articleid={articleid}/>
-			<Button shape="circle" size='large' icon={<MessageOutlined />} onClick={toComment}/>
-			<Subscribe articleid={articleid}/>
-			<Button shape="circle" size='large' icon={<PrinterOutlined />} onClick={printPDF}/>
-		</Fragment>
-	);
+	return(
+		<Button shape="circle" size='large' icon={<PrinterOutlined />} onClick={printPDF}/>
+	)
 }
-
 function Like({articleid}){
 
 	const [isLike,setLike] = useState(false)
@@ -98,23 +107,16 @@ function Subscribe({articleid}){
 	},[])
 
 	const openUserFav = () => {
-		if (favs.length >= 1) {
-			setVisible(true)
-		} else {
-			CustomStorage.checkAccount().then(result => {
+		setVisible(true)
+		// 没有获取过收藏夹
+		if (favs.length < 1) {
+			UserDataRequest.getUserFavorites().then(result => {
 				if (result?.Ok){
-					setVisible(true)
-					UserDataRequest.getUserFavorites().then(result => {
-						if (result?.Ok){
-							setFavs(result.Favs)
-						}else {
-							message.warn('获取收藏夹失败')
-						}
-						setLoading(false)
-					})
+					setFavs(result.Favs)
 				}else {
 					message.warn(result.Msg)
 				}
+				setLoading(false)
 			})
 		}
 	}

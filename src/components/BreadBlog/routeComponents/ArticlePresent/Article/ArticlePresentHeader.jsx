@@ -18,7 +18,7 @@ export default function ArticlePresentHeader({ArticleInfo}){
 			extra={[
 				<Button key="subscribe" icon={<PlusOutlined />}>关注</Button>,
 			]}
-			avatar={{ src: 'https://avatars1.githubusercontent.com/u/8186664?s=460&v=4' }}
+			avatar={{ src: `/data/logo/${ArticleInfo.authorid}` }}
 		>
 			{ArticleInfo.description || '该文章无描述'}
 		</PageHeader>

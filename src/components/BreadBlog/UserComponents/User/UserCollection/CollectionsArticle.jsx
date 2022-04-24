@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useMemo, useState} from "react";
 import {Card, message, Skeleton} from "antd";
 import CollectionsMenu from "./CollectionsMenu";
-import ArticleListArea from "../../../utilsComponents/ArticleListArea";
+import ArticleListArea from "../../../utilsComponents/Present/ArticleListArea";
 import CollectionsDropMenu from "./CollectionsDropMenu";
 import UserDataRequest from "../../../../../utils/RequestUtils/UserDataRequest";
 import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperationRequest";

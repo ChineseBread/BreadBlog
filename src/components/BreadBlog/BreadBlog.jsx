@@ -4,24 +4,31 @@
  * @version 1.0
  */
 import React, {Suspense} from "react";
-import {Outlet, useNavigate} from "react-router-dom";
+import {Outlet, useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import {Avatar, BackTop, Badge, Dropdown, Input, Layout, Menu} from 'antd';
 import {ArrowUpOutlined, CommentOutlined, SearchOutlined} from "@ant-design/icons";
 
 import ContentLoading from "./utilsComponents/Loading/ContentLoading";
-import AvatarDropMenu from "./utilsComponents/AvatarDropMenu";
+import AvatarDropMenu from "./utilsComponents/Present/AvatarDropMenu";
 
 import CustomStorage from "../../utils/StorageUtils/CustomStorage";
 import logo from "../../static/Logo.png";
-import './less/index.less'
 
 const { Header, Content } = Layout;
 
 export default function BreadBlog(){
     const navigator = useNavigate()
-
+    const [search,setSearch] = useSearchParams()
+    const location = useLocation()
     let handleSearch = ({value}) => {
-        navigator(`/search?query=${value}`)
+
+        if (value){
+            if (location.pathname !== '/search'){
+                navigator(`/search?query=${value}`)
+            }else{
+                setSearch(`query=${value}`)
+            }
+        }
     }
     return(
 

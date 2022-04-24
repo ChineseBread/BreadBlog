@@ -45,6 +45,26 @@ class PublicDataRequest{
     }
 
     /**
+     * @description 简单文本搜索 用于搜索界面
+     * @param keyword
+     * @param page
+     */
+    static getArticleBySearchParams(keyword:string,page:number):Promise<object>{
+        return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doDataRequest({url:"search/simple",data:{keyword,page},method:'GET'})
+                if (result?.Results){
+                    resolve({Ok:true,ArticleList:result.Results,total:result.Count})
+                }else{
+                    if (result?.Results == null) resolve({Ok:true,ArticleList:[],total:0})
+                    else resolve({Ok:false,Msg:result?.Msg || errMsg})
+                }
+            }catch (e){
+                resolve({Ok:false,Msg:errMsg})
+            }
+        })
+    }
+    /**
      * @description 根据选取最热分类获取文章
      * @param sortname 最热分类
      */
@@ -198,8 +218,8 @@ class PublicDataRequest{
         "like": 1,
         "username": "admin"
         },
-     "FcommentCount": 1,
-     "HotFCommentsData": null
+        "FcommentCount": 1,
+        "HotFCommentsData": null
      * @param commentsid
      * @param page
      */
@@ -209,6 +229,7 @@ class PublicDataRequest{
                 let token = CustomStorage.getAccount().Token;
                 let data = token ? {commentsid,page,token} : {commentsid,page}
                 let result = await doDataRequest({url:'comments/get',data,method:'GET'})
+                // 没有数据就给commentsid和空数组
                 if (result?.CommentsData){
                     resolve({Ok:true,CommentsList:result.CommentsData,total:result.TotalCount})
                 }else {
