@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
-    "antd": "^4.20.0-alpha.1",
+    "antd": "^4.20.0",
     "axios": "^0.26.0",
     "animate.css": "^4.1.1",
     "braft-editor": "^2.3.9",
@@ -14,8 +14,8 @@
     "qs": "^6.10.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-infinite-scroll-component": "^6.1.0",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "react-infinite-scroll-component": "^6.1.0"
   },
   "devDependencies": {
     "react-app-polyfill": "^3.0.0",
