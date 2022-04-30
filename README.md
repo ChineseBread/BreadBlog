@@ -26,7 +26,7 @@
   * 评论点赞
   * 收藏文章
 ## install
- 请根据package.json中的依赖自行安装所需依赖
+ 请根据package.json中的依赖自行安装所需依赖,wepack.config.js中有自定义的打包配置，不使用可能会有报错
 ## 注意事项
  main下为非最新进度的React18分支版本
  目前进行React18版本开发,请参考[React18分支](https://github.com/ChineseBread/BreadBlog/tree/React-18)
