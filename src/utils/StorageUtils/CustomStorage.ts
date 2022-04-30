@@ -17,9 +17,13 @@ class CustomStorage {
     static heartbeat:any;
 
     static getAvatarUrl():string{
-        return `/data/logo/${CustomStorage.getAccount().UserID || 'null'}`
+        let UserID = CustomStorage.getAccount().UserID
+        return UserID ? `/data/logo/${CustomStorage.getAccount().UserID || 'null'}` : 'https://p9-passport.byteacctimg.com/img/mosaic-legacy/3791/5035712059~300x300.image'
     }
-
+    static getBackGroundUrl():string{
+        let UserID = CustomStorage.getAccount().UserID
+        return `/data/background/${UserID || null}`
+    }
     static getAccount(): account {
         let account:any = sessionStorage.getItem('account');
         if (account)  return JSON.parse(account);

@@ -1,20 +1,19 @@
 
 
 .User_Container {
-    height: 100vh;
+    height:100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: shangshou;
-    /*background: linear-gradient(45deg, rgb(200, 176, 250), rgb(245, 189, 253)) fixed;*/
-    //background: linear-gradient(60deg, rgb(78, 82, 246), rgb(145, 165, 248)) fixed;
+    z-index: 5;
     .container {
         transform: scale(0.9);
         position: relative;
         width: 70rem;
         img {
             width: 70rem;
-            box-shadow: 1px 1px 10px 2px #bfbfbf;
+            box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+            0 9px 28px 8px rgba(0, 0, 0, 0.05);
             user-select: none;
         }
         .switch{
@@ -23,7 +22,6 @@
                 color: #ccc;
                 font-size: 1.4rem;
                 cursor: pointer;
-                font-family: shangshou;
                 &.active {
                     color: rgb(116, 67, 226);
                 }
@@ -63,7 +61,6 @@
                 cursor: pointer;
                 color: white;
                 font-size: 18px;
-                font-family: shangshou, serif;
                 &:hover{
                     animation: headShake;
                     animation-duration: 1s;
@@ -77,6 +74,7 @@
                 margin: 2rem 0;
                 transition: .4s;
                 input {
+                    font-size: 16px;
                     outline: none;
                     width: 100%;
                     border: none;
@@ -97,7 +95,6 @@
                     font-size: 1.2rem;
                     color: rgb(129, 101, 207);
                     transition: .3s;
-                    font-family: shangshou, serif;
                 }
             }
         }
@@ -105,5 +102,4 @@
 
 
 }
-
 

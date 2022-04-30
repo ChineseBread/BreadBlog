@@ -2,6 +2,10 @@
 import {doRequest} from "../request";
 import CustomStorage from "../StorageUtils/CustomStorage";
 import debounce from "../debounce";
+
+/**
+ * @description 用户的文章操作 指在文章编辑见面的文章操作
+ */
 class ArticleOperationRequest{
 
     /**
@@ -100,14 +104,7 @@ class ArticleOperationRequest{
             }
         })
     }
-   /* sendComment(comment:string,anonymous:'public' | 'anonymous',userid:string,articleid:string):Promise<object>{
-        switch (anonymous){
-            case "public":
-                return this.sendPublicComment(comment,userid,articleid)
-            case 'anonymous':
-                return this.sendAnonymousComment(comment,articleid);
-        }
-    }*/
+
     static addArticleTag(articleid: string, tags: string): Promise<object> {
         return this.doArticleTagOperation(CustomStorage.getAccount().Token, articleid, tags,'tags/add');
     }

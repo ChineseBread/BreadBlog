@@ -24,8 +24,12 @@ export default function CollectionsManage(props) {
 		return () => {
 			return new Promise((resolve,reject) => {
 				UserOperationRequest.deleteFav(favname).then(result => {
-					message[result?.Ok? 'success' : 'warn'](result?.Msg)
-					setFavs(favs => favs.filter(favItem => favItem.info.name !== favname))
+					if (result.Ok){
+						message.success("删除成功")
+						setFavs(favs => favs.filter(favItem => favItem.info.name !== favname))
+					}else{
+						message.warn(result.Msg)
+					}
 					resolve()
 				})
 			})

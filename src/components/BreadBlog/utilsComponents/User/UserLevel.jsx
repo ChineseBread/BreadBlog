@@ -6,7 +6,7 @@ export default function UserLevel({user}) {
 
 	return (
 		<>
-			{user}
+			<span className='author-name'>{user}</span>
 			<i className='iconfont icon-icon-test5'/>
 		</>
 	);

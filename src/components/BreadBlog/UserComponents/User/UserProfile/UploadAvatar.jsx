@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { Upload, message } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import ImgCrop from "antd-img-crop";
 
 function getBase64(img, callback) {
 	const reader = new FileReader();
@@ -45,21 +46,24 @@ export default function UploadAvatar({token}){
 	}
 
 	return(
-		<Upload
-			name="logo"
-			listType="picture-card"
-			className="avatar-uploader"
-			showUploadList={false}
-			action={`/api/upload/logo/${token}`}
-			beforeUpload={beforeUpload}
-			onChange={handleChange}
-		>
-			{imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> :
-			<div>
-				{loading ? <LoadingOutlined /> : <PlusOutlined />}
-				<div style={{ marginTop: 8 }}>点击上传头像</div>
-			</div>
-			}
-		</Upload>
+		<ImgCrop rotate quality={1} modalOk='确认上传' modalCancel='取消'>
+			<Upload
+				name="logo"
+				listType="picture-card"
+				className="avatar-uploader"
+				showUploadList={false}
+				action={`/api/upload/logo/${token}`}
+				beforeUpload={beforeUpload}
+				onChange={handleChange}
+			>
+				{imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> :
+					<div>
+						{loading ? <LoadingOutlined /> : <PlusOutlined />}
+						<div style={{ marginTop: 8 }}>点击上传头像</div>
+					</div>
+				}
+			</Upload>
+		</ImgCrop>
+
 	)
 }

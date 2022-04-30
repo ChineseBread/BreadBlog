@@ -2,6 +2,11 @@ import {lazy} from "react";
 
 import {Navigate} from "react-router-dom";
 
+//用户收藏夹
+import CollectionsArticle from "../components/BreadBlog/UserComponents/User/UserCollection/CollectionsArticle";
+import CollectionsManage from "../components/BreadBlog/UserComponents/User/UserCollection/CollectionsManage";
+import Explore from "../components/BreadBlog/routeComponents/Explore/Explore";
+
 const BreadBlog = lazy(() => import("../components/BreadBlog/BreadBlog"));
 const HomePage = lazy(() => import("../components/BreadBlog/routeComponents/HomePage/HomePage"));
 
@@ -18,9 +23,9 @@ const UpdateCommon = lazy(() => import("../components/BreadBlog/UserComponents/A
 
 const Account = lazy(() => import("../components/BreadBlog/routeComponents/Account/Account"));
 
+const UserPreview = lazy(() => import("../components/BreadBlog/routeComponents/UserPreview/UserPreview"));
 const About = lazy(() => import("../components/BreadBlog/routeComponents/About/About"))
-const News = lazy(() => import("../components/BreadBlog/routeComponents/News")) ;
-const HotSpot = lazy(() => import("../components/BreadBlog/routeComponents/HotSpot")) ;
+const Topic = lazy(() => import("../components/BreadBlog/routeComponents/Topic")) ;
 const Comments = lazy(() => import("../components/BreadBlog/routeComponents/Comments")) ;
 const Search = lazy(() => import("../components/BreadBlog/routeComponents/Search/Search")) ;
 const ArticlePresent = lazy(() => import( "../components/BreadBlog/routeComponents/ArticlePresent/Article/ArticlePresent"));
@@ -28,9 +33,10 @@ const ArticlePresent = lazy(() => import( "../components/BreadBlog/routeComponen
 const UserDrafts = lazy(() => import("../components/BreadBlog/UserComponents/User/UserDrafts/UserDrafts")) ;
 const UserHomePage = lazy(() => import("../components/BreadBlog/UserComponents/User/UserHomePage/UserHomePage")) ;
 
+const UserArticleManage = lazy(() => import("../components/BreadBlog/UserComponents/User/UserArticleManage/UserArticleManage"));
+
 const UserCollection = lazy(() => import("../components/BreadBlog/UserComponents/User/UserCollection/UserCollection")) ;
-const CollectionsArticle = lazy( () => import("../components/BreadBlog/UserComponents/User/UserCollection/CollectionsArticle"));
-const CollectionsManage = lazy(() => import("../components/BreadBlog/UserComponents/User/UserCollection/CollectionsManage"));
+
 
 const UserProfile = lazy(() => import("../components/BreadBlog/UserComponents/User/UserProfile/UserProfile"))
 
@@ -44,16 +50,16 @@ const routesForm = [
         element:<BreadBlog/>,
         children:[
             {
+                path: '/preview',
+                element: <UserPreview/>
+            },
+            {
               path: '/',
               element: <HomePage/>
             },
             {
-                path: '/news',
-                element: <News/>
-            },
-            {
-                path: '/hotspot',
-                element: <HotSpot/>
+                path: '/topic',
+                element: <Topic/>
             },
             {
                 path: '/comments',
@@ -70,6 +76,10 @@ const routesForm = [
             {
               path: '/about',
               element: <About/>
+            },
+            {
+                path: '/explore',
+                element: <Explore/>
             },
             {
                 path: '/user',
@@ -98,15 +108,20 @@ const routesForm = [
                             }
                         ]
                     },
-                    // {
-                    //     path: '/user/tags',
-                    //     element: <TagsManagement/>
-                    // },
+                    {
+                        path:'/user/article/manage',
+                        element: <UserArticleManage/>
+                    },
                     {
                         path: "/user/profile",
                         element: <UserProfile/>
-                    }
+                    },
+
                 ]
+            },
+            {
+                path: '/account',
+                element: <Account/>,
             },
         ]
 
@@ -123,20 +138,6 @@ const routesForm = [
               path:'/article/edit/md',
               element: <EditMarkDown/>
           },
-          // {
-          //     path: '/article/edit',
-          //     element: <EditorPage/>,
-          //     children:[
-          //         {
-          //             path:'/article/edit/common',
-          //             element:<ArticleEditor/>
-          //         },
-          //         {
-          //             path:'/article/edit/md',
-          //             element: <MarkDownEditor/>
-          //         }
-          //     ]
-          // },
           {
               path:'/article/update/md',
               element:<UpdateMarkDown/>
@@ -154,10 +155,6 @@ const routesForm = [
               element: <DraftsCommon/>
           }
       ]
-    },
-    {
-        path: '/account',
-        element: <Account/>,
     },
 
 

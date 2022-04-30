@@ -8,7 +8,7 @@ import {Header} from "antd/es/layout/layout";
 export default function EditorHeader({handleTitleChange,openDrawer,visible,title,pathname,toolTip,isEdit}) {
 	const navigator = useNavigate()
 	return (
-		<Header>
+		<Header className='box-shadow'>
 			<div>
 				<LeftOutlined onClick={() => navigator(-1)}/>
 				<Input placeholder='请输入文章的标题' value={title} maxLength={20} onChange={handleTitleChange}/>

@@ -1,4 +1,4 @@
-import {doDataRequest} from "../request";
+import {doDataRequest, doRequest} from "../request";
 import CustomStorage from "../StorageUtils/CustomStorage";
 import debounce from "../debounce";
 
@@ -6,23 +6,53 @@ const errMsg = '服务器异常请稍后';
 class PublicDataRequest{
     //----------------------------//
     /**
-     * @description 公开数据接口 不给token
+     * @description 公开数据接口 不给token 用于其他用户访问该用户 不可访问其私人文章
      */
-    static getArticle(page:number):Promise<object>{
+    static getUserArticle(userid:string,page:number):Promise<object>{
         return new Promise( async resolve => {
             try {
-                let result = await doDataRequest({url:'article/user',data: {user:CustomStorage.getAccount().user,page},method:'GET'})
-                if (result?.length){
-                    resolve({Ok:true,ArticleList:result})
+                let result = await doDataRequest({url:'article/user',data: {userid,page},method:'GET'})
+                if (result?.articles){
+                    resolve({Ok:true,ArticleList:result.articles,total:result.total})
                 }else {
-                    resolve({Ok:false})
+                    if (result?.articles == null) resolve({Ok:true,ArticleList:[],total:-1})
+                    else resolve({Ok:false,Msg:result?.Msg || errMsg})
                 }
             }catch (e){
                 resolve({Ok:false})
             }
         })
     }
-
+    static getUserArticleCategory(userid:string):Promise<object>{
+        return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doDataRequest({url:'user/sorts',data:{userid},method:'GET'})
+                if (result?.length){
+                    resolve({Ok:true,ArticleCateGory:result})
+                }else{
+                    resolve({Ok:false})
+                }
+            }catch (e){
+                resolve({Ok:false,Msg:errMsg})
+            }
+        })
+    }
+    static getUserArticleByCateGory(userid:string,page:number,sortname:string):Promise<object>{
+        if (sortname === 'all') return this.getUserArticle(userid,page)
+        else return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doDataRequest({url:"user/sort",data:{page,userid,sortname},method:'GET'})
+                if (result?.articles){
+                    resolve({Ok:true,ArticleList:result.articles,total:result.total})
+                }else {
+                    if (result?.articles == null) resolve({Ok:true,ArticleList:[],total:-1})
+                    resolve({Ok:false,Msg:result?.Msg || '服务器异常请稍后'})
+                }
+            }catch (e){
+                resolve({Ok:false,Msg:errMsg})
+            }
+        })
+    }
     /**
      * @description 文章展示页获取文章信息
      * @param articleid
@@ -92,10 +122,10 @@ class PublicDataRequest{
                 if (result?.length){
                     resolve({Ok:true,ArticleList:result})
                 }else {
-                    resolve({Ok:false})
+                    resolve({Ok:false,Msg:result?.Msg || errMsg})
                 }
             }catch (e){
-                resolve({Ok:false})
+                resolve({Ok:false,Msg:errMsg})
             }
         })
     }
@@ -110,10 +140,10 @@ class PublicDataRequest{
                 if (result?.length){
                     resolve({Ok:true,ArticleList:result})
                 }else {
-                    resolve({Ok:false})
+                    resolve({Ok:false,Msg:result?.Msg || errMsg})
                 }
             }catch (e){
-                resolve({Ok:false})
+                resolve({Ok:false,Msg:errMsg})
             }
         })
     }
@@ -128,10 +158,10 @@ class PublicDataRequest{
                 if (result?.length){
                     resolve({Ok:true,ArticleList:result})
                 }else {
-                    resolve({Ok:false})
+                    resolve({Ok:false,Msg:result?.Msg || errMsg})
                 }
             }catch (e){
-                resolve({Ok:false})
+                resolve({Ok:false,Msg:errMsg})
             }
 
         })
@@ -143,9 +173,9 @@ class PublicDataRequest{
         return new Promise(async (resolve,reject) => {
             try {
                 let result = await doDataRequest({url:'hot/sorts',data:{},method:'GET'})
-                if (result?.length){
-                    resolve({Ok:true,HottestCateGory:result})
-                }else {
+                if (result?.HotSorts?.length){
+                    resolve({Ok:true,HottestCateGory:result.HotSorts})
+                }else{
                     resolve({Ok:false})
                 }
             }catch (e){
@@ -155,7 +185,20 @@ class PublicDataRequest{
         })
     }
 
-
+    static getHottestAuthor():Promise<object>{
+        return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doDataRequest({url:'hot/authors',data:{},method:'GET'})
+                if (result?.length){
+                    resolve({Ok:true,AuthorList:result})
+                }else {
+                    resolve({Ok:false,Msg:result?.Msg || errMsg})
+                }
+            }catch (e){
+                resolve({Ok:false,Msg:errMsg})
+            }
+        })
+    }
     private static _getHomePageData(category:string):Promise<object>{
         switch (category){
             // 待定

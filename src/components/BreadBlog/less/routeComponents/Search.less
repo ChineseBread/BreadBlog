@@ -14,7 +14,7 @@
     //}
     //左边list区域
     .article-list-container{
-        width: 65%;
+        width: 70%;
         margin-right: 20%;
     }
     //右边框
@@ -41,6 +41,18 @@
                     cursor: pointer;
                 }
             }
+        }
+    }
+}
+@media (max-width: 1000px) {
+    .search-article-container{
+        width: 100%;
+        .article-list-container{
+            width: 100%;
+            margin-right: 0;
+        }
+        .search-minor-container{
+            display: none;
         }
     }
 }

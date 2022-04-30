@@ -1,83 +1,119 @@
 .article-dropdown{
     width: 100px;
-    .anticon-edit,.anticon-delete{
+    .anticon-edit,.anticon-delete,.anticon-redo{
         margin-right: 20px;
     }
 }
 
 .user-home-container{
-    height: 100%;
-    width: 70%;
-    max-width: 100%;
+    //height: 100%; sticky不设置height
+    width: 1200px;
     padding: 15px 0;
-    //background-color: #eff1f4;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
 
-    //卡片阴影
-    .user-header-container,.user-minor-card,.ant-list-empty-text,.article-list-item{
-        box-shadow: 1px 1px 3px 2px #d9d9d9;
-    }
     //左边list区域
     .user-card-list-container{
-        width: 65%;
-        margin-right: 20%;
-
-        .user-header{
+        width: 700px;
+        // 用户头部
+        .user-header-container{
             margin-bottom: 10px;
-            .icon-icon-test2,.icon-icon-test,.icon-icon-test1,.icon-icon-test3,.icon-icon-test4,.icon-icon-test5{
-                font-size: 20px;
-                margin-left: 10px;
+            background-color: #fff;
+            box-shadow: 1px 1px 5px -1px #d9d9d9;
+            // 动态style
+            .user-avatar-container{
+                position: relative;
+                height: 200px;
+                .user-background{
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                    box-shadow: 0 2px 5px -2px #8c8c8c;
+                    button{
+                        position: absolute;
+                        top: 10px;
+                        right: 20px;
+                    }
+                    img{
+                        width: 100%;
+                    }
+                }
+                .ant-avatar-circle{
+                    position: absolute;
+                    box-shadow: 1px 1px 3px 1px #595959;
+                    top: 50px;
+                    left: 300px;
+                }
             }
-            // 一级
-            .icon-icon-test2{
-                color: #cdcdcd;
-            }
-            // 二级
-            .icon-icon-test{
-                color: #bae7ff;
-            }
-            //三级
-            .icon-icon-test1{
-                color: #60a1e1;
-            }
-            // 四级
-            .icon-icon-test3{
-                color: #febb8b;
-            }
-            // 五级
-            .icon-icon-test4{
-                color: #d83627;
-            }
-            .icon-icon-test5{
-                color: #d81e06;
+            .user-info-container{
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                text-align: center;
+                font-size: 25px;
+                .author-name{
+                    margin-right: 10px;
+                }
             }
         }
+
     }
     //右边框
     .user-minor-container{
-        top: 77px;
-        right: 8%;
-        position: fixed;
-        width: 20%;
+        width: 270px;
         user-select: none;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        .ant-card-head-title:hover{
-            animation: headShake;
-            animation-duration: 1s;
-        }
-        .user-minor-card{
-            width: 100%;
-            margin-bottom: 20px;
-
-            .tags-list-container{
-                span{
-                    margin: 5px;
-                    cursor: pointer;
+        .user-card-container{
+            position: sticky;
+            top: 60px;
+            .ant-card-head-title:hover{
+                animation: headShake;
+                animation-duration: 1s;
+            }
+            .user-minor-card{
+                width: 100%;
+                margin-bottom: 15px;
+                .tags-list-container{
+                    span{
+                        height: 22px;
+                        width: auto;
+                        line-height: 20px;
+                        font-size: 12px;
+                        margin: 5px;
+                        cursor: pointer;
+                        &:hover{
+                            background-color: #d9d9d9;
+                            transition:background-color 0.1s ease-in-out;
+                        }
+                    }
                 }
             }
+        }
+
+    }
+}
+@media (max-width: 1000px) {
+    .user-home-container{
+        width: 100%;
+        .user-card-list-container{
+            width: 100%;
+            .user-header-container{
+                .user-avatar-container{
+                    .user-background{
+                        height: 70%;
+                    }
+                    .ant-avatar-circle{
+                        left: calc(50% - 50px);
+                        top: 50%;
+                    }
+                }
+            }
+
+        }
+        .user-minor-container{
+            display: none;
         }
     }
 }

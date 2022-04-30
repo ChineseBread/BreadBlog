@@ -7,7 +7,8 @@ class UserDataRequest {
     static getUserArticle(page:number,sortname:string | undefined):Promise<object>{
         return new Promise(async (resolve,reject) => {
             try {
-                let result:any = await doDataRequest({url:'article/user',data:{user:CustomStorage.getAccount().user,token:CustomStorage.getAccount().Token,page},method:'GET'})
+                let {Token:token,UserID:userid} = CustomStorage.getAccount()
+                let result:any = await doDataRequest({url:'article/user',data:{userid,token,page},method:'GET'})
                 if (result?.articles){
                     switch (sortname){
                         case "all":
@@ -48,7 +49,8 @@ class UserDataRequest {
     static getUserArticleCategory():Promise<object>{
         return new Promise(async (resolve,reject) => {
             try {
-                let result = await doDataRequest({url:"user/sorts",data:{token:CustomStorage.getAccount().Token},method:'GET'})
+                let {Token:token,UserID:userid} = CustomStorage.getAccount()
+                let result = await doDataRequest({url:"user/sorts",data:{token,userid},method:'GET'})
                 if (result?.length){
                     resolve({Ok:true,ArticleCateGory:result})
                 }else{
@@ -63,7 +65,8 @@ class UserDataRequest {
         if (sortname === 'all' || sortname === 'private') return this.getUserArticle(page,sortname)
         return new Promise(async (resolve,reject) => {
             try {
-                let result = await doDataRequest({url:"user/sort",data:{token:CustomStorage.getAccount().Token,sortname},method:'GET'})
+                let {Token:token,UserID:userid} = CustomStorage.getAccount()
+                let result = await doDataRequest({url:"user/sort",data:{token,userid,sortname,page},method:'GET'})
                 if (result?.articles){
                     resolve({Ok:true,ArticleList:result.articles,total:result.total})
                 }else {
@@ -143,6 +146,21 @@ class UserDataRequest {
                 }
             }catch (e){
                 resolve({Ok:false,Msg:'服务器异常请稍后再试'})
+            }
+        })
+    }
+    static getUserTrash(page:number):Promise<object>{
+        return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doDataRequest({url:'trash/list/all',data:{token:CustomStorage.getAccount().Token,page},method:'GET'})
+                if (result?.TrashData){
+                    resolve({Ok:true,TrashList:result.TrashData,total:result.Count})
+                }else{
+                    if (result?.TrashData === null) resolve({Ok:true,TrashList:[],total:0})
+                    else resolve({Ok:false,Msg:result?.Msg || errMsg})
+                }
+            }catch (e){
+                resolve({Ok:false,Msg:errMsg})
             }
         })
     }

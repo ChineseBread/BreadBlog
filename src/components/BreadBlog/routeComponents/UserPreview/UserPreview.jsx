@@ -1,18 +1,15 @@
-import React, { useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
+import {useSearchParams} from "react-router-dom";
 import {message} from "antd";
-import UserInfoArea from "./UserInfoArea";
-import UserMinorArea from "./UserMinorArea";
-import ArticleListArea from "../../../utilsComponents/Present/ArticleListArea";
-import ArticleDropMenu from "../../../utilsComponents/Present/ArticleDropMenu";
-import UserDataRequest from "../../../../../utils/RequestUtils/UserDataRequest";
-import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperationRequest";
+import ArticleListArea from "../../utilsComponents/Present/ArticleListArea";
+import UserPreviewMinor from "./UserPreviewMinor";
+import UserPreviewInfo from "./UserPreviewInfo";
+import PublicDataRequest from "../../../../utils/RequestUtils/PublicDataRequest";
 
-/**
- * @description 用户主页
- */
-export default function UserHomePage(){
-
+export default function UserPreview(props) {
+	const [search,] = useSearchParams()
 	const [ArticleCategoryList,setCateGoryList] = useState([])
+
 	const [ArticleListInfo,setArticleListInfo] = useState({ArticleList:[],hasMore:false})
 	const [page,setPage] = useState(1)
 	// const [hasMore,setHasMore] = useState(true)
@@ -20,7 +17,7 @@ export default function UserHomePage(){
 	const [loading,setLoading] = useState(true)
 
 	useEffect(() => {
-		UserDataRequest.getUserArticleCategory().then(result => {
+		PublicDataRequest.getUserArticleCategory(search.get('userid')).then(result => {
 			if (result?.Ok){
 				setCateGoryList(result.ArticleCateGory)
 			}
@@ -28,7 +25,7 @@ export default function UserHomePage(){
 	},[])
 
 	useEffect(() => {
-		UserDataRequest.getUserArticle(1,'all').then(result => {
+		PublicDataRequest.getUserArticle(search.get('userid'),1).then(result => {
 			if (result?.Ok){
 				let {ArticleList,total} = result
 				setPage(page => page + 1)
@@ -43,7 +40,7 @@ export default function UserHomePage(){
 		return () => {
 			setPage(1)
 			setLoading(true)
-			UserDataRequest.getUserArticleByCateGory(page,key).then(result => {
+			PublicDataRequest.getUserArticleByCateGory(search.get('userid'),page,key).then(result => {
 				if (result?.Ok){
 					let {ArticleList,total} = result;
 					setArticleListInfo({ArticleList, hasMore: ArticleList.length < total})
@@ -56,8 +53,7 @@ export default function UserHomePage(){
 	}
 
 	const getMoreArticleList = () => {
-		UserDataRequest.getUserArticleByCateGory(page + 1,category).then(result => {
-
+		PublicDataRequest.getUserArticleByCateGory(search.get('userid'),page + 1,category).then(result => {
 			if (result?.Ok){
 				let {ArticleList,total} = result;
 				setPage(page => page + 1)
@@ -73,38 +69,20 @@ export default function UserHomePage(){
 
 		})
 	}
-	const deleteArticle = articleid => {
-		return () => {
-			UserOperationRequest.deleteArticle(articleid).then(result => {
-				if (result.Ok){
-					setArticleListInfo(({ArticleList,hasMore}) => {
-						return{
-							ArticleList:ArticleList.filter(article => article.articleid !== articleid),
-							hasMore
-						}
-					})
-					message.success("删除成功")
-				}else{
-					message.warn(result.Msg)
-				}
-			})
-		}
-	}
-	return(
+	return (
 		<div className='user-home-container'>
 			<div className='user-card-list-container' >
-				<UserInfoArea changeCategory={changeCategory}/>
+				<UserPreviewInfo User={{userid:search.get('userid'),username:search.get('username')}}/>
 				<ArticleListArea
 					ArticleListInfo={ArticleListInfo}
 					loading={loading}
 					getMoreArticleList={getMoreArticleList}
-					extra={item => <ArticleDropMenu deleteArticle={deleteArticle}  articleid={item.articleid} type={item.type}/>}
 					scrollTarget='scrollableDiv'
 				/>
 			</div>
 			<div className='user-minor-container'>
-				<UserMinorArea ArticleCategoryList={ArticleCategoryList} changeCategory={changeCategory} setCateGoryList={setCateGoryList}/>
+				<UserPreviewMinor ArticleCategoryList={ArticleCategoryList} changeCategory={changeCategory} setCateGoryList={setCateGoryList}/>
 			</div>
 		</div>
-	)
+	);
 }

@@ -1,22 +1,22 @@
-import React, {Fragment} from "react";
-import {Card, Tag} from "antd";
-import {EditOutlined, StarOutlined} from "@ant-design/icons";
+import React, {useMemo} from "react";
 import {useNavigate} from "react-router-dom";
+import {Card, Tag} from "antd";
+import {EditOutlined, FolderOpenOutlined, StarOutlined} from "@ant-design/icons";
 import {nanoid} from "nanoid";
 import TimeShow from "../../../utilsComponents/Present/TimeShow";
 
-function UserMinorArea({ArticleCategoryList,changeCategory}) {
+export default function UserMinorArea({ArticleCategoryList,changeCategory}) {
 	const navigator = useNavigate()
 	return (
-		<Fragment>
-			<div className='user-minor-card'>
+		<div className='user-card-container'>
+			<div className='user-minor-card box-shadow'>
 				<div className='minor-card-content-container'>
 					<TimeShow actions={[
-						<div onClick={() => navigator('/user/collections/show')}>
+						<div className='user-actions' onClick={() => navigator('/user/collections/show')}>
 							<StarOutlined key='subscribe' style={{marginRight:'15px'}} />
 							收藏夹
 						</div>,
-						<div onClick={() => navigator('/article/edit/md')}>
+						<div className='user-actions' onClick={() => navigator('/article/edit/md')}>
 							<EditOutlined key="edit" style={{marginRight:'15px'}} />
 							写文章
 						</div>
@@ -24,20 +24,28 @@ function UserMinorArea({ArticleCategoryList,changeCategory}) {
 					]}/>
 				</div>
 			</div>
-			<div className='user-minor-card'>
-				<div className='minor-card-content-container'>
-					<Card title='文章分类'>
-						<div className='tags-list-container'>
-							{ArticleCategoryList.filter(category => category && category.trim()).map(category => {
-								return(
-									<Tag color='#85a5ff' key={nanoid()} onClick={changeCategory(category)}>{category}</Tag>
-								)
-							})}
+			{useMemo(() => {
+				return(
+					<div className='user-minor-card box-shadow'>
+						<div className='minor-card-content-container'>
+							<Card title='文章分类' actions={[<div onClick={() => navigator('/user/article/manage')}>
+								<div className='user-actions'>
+									<FolderOpenOutlined key='folder' style={{marginRight:'15px'}} />
+									文章管理
+								</div>
+							</div>]}>
+								<div className='tags-list-container'>
+									{ArticleCategoryList.map(category => {
+										return(
+											<Tag key={nanoid()} onClick={changeCategory(category)}>{category}</Tag>
+										)
+									})}
+								</div>
+							</Card>
 						</div>
-					</Card>
-				</div>
-			</div>
-		</Fragment>
+					</div>
+				)
+			},[ArticleCategoryList])}
+		</div>
 	);
 }
-export default React.memo(UserMinorArea,(prevProps, nextProps) => prevProps.ArticleCategoryList.length === nextProps.ArticleCategoryList.length)

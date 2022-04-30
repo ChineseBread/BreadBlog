@@ -47,12 +47,19 @@
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
+        button{
+            height: 40px;
+            width: 40px;
+            .anticon{
+                font-size: 16px;
+            }
+        }
     }
     .@{article-present}-major-container{
-        width: 55%;
+        width: 800px;
         display: flex;
         flex-direction: column;
-        margin-right: 15%;
+        margin-right: 230px;
         padding: 20px 0;
             //文章标题
         .ant-card-head-title{
@@ -75,17 +82,28 @@
                     margin-top: 5px;
                 }
                .article-author-header{
-                   //页头描述
-                   .ant-page-header-content{
-                       color: #8c8c8c;
+                   .ant-page-header-heading-title{
+                       font-size: 20px;
+                       line-height: 32px;
+                   }
+                   .ant-page-header-heading-sub-title{
+                       font-size: 14px;
                    }
                    .ant-page-header-heading-tags{
                        .ant-tag{
+                           height: 18px;
+                           line-height: 16px;
+                           font-size: 12px;
                            max-width: 70px;
                            overflow: hidden;
                            text-overflow: ellipsis;
                            white-space: nowrap;
                        }
+                   }
+                   //页头描述
+                   .ant-page-header-content{
+                       color: #8c8c8c;
+                       font-size: 14px;
                    }
                }
                 .article-content{
@@ -125,6 +143,7 @@
                             width: 80%;
                             padding-top: 10px;
                             .ant-input{
+                                font-size: 14px;
                                 max-height: 80px;
                                 min-height: 80px;
                                 background-color: #f5f5f5;
@@ -136,66 +155,79 @@
 
                     .ant-comment{
                         margin: 5px 0;
-                        // 用户发布时间
-                        .ant-comment-content-author-time{
-                            color: #8c8c8c;
-                        }
-                        //追平区背景
-                        .subcomment-container{
-                            background-color: #f8f8f8;
-                            padding: 0 15px;
-                            border-radius: 8px;
-                            .more-subcomment-button{
-                                width: 100%;
-                                margin-bottom: 10px;
-                            }
-
-                        }
-                        // 评论内容区 分为内容和评论发送器
-                        .comment-content-container{
-                            .comment{
-                                margin: 5px 0;
-                                font-family: -apple-system,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial
-                            }
-                            // 被回复者的评论
-                            .reply-comment{
-                                border: 1px solid #bfbfbf;
-                                border-radius: 4px;
-                                background-color: #f0f0f0;
-                                color: #8c8c8c;
-                                padding: 0 5px;
-
-                            }
-                            // 文章评论文字大小
-                            .comment-content{
-                                color: #434343;
-                            }
-                            .comment-editor{
-                                padding: 10px 20px;
-                                textarea{
-                                    min-height: 80px;
-                                    max-height: 80px;
+                        .ant-comment-content{
+                            .ant-comment-content-author{
+                                span{
+                                    font-size: 12px;
                                 }
-                                .ant-btn-primary{
-                                    margin-top: 10px;
-                                    margin-right: 10px;
+                                // 用户发布时间
+                                .ant-comment-content-author-time{
+                                    color: #8c8c8c;
                                 }
                             }
-                        }
 
-                        .comment-action {
-                            padding-left: 8px;
-                            cursor: auto;
-                        }
-                        // 底部图标
-                        .ant-comment-actions{
-                            margin-top: 5px;
-                            [class*='-col-rtl'] .comment-action {
-                                padding-right: 8px;
-                                padding-left: 0;
+
+                            //追平区背景
+                            .subcomment-container{
+                                background-color: #f8f8f8;
+                                padding: 0 15px;
+                                border-radius: 8px;
+                                .more-subcomment-button{
+                                    width: 100%;
+                                    margin-bottom: 10px;
+                                }
+
                             }
-                        }
+                            // 评论内容区 分为内容和评论发送器
+                            .comment-content-container{
+                                font-size: 14px;
+                                .comment{
+                                    margin: 5px 0;
+                                    font-family: -apple-system,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial
+                                }
+                                // 被回复者的评论
+                                .reply-comment{
+                                    border: 1px solid #bfbfbf;
+                                    border-radius: 4px;
+                                    background-color: #f0f0f0;
+                                    color: #8c8c8c;
+                                    padding: 0 5px;
 
+                                }
+                                // 文章评论文字大小
+                                .comment-content{
+                                    color: #434343;
+                                }
+                                .comment-editor{
+                                    padding: 10px 20px;
+                                    textarea{
+                                        font-size: 14px;
+                                        min-height: 80px;
+                                        max-height: 80px;
+                                    }
+                                    .ant-btn-primary{
+                                        margin-top: 10px;
+                                        margin-right: 10px;
+                                    }
+                                }
+                            }
+
+
+                            // 底部图标
+                            .ant-comment-actions{
+                                margin-top: 5px;
+                                .anticon{
+                                    font-size: 14px;
+                                }
+                                .comment-action {
+                                    font-size: 14px;
+                                    padding-right: 4px;
+                                    padding-left: 6px;
+                                    cursor: auto;
+                                }
+                            }
+
+                        }
 
                     }
                 }
@@ -203,15 +235,15 @@
         }
 
     }
-    @media(max-width: 1000px){
+    @media(max-width: 1200px){
         .article-minor-container{
-            display: none;
+           display: none;
         }
     }
     .article-minor-container{
         position: fixed;
+        width: 250px;
         right: 6%;
         top: 20%;
-        box-shadow: 1px 1px 2px 3px #d9d9d9;
     }
 }

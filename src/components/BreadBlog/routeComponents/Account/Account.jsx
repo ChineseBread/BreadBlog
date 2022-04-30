@@ -49,19 +49,20 @@ export default function Login(){
 			switch (active){
 				case "login" :
 					result = await UserOperationRequest.doLogin(username,password)
-					if (result?.Ok){
+					if (result.Ok){
 						message.success({content:'登录成功!',key:'loading'})
-						navigator(-1)
+						navigator('/user/home')
 					}else {
 						message.error({content:result.Msg,key:'loading'})
 					}
 					break;
 				case "register" :
 					result = await UserOperationRequest.doRegister(username,password)
-					if (result?.Ok){
+					if (result.Ok){
 						message.success({content:"注册成功!",key:'loading'})
-						navigator(-1)
+						navigator('/user/home')
 					}else {
+						console.log(result)
 						message.error({content:result.Msg,key:'loading'})
 					}
 					break;
@@ -71,7 +72,7 @@ export default function Login(){
 
 	}
 	return(
-		<div className="User_Container">
+		<div className="User_Container shangshou">
 			<div className="container">
 				<img src={background}/>
 				<div className="panel">

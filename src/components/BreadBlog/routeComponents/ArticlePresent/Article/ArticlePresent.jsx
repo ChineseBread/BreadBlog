@@ -1,17 +1,17 @@
 import React, {Fragment, useEffect, useState} from "react";
 import {useSearchParams} from "react-router-dom";
 import {Card, Divider,Skeleton} from "antd";
-import TimeShow from "../../../utilsComponents/Present/TimeShow";
 import ArticlePresentHeader from "./ArticlePresentHeader";
 import ArticleActionNav from "./ArticleActionNav";
 import ArticleContent from "./ArticleContent";
 import MarkDownContent from "./MarkDownContent";
 import CommentsList from "../Comment/CommentsList";
+import TimeShow from "../../../utilsComponents/Present/TimeShow";
 import NotFoundPage from "../../../utilsComponents/Present/NotFoundPage";
 import PublicDataRequest from "../../../../../utils/RequestUtils/PublicDataRequest";
 export default function ArticlePresent(props) {
 
-	const [search,setSearch] = useSearchParams()
+	const [search,] = useSearchParams()
 	const [ArticleInfo,setArticleInfo] = useState({title:'',authorname:'',sortname:'',tags:[],content:'',createdtime:'',type:'',commentsid:''})
 	const [loading,setLoading] = useState(true)
 	const [isError,setError] = useState({status:false,errText:''})
@@ -46,12 +46,10 @@ export default function ArticlePresent(props) {
 									<ArticlePresentHeader ArticleInfo={ArticleInfo}/>
 								</div>
 								<Divider/>
-								<div id='pdf_viewer'>
-									{ArticleInfo.type === 'markdown' ?
-										<MarkDownContent content={ArticleInfo.content}/> :
-										<ArticleContent content={ArticleInfo.content}/>
-									}
-								</div>
+								{ArticleInfo.type === 'markdown' ?
+									<MarkDownContent content={ArticleInfo.content}/> :
+									<ArticleContent content={ArticleInfo.content}/>
+								}
 							</div>
 						</Card>
 					</Skeleton>
@@ -63,7 +61,7 @@ export default function ArticlePresent(props) {
 						</div>
 					</Card>
 				</div>
-				<div className='article-minor-container'>
+				<div className='article-minor-container box-shadow'>
 					<TimeShow/>
 				</div>
 			</div> : <NotFoundPage errText={isError.errText}/>}

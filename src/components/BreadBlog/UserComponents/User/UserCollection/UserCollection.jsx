@@ -5,8 +5,8 @@ import {Outlet, useNavigate} from "react-router-dom";
 
 export default function UserCollection(props) {
 	const navigator = useNavigate()
-	const onChange = ({target}) => {
-		navigator(`/user/collections/${target.value}`)
+	const onChange = value => {
+		navigator(`/user/collections/${value}`)
 	}
 	return (
  		<div className='user-collections-container'>

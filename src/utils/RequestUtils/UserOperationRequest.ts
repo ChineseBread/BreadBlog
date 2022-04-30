@@ -116,9 +116,19 @@ class UserOperationRequest{
     static doModifyUserName(name: string): Promise<object> {
         return this.doModifyOperation(CustomStorage.getAccount().Token,{name},'user/changename','username')
     }
-    static uploadAvatar(file:object):Promise<object>{
-        return new Promise(async (resolve,reject) => {
 
+    /**
+     * @description 删除用户主页已经创建的分类 分类所包含的文章将会全部删除
+     * @param sortname
+     */
+    static deleteUserCateGory(sortname:string):Promise<object>{
+        return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doRequest({url:'sort/remove',data:{token:CustomStorage.getAccount().Token,sortname,force:true},method:'GET'})
+                resolve({Ok:result?.Ok,Msg:result?.Msg || errMsg})
+            }catch (e){
+                resolve({Ok:false,Msg:errMsg})
+            }
         })
     }
     /**
@@ -203,6 +213,20 @@ class UserOperationRequest{
 
     }
 
+    /**
+     * @description 用户删除已有文章
+     * @param articleid
+     */
+    static deleteArticle(articleid:string):Promise<object>{
+        return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doRequest({url:'article/del',data:{token:CustomStorage.getAccount().Token,articleid},method:'GET'})
+                resolve({Ok:result?.Ok,Msg:result?.Msg || errMsg})
+            }catch (e){
+                resolve({Ok:false,Msg:errMsg})
+            }
+        })
+    }
     /**
      * @description 用户评论操作
      * @undetermined 用户评论成功需要给commentid
@@ -336,6 +360,15 @@ class UserOperationRequest{
             }
         })
     }
-
+    static removeTrash(trashid:string,type:string):Promise<object>{
+        return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doRequest({url:`trash/${type === 'redo' ? 'restore' : 'remove'}`,data:{trashid,token:CustomStorage.getAccount().Token},method:'GET'})
+                resolve({Ok:result?.Ok,Msg:result?.Msg})
+            }catch (e){
+                resolve({Ok:false,Msg:errMsg})
+            }
+        })
+    }
 }
 export default UserOperationRequest;
