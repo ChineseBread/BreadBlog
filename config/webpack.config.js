@@ -151,6 +151,22 @@ module.exports = function (webpackEnv) {
                   // so that it honors browserslist config in package.json
                   // which in turn let's users customize the target behavior as per their needs.
                   'postcss-normalize',
+                  [
+                    'postcss-pxtorem',
+                    {
+                      rootValue:16,//结果为：设计稿元素尺寸/16，比如元素宽320px,最终页面会换算成 20rem
+                      propList: ['*'],
+                      exclude: file => {
+                        console.log(file)
+                        if (file.indexOf('antd') !== -1) return false
+                        if (file.indexOf('@ant-design') !== -1) return false
+                        if (file.indexOf('\\blogbackground\\src\\') !== -1) return false
+                        if (file.indexOf('md-editor-rt') !== -1) return false
+                        if (file.indexOf('braft-editor') !== -1) return false
+                        return true
+                      }  //这里表示不处理node_modules文件夹下的内容
+                    }
+                  ]
                 ]
               : [
                   'tailwindcss',
@@ -164,6 +180,14 @@ module.exports = function (webpackEnv) {
                       stage: 3,
                     },
                   ],
+                  [
+                    'postcss-pxtorem',
+                    {
+                      rootValue:16,//结果为：设计稿元素尺寸/16，比如元素宽320px,最终页面会换算成 20rem
+                      propList: ['*'],
+                      exclude: /node_modules/i  //这里表示不处理node_modules文件夹下的内容
+                    }
+                  ]
                 ],
           },
           sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
@@ -192,13 +216,7 @@ module.exports = function (webpackEnv) {
   };
 
   return {
-    // externalsType: 'script',
-    // externals: {
-    //   packageName: [
-    //     'https://printjs-4de6.kxcdn.com/print.min.js',
-    //     'global',
-    //   ],
-    // },
+
     target: ['browserslist'],
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     // Stop compilation early in production
