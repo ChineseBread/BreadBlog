@@ -7,15 +7,27 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Hello BreadBlog"
     />
     <title>BreadBlog</title>
   </head>
   <body>
-    <noscript>兄弟把JavaScript打开</noscript>
-
-
+    <noscript>
+      <div style="color: #f5222d; font-size: 100px">兄弟把JavaScript打开</div>
+    </noscript>
     <div id="root"></div>
+    <canvas id="background"></canvas>
   </body>
-  <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+  <script>
+    const baseSize = 16;
+
+    (function setRem() {
+      const scale = document.documentElement.clientWidth / 1500
+      if (scale >= 1){
+        document.documentElement.style.fontSize = baseSize * scale + 'px'
+      }
+    })()
+
+  </script>
+<!--  <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>-->
 </html>
