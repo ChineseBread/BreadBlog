@@ -60,7 +60,6 @@ function _ArticleDrawer({visible,onClose,title,markdown,editorState,isMarkdown})
             onClose={onClose}
             getContainer={false}
             style={{ position: 'absolute' }}
-            width={500}
             // forceRender={false}
         >
             <Form

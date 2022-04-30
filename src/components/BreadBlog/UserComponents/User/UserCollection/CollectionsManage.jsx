@@ -65,7 +65,7 @@ export default function CollectionsManage(props) {
 							favs.map(favItem => {
 								return(
 									<div className='fav-item' key={favItem.favid}>
-										<span>{favItem.info.name}</span>
+										<span className='fav-name'>{favItem.info.name}</span>
 										<div className='fav-button'>
 											<Button type='ghost'>编辑</Button>
 											<Popconfirm

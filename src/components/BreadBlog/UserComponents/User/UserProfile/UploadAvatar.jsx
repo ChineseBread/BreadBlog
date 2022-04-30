@@ -46,7 +46,7 @@ export default function UploadAvatar({token}){
 	}
 
 	return(
-		<ImgCrop rotate quality={1} modalOk='确认上传' modalCancel='取消'>
+		<ImgCrop rotate quality={1} modalOk='确认上传' modalCancel='取消' modalTitle='裁剪图片'>
 			<Upload
 				name="logo"
 				listType="picture-card"

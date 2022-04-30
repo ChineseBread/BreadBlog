@@ -73,7 +73,6 @@ function _UpdateDrawer({visible,onClose,title,markdown,editorState,ArticleInfo,l
 			onClose={onClose}
 			getContainer={false}
 			style={{ position: 'absolute' }}
-			width={500}
 			// forceRender={false}
 		>
 			<Skeleton active loading={loading}>

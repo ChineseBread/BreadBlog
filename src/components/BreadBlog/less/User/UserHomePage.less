@@ -1,6 +1,7 @@
+//文章选项删除和编辑
 .article-dropdown{
     width: 100px;
-    .anticon-edit,.anticon-delete,.anticon-redo{
+    .anticon{
         margin-right: 20px;
     }
 }
@@ -39,6 +40,8 @@
                     }
                 }
                 .ant-avatar-circle{
+                    height: 100px;
+                    width: 100px;
                     position: absolute;
                     box-shadow: 1px 1px 3px 1px #595959;
                     top: 50px;
@@ -77,10 +80,6 @@
                 margin-bottom: 15px;
                 .tags-list-container{
                     span{
-                        height: 22px;
-                        width: auto;
-                        line-height: 20px;
-                        font-size: 12px;
                         margin: 5px;
                         cursor: pointer;
                         &:hover{
@@ -97,16 +96,17 @@
 @media (max-width: 1000px) {
     .user-home-container{
         width: 100%;
+        padding-top: 0;
         .user-card-list-container{
             width: 100%;
             .user-header-container{
                 .user-avatar-container{
-                    .user-background{
-                        height: 70%;
-                    }
+                    height: 70%;
                     .ant-avatar-circle{
-                        left: calc(50% - 50px);
-                        top: 50%;
+                        width: 20%;
+                        height: 70%;
+                        left: 40%;
+                        top: 20%;
                     }
                 }
             }

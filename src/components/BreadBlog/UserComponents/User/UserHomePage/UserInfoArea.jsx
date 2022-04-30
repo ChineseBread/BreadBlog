@@ -12,7 +12,7 @@ function UserInfoArea({changeCategory}){
 		<div className='user-header-container'>
 			<div className='user-avatar-container'>
 				<UploadBackGround imgUrl={CustomStorage.getBackGroundUrl()}/>
-				<Avatar size={100} src={CustomStorage.getAvatarUrl()}/>
+				<Avatar src={CustomStorage.getAvatarUrl()}/>
 			</div>
 			<div className='user-info-container shangshou'>
 				<UserLevel user={CustomStorage.getAccount().User}/>
@@ -59,7 +59,7 @@ function UploadBackGround({imgUrl}){
 	}
 	return(
 		<div className='user-background'>
-			<ImgCrop rotate aspect={7 / 2} quality={1} modalOk='确认上传' modalCancel='取消'>
+			<ImgCrop rotate aspect={7 / 2} quality={1} modalOk='确认上传' modalCancel='取消' modalTitle='裁剪图片'>
 				<Upload
 					name="background"
 					showUploadList={false}

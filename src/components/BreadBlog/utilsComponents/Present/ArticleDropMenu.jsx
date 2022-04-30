@@ -34,7 +34,7 @@ const useMenu = (articleid,type,deleteArticle) => {
 export default function ArticleDropMenu({articleid,type,deleteArticle}){
 	return(
 		<Dropdown key="more" overlay={useMenu(articleid,type,deleteArticle)} placement="bottomRight" overlayClassName='article-dropdown' arrow>
-			<Button type="text" icon={<MoreOutlined style={{ fontSize: 20 }} />} />
+			<Button type="text" icon={<MoreOutlined/>} />
 		</Dropdown>
 	)
 }

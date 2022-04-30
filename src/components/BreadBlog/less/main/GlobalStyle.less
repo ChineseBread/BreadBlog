@@ -1,10 +1,4 @@
-// 全局提示
-.ant-message-notice-content{
-    font-size: 14px;
-    .anticon{
-        font-size: 16px;
-    }
-}
+
 // 盒子阴影样式
 .box-shadow{
     transition: box-shadow ease-out 0.2s;
@@ -101,34 +95,9 @@
     background-color: #fff;
     border-radius: 3px;
     box-shadow: 2px 2px 4px -2px #d9d9d9;
-    &:hover{
-        background-color: #f9f9f9;
-        transition: background-color ease-out 0.2s;
-    }
-    .ant-list-item-meta{
-        // 用户头像
-        .ant-list-item-meta-avatar{
-            .ant-avatar-circle{
-                width: 34px;
-                height: 34px;
-                line-height: 34px;
-                font-size: 14px;
-            }
-        }
-        .ant-list-item-meta-content{
-            .ant-list-item-meta-title{
-                font-size: 16px;
-                line-height: 24px;
-            }
-            .ant-list-item-meta-description{
-                font-size: 14px;
-            }
-        }
-    }
 
     //文章换行省略
     .article-list-item-content{
-        font-size: 14px;
         word-break: break-all;
         text-overflow: ellipsis;
         display: -webkit-box;
@@ -137,30 +106,19 @@
         overflow: hidden;
         cursor: pointer;
     }
-    .ant-list-item-action{
-        li{
-            font-size: 14px;
+    &:hover{
+        background-color: #f9f9f9;
+        transition: background-color ease-out 0.2s;
+    }
+}
+@media (max-width: 1000px) {
+    .article-list-item{
+        // 原样式margin auto auto 0 会在手机端将icon挤到下面
+        .ant-list-item-extra{
+            button{
+                display: none;
+            }
         }
     }
-    //.ant-list-item-action{
-    //}
-    .ant-list-item-extra{
-        margin-left: 0;
-    }
-
 }
-.ant-divider-inner-text{
-    font-size: 14px;
-}
-.ant-card{
-    // 所有卡片的标题
-    .ant-card-head-title{
-        font-size: 16px;
-    }
-    // 用户操作
-    .user-actions{
-        font-size: 14px;
-    }
-}
-
 
