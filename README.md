@@ -33,4 +33,4 @@
  
  [手机端](https://github.com/ChineseBread/BreadBlog/tree/React-18-Responsive)博客系统正在适配中,手机访问部分功能无法使用，请尽量使用电脑
  
- [React17](https://github.com/ChineseBread/BreadBlog/tree/React-17)版本会在后期合并，对于特殊的兼容问题api会明确指出
+ React17版博客已经停止开发不再维护
