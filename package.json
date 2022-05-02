@@ -1,11 +1,11 @@
 {
   "name": "breadblog",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "animate.css": "^4.1.1",
-    "antd": "^4.20.0",
+    "antd": "^4.20.2",
     "antd-img-crop": "^4.2.3",
     "axios": "^0.26.0",
     "braft-editor": "^2.3.9",
