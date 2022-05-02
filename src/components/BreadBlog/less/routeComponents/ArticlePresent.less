@@ -205,11 +205,6 @@
         }
 
     }
-    @media(max-width: 1200px){
-        .article-minor-container{
-           display: none;
-        }
-    }
     .article-minor-container{
         position: fixed;
         width: 250px;
@@ -217,3 +212,17 @@
         top: 20%;
     }
 }
+@media(max-width: 1200px){
+    .@{article-present}-container{
+        .@{article-present}-major-container{
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .article-minor-container,.article-action-nav{
+            display: none;
+        }
+    }
+
+}
+

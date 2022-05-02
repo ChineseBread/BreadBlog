@@ -24,7 +24,7 @@ export default function Explore(props) {
 				message.success({content:'文章获取成功',key:'loading'})
 			}else {
 				message.warn({content:'获取文章失败',key:'loading'})
-				// setError({status: true,errText: result.Msg})
+				setError({status: true,errText: result.Msg})
 			}
 		})
 	},[])

@@ -4,7 +4,7 @@ import {Menu, Modal} from "antd";
 import {
 	EditOutlined,
 	FileTextOutlined,
-	HomeOutlined, LogoutOutlined, SettingOutlined,
+	LogoutOutlined, SettingOutlined,
 	StarOutlined,
 	UserAddOutlined,
 	UserOutlined

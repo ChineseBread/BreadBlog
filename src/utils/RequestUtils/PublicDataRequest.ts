@@ -1,4 +1,4 @@
-import {doDataRequest, doRequest} from "../request";
+import {doDataRequest} from "../request";
 import CustomStorage from "../StorageUtils/CustomStorage";
 import debounce from "../debounce";
 

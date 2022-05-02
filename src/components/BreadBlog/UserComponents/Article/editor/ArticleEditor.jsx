@@ -1,19 +1,28 @@
-import {Fragment, useEffect, useMemo} from "react";
+import {Fragment, useMemo} from "react";
 import BraftEditor from 'braft-editor'
-// import { useOutletContext } from "react-router-dom";
+import ArticleOperationRequest from "../../../../../utils/RequestUtils/ArticleOperationRequest";
 
 
 export default function ArticleEditor(props){
 
-    useEffect(() => {
-        return () => false
-    },[])
-    // const context = useOutletContext()
     const {editorState,setEditorState} = props
-    // const [editorState,setEditorState] = useState(BraftEditor.createEditorState('<p>写点啥呗...</p>'))
 
     const handleChange = (editorState) => {
         setEditorState(editorState)
+    }
+
+    const handleUpload = ({success,file,error}) => {
+        ArticleOperationRequest.uploadImg(file).then(result => {
+            if (result.Ok){
+                success({
+                    url: result.path,
+                })
+            }else{
+                error({
+                    msg:result.Msg
+                })
+            }
+        })
     }
     return (
         <Fragment>
@@ -23,6 +32,8 @@ export default function ArticleEditor(props){
                         <BraftEditor
                             value={editorState}
                             onChange={handleChange}
+                            media={{uploadFn:handleUpload}}
+                            excludeControls={['fullscreen']}
                         />
                     </div>
                 )

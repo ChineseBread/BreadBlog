@@ -2,6 +2,7 @@
 import {doRequest} from "../request";
 import CustomStorage from "../StorageUtils/CustomStorage";
 import debounce from "../debounce";
+import axios from "axios";
 
 /**
  * @description 用户的文章操作 指在文章编辑见面的文章操作
@@ -105,6 +106,31 @@ class ArticleOperationRequest{
         })
     }
 
+    /**
+     * @description 文章图片上传
+     * @param file
+     */
+    static uploadImg(file:File):Promise<object>{
+        if (file.size / 1024 / 1024 > 5) return Promise.resolve({Ok:false,Msg:'图片不能超过5MB'})
+        else return new Promise(async (resolve,reject) => {
+            try {
+                const form = new FormData()
+                form.append('image',file)
+                let result = await axios.post(`/api/upload/attach/${CustomStorage.getAccount().Token}`,form,{
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                if (result.data.Ok){
+                    resolve({Ok:true,path:result.data.Path})
+                }else{
+                    resolve({Ok:false,Msg:result.data?.Msg || '服务器异常请稍后'})
+                }
+            }catch (e){
+                resolve({Ok:false,Msg:'服务器异常请稍后'})
+            }
+        })
+    }
     static addArticleTag(articleid: string, tags: string): Promise<object> {
         return this.doArticleTagOperation(CustomStorage.getAccount().Token, articleid, tags,'tags/add');
     }

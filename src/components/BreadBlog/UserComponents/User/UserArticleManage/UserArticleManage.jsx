@@ -13,14 +13,10 @@ export default function UserArticleManage(props) {
 		<div className='user-manage-container'>
 			<Card title='文章管理' extra={<Button onClick={() => navigator('/user/home')}>我的主页</Button>}>
 				<div className='user-manage-item-container clear-scroll' id='user-trash-list'>
-					<Card type='inner' title='垃圾箱'>
-						<UserTrash/>
-					</Card>
+					<UserTrash/>
 				</div>
 				<div className='user-manage-item-container clear-scroll'>
-					<Card type='inner' title='分类管理'>
-						<UserCateGory/>
-					</Card>
+					<UserCateGory/>
 				</div>
 			</Card>
 		</div>

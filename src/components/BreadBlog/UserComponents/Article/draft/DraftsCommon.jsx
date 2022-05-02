@@ -3,7 +3,6 @@ import React, {useEffect, useState} from "react";
 import {Layout, message} from "antd";
 import ArticleDrawer from "../Drawer/ArticleDrawer";
 import BraftEditor from "braft-editor";
-import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperationRequest";
 import ArticleEditor from "../editor/ArticleEditor";
 import EditorHeader from "../Header/EditorHeader";
 import ArticleDraftStorage from "../../../../../utils/StorageUtils/ArticleDraftStorage";

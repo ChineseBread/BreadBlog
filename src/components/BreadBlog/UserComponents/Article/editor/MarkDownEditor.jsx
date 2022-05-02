@@ -1,15 +1,11 @@
-// import React, {useState} from 'react';
+import {Fragment, useMemo, useState} from "react";
+import {message} from "antd";
 import Editor from 'md-editor-rt';
-// import {useOutletContext} from "react-router-dom";
-import {Fragment, useEffect, useMemo, useState} from "react";
 import {emojis, MarkDownExtension,toolbars} from "./DataSource";
 import {HighlightOutlined, SmileOutlined} from "@ant-design/icons";
+import ArticleOperationRequest from "../../../../../utils/RequestUtils/ArticleOperationRequest";
 
 export default function MarkDownEditor(props){
-    // let context = useOutletContext()
-    useEffect(() => {
-       return () => false
-    },[])
     let {text,setText} = props
     const [emojiVisible, setEmojiVisible] = useState(false);
     const emojiHandler = (emoji) => {
@@ -58,10 +54,23 @@ export default function MarkDownEditor(props){
         }, 0);
     };
     // const [text, setText] = useState('## 写点东西呗....');
+    const handleUploadImg = (files,callback) => {
+        let file = files[0]
+        message.loading({content:"上传中...",key:'uploading',duration:10})
+        ArticleOperationRequest.uploadImg(file).then(result => {
+            if (result.Ok){
+                message.success({content:'上传成功',key:'uploading'})
+                callback([result.path])
+            }else{
+                message.warn(result.Msg)
+            }
+        })
+    }
     return(
         <Fragment>
             {useMemo(() => {
                 return <Editor
+                    onUploadImg={handleUploadImg}
                     modelValue={text}
                     editorId="md-prev"
                     editorClass='markdown_editor'

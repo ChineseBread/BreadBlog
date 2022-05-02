@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {Avatar, Card, Tag} from "antd";
 import {nanoid} from "nanoid";
@@ -32,7 +32,7 @@ export default function ExploreMinorArea({ArticleCategoryList,handleClickTag}) {
 				return(
 					<div className='explore-card-item box-shadow'>
 						<Card title="今天想看什么?">
-							<div className='category-container clear-scroll'>
+							<div className='tags-list-container clear-scroll'>
 								{ArticleCategoryList.map(category =>{
 									return(
 										<Tag onClick={handleClickTag(category)} key={nanoid()}>{category}</Tag>

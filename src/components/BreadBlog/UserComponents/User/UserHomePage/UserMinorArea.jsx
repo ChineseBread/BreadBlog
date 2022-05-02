@@ -5,7 +5,7 @@ import {EditOutlined, FolderOpenOutlined, StarOutlined} from "@ant-design/icons"
 import {nanoid} from "nanoid";
 import TimeShow from "../../../utilsComponents/Present/TimeShow";
 
-export default function UserMinorArea({ArticleCategoryList,changeCategory}) {
+export default function UserMinorArea({CategoryList,changeCategory}) {
 	const navigator = useNavigate()
 	return (
 		<div className='user-card-container'>
@@ -35,7 +35,7 @@ export default function UserMinorArea({ArticleCategoryList,changeCategory}) {
 								</div>
 							</div>]}>
 								<div className='tags-list-container'>
-									{ArticleCategoryList.map(category => {
+									{CategoryList.map(category => {
 										return(
 											<Tag key={nanoid()} onClick={changeCategory(category)}>{category}</Tag>
 										)
@@ -45,7 +45,7 @@ export default function UserMinorArea({ArticleCategoryList,changeCategory}) {
 						</div>
 					</div>
 				)
-			},[ArticleCategoryList])}
+			},[CategoryList])}
 		</div>
 	);
 }

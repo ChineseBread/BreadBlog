@@ -118,13 +118,14 @@ class UserOperationRequest{
     }
 
     /**
-     * @description 删除用户主页已经创建的分类 分类所包含的文章将会全部删除
+     * @description 删除用户主页已经创建的分类
      * @param sortname
+     * @param force 分类所包含的文章将会全部删除
      */
-    static deleteUserCateGory(sortname:string):Promise<object>{
+    static deleteUserCateGory(sortname:string,force:boolean):Promise<object>{
         return new Promise(async (resolve,reject) => {
             try {
-                let result = await doRequest({url:'sort/remove',data:{token:CustomStorage.getAccount().Token,sortname,force:true},method:'GET'})
+                let result = await doRequest({url:'sort/remove',data:{token:CustomStorage.getAccount().Token,sortname,force},method:'GET'})
                 resolve({Ok:result?.Ok,Msg:result?.Msg || errMsg})
             }catch (e){
                 resolve({Ok:false,Msg:errMsg})
@@ -311,7 +312,6 @@ class UserOperationRequest{
      * @description 用户追评操作
      */
     static likeSubComment(commentsid:string,commentid:string,fcommentid:string):Promise<object>{
-        console.log(fcommentid)
         let token = CustomStorage.getAccount().Token;
         if (!token) return Promise.resolve({Ok:false,Msg:'请先登录'})
         else return this.doSubCommentOpreation('like/fcomment/add',{token,commentsid,commentid,fcommentid})

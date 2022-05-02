@@ -12,17 +12,17 @@ import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperatio
  */
 export default function UserHomePage(){
 
-	const [ArticleCategoryList,setCateGoryList] = useState([])
+	const [CategoryList,setCateoryList] = useState([])
 	const [ArticleListInfo,setArticleListInfo] = useState({ArticleList:[],hasMore:false})
 	const [page,setPage] = useState(1)
 	// const [hasMore,setHasMore] = useState(true)
-	const [category,setCateGory] = useState('all')
+	const [category,setCategory] = useState('all')
 	const [loading,setLoading] = useState(true)
 
 	useEffect(() => {
 		UserDataRequest.getUserArticleCategory().then(result => {
 			if (result?.Ok){
-				setCateGoryList(result.ArticleCateGory)
+				setCateoryList(result.ArticleCateGory)
 			}
 		})
 	},[])
@@ -47,7 +47,7 @@ export default function UserHomePage(){
 				if (result?.Ok){
 					let {ArticleList,total} = result;
 					setArticleListInfo({ArticleList, hasMore: ArticleList.length < total})
-					setCateGory(key)
+					setCategory(key)
 				}
 			}).finally(() => {
 				setLoading(false)
@@ -103,7 +103,7 @@ export default function UserHomePage(){
 				/>
 			</div>
 			<div className='user-minor-container'>
-				<UserMinorArea ArticleCategoryList={ArticleCategoryList} changeCategory={changeCategory} setCateGoryList={setCateGoryList}/>
+				<UserMinorArea CategoryList={CategoryList} changeCategory={changeCategory}/>
 			</div>
 		</div>
 	)
