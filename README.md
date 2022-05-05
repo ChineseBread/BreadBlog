@@ -27,9 +27,9 @@
   * 追评回复发表
   * 评论点赞
   * 收藏文章
-## install
+### 安装
  请根据package.json中的依赖自行安装所需依赖,webpack.config.js中有自定义的打包配置，不使用可能会有报错
-## 注意事项
+### 注意事项
  main下为非最新进度的React18分支版本
  目前进行React18版本开发,请参考[React18分支](https://github.com/ChineseBread/BreadBlog/tree/React-18)
  
@@ -37,7 +37,7 @@
  
  React17版博客已经停止开发不再维护
 
-## 项目赞助
+### 项目赞助
 如果觉得软件用的还挺顺手的话可以请开发者喝杯奶茶🤪
 
 项目赞助请联系微信:17366201379
