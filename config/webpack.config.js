@@ -158,13 +158,14 @@ module.exports = function (webpackEnv) {
                       propList: ['*'],
                       exclude: file => {
                         console.log(file)
+                        // 传入的每一个file都是用到的less,可以选择直接return false
                         if (file.indexOf('antd') !== -1) return false
                         if (file.indexOf('@ant-design') !== -1) return false
                         if (file.indexOf('\\blogbackground\\src\\') !== -1) return false
                         if (file.indexOf('md-editor-rt') !== -1) return false
                         if (file.indexOf('braft-editor') !== -1) return false
                         return true
-                      }  //这里表示不处理node_modules文件夹下的内容
+                      } 
                     }
                   ]
                 ]
