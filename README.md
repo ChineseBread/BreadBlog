@@ -36,3 +36,8 @@
  [手机端](https://github.com/ChineseBread/BreadBlog/tree/React-18-Responsive)博客系统正在适配中,手机访问部分功能无法使用，请尽量使用电脑
  
  React17版博客已经停止开发不再维护
+
+## 项目赞助
+如果觉得软件用的还挺顺手的话可以请开发者喝杯奶茶🤪
+
+项目赞助请联系微信:17366201379
