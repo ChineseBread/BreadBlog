@@ -1,5 +1,5 @@
 # 开发事项
-由于要期末考试，开发暂缓
+由于要期末考试并且后端摸鱼，开发暂缓🤒
 # BreadBlog
 基于React开发的博客系统
 
@@ -11,7 +11,7 @@
 #### 2. 用户管理
   * 文章预览
   * 用户资料修改支持头像上传
-  * 用户自定义背景
+  * 用户自定义背景(支持裁剪上传,比例要求7:2)
   * 用户收藏夹
   * 用户草稿箱
   * 文章垃圾箱
@@ -33,7 +33,7 @@
  main下为非最新进度的React18分支版本
  目前进行React18版本开发,请参考[React18分支](https://github.com/ChineseBread/BreadBlog/tree/React-18)
  
- [手机端](https://github.com/ChineseBread/BreadBlog/tree/React-18-Responsive)博客系统正在适配中,手机访问部分功能无法使用，请尽量使用电脑
+ [手机端博客](https://github.com/ChineseBread/BreadBlog/tree/React-18-Responsive)正在适配中,手机访问部分功能无法使用，请尽量使用电脑端
  
  React17版博客已经停止开发不再维护
 
