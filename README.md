@@ -32,11 +32,10 @@
  请根据package.json中的依赖自行安装所需依赖,webpack.config.js中有自定义的打包配置，不使用可能会有报错并且会影响css样式和界面布局
 ## 注意事项
  main下为非最新进度的React18分支版本
- 目前进行React18版本开发,请参考[React18分支](https://github.com/ChineseBread/BreadBlog/tree/React-18)
  
  [手机端博客](https://github.com/ChineseBread/BreadBlog/tree/React-18-Responsive)正在适配中,手机访问部分功能无法使用，请尽量使用电脑端
  
- 开发进度和更新内容会写在update-log.md中
+ 开发进度和更新内容会写在React-18-Responsive的[update-log.md](https://github.com/ChineseBread/BreadBlog/blob/React-18-Responsive/update-log.md)中
  
  React17版博客已经停止开发不再维护
 
