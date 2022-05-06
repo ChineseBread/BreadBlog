@@ -33,9 +33,11 @@
 ## 注意事项
  main下为非最新进度的React18分支版本
  
- [手机端博客](https://github.com/ChineseBread/BreadBlog/tree/React-18-Responsive)正在适配中,手机访问部分功能无法使用，请尽量使用电脑端
+ React-18最新进度版本请参考[React-18分支](https://github.com/ChineseBread/BreadBlog/tree/React-18)
  
- 开发进度和更新内容会写在React-18-Responsive的[update-log.md](https://github.com/ChineseBread/BreadBlog/blob/React-18-Responsive/update-log.md)中
+ 博客手机端正在适配中,手机访问部分功能无法使用，请尽量使用电脑端
+ 
+ 开发进度和更新内容会写在React-18的[update-log.md](https://github.com/ChineseBread/BreadBlog/blob/React-18/update-log.md)中
  
  React17版博客已经停止开发不再维护
 
