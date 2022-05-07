@@ -5,11 +5,12 @@
  */
 import React, {Suspense} from "react";
 import {Outlet, useLocation, useNavigate, useSearchParams} from "react-router-dom";
-import {Avatar, BackTop, Badge, Dropdown, Input, Layout, Menu} from 'antd';
-import {ArrowUpOutlined, CommentOutlined, SearchOutlined} from "@ant-design/icons";
+import {Avatar, BackTop, Dropdown, Input, Layout, Menu} from 'antd';
+import {ArrowUpOutlined, SearchOutlined} from "@ant-design/icons";
 
 import ContentLoading from "./utilsComponents/Loading/ContentLoading";
 import AvatarDropMenu from "./utilsComponents/Present/AvatarDropMenu";
+import UserNoticeIcon from "./UserComponents/User/UserNotice/UserNoticeIcon";
 
 import CustomStorage from "../../utils/StorageUtils/CustomStorage";
 import logo from "../../static/Logo.png";
@@ -18,7 +19,7 @@ const { Header, Content } = Layout;
 
 export default function BreadBlog(){
     const navigator = useNavigate()
-    const [search,setSearch] = useSearchParams()
+    const [,setSearch] = useSearchParams()
     const location = useLocation()
     let handleSearch = ({value}) => {
 
@@ -50,9 +51,7 @@ export default function BreadBlog(){
                         </Menu>
                     </div>
                     <div className='user_container'>
-                        <Badge count={5} overflowCount={99} size='small'>
-                            <CommentOutlined onClick={() => navigator('/comments')} />
-                        </Badge>
+                        <UserNoticeIcon/>
                         <Dropdown overlay={AvatarDropMenu()} placement="bottomLeft" trigger={['click']} arrow>
                             <Avatar src={CustomStorage.getAvatarUrl()} />
                         </Dropdown>
