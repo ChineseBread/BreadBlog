@@ -1,4 +1,5 @@
-.user-manage-container{
+@user-manage:user-manage;
+.@{user-manage}-container{
     height: 100%;
     width: 100%;
     padding: 15px 20px;
@@ -10,7 +11,7 @@
             height: calc(100% - 58px);
             display: flex;
             justify-content: space-between;
-            .user-manage-item-container{
+            .@{user-manage}-item-container{
                 width: 49%;
                 height: 100%;
                 overflow: auto;
@@ -31,11 +32,11 @@
     }
 }
 @media (max-width: 1000px){
-    .user-manage-container{
+    .@{user-manage}-container{
         .ant-card{
             .ant-card-body{
                 flex-direction: column;
-                .user-manage-item-container{
+                .@{user-manage}-item-container{
                     width: 100%;
                 }
             }

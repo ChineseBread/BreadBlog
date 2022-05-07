@@ -22,9 +22,9 @@
         }
     }
     .ant-space-horizontal{
+        width: 100%;
         margin-top: 10px;
         padding: 0 25%;
-        width: 100%;
         div{
             flex-grow: 1;
             text-align: center;
@@ -76,6 +76,7 @@
                 }
                .article-author-header{
                    .ant-page-header-heading-tags{
+                       // 头部标签限制
                        .ant-tag{
                            max-width: 70px;
                            overflow: hidden;
@@ -88,6 +89,7 @@
                        color: #8c8c8c;
                    }
                }
+                // 文章内容换行
                 .article-content{
                     word-break: break-all;
                     word-wrap:break-word;
@@ -95,11 +97,11 @@
 
             }
             .article-comment-container{
+                min-height: 140px;
                 width: 100%;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-                min-height: 140px;
                 .comment-title{
                     font-weight: bold;
                     font-size: 20px;
@@ -142,7 +144,7 @@
                                 color: #8c8c8c;
                             }
 
-                            //追平区背景
+                            //追评区背景
                             .subcomment-container{
                                 background-color: #f8f8f8;
                                 padding: 0 15px;
