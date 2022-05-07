@@ -1,16 +1,16 @@
-import {lazy, useEffect,Suspense} from 'react';
+import {useEffect,Suspense} from 'react';
 import {BrowserRouter} from "react-router-dom";
 import Particles from 'particlesjs/dist/particles.min'
 import Loading from "./components/BreadBlog/utilsComponents/Loading/Loading";
+import BreadBlogEntry from "./components/BreadBlog";
 import CustomStorage from "./utils/StorageUtils/CustomStorage";
 import './App.less';
 /**
  * @version 1.0
  * @description 基于react开发的博客管理系统
- * @Browser Chinesebread
+ * @Author Chinesebread
  * @Server Watish
  */
-const Index = lazy(() => import('./components/BreadBlog/index'))
 function App() {
     useEffect(() => {
         const width = document.documentElement.clientWidth
@@ -34,9 +34,9 @@ function App() {
 
     return (
         <BrowserRouter>
-            <div className="App clear-scroll" id='scrollableDiv'>
+            <div className="App" id='scrollableDiv'>
                 <Suspense fallback={<Loading/>} >
-                    <Index/>
+                    <BreadBlogEntry/>
                 </Suspense>
             </div>
         </BrowserRouter>
