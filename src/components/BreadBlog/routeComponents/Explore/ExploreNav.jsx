@@ -1,7 +1,7 @@
 import {Menu} from "antd";
 import React from "react";
 
-function _ExploreNav({changeCategory}){
+function _ExploreNav({changeCategory,children}){
 	return(
 		<Menu
 			mode="horizontal"

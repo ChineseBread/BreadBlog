@@ -5,6 +5,7 @@ import ArticleListArea from "../../utilsComponents/Present/ArticleListArea";
 import UserPreviewMinor from "./UserPreviewMinor";
 import UserPreviewInfo from "./UserPreviewInfo";
 import PublicDataRequest from "../../../../utils/RequestUtils/PublicDataRequest";
+import UserPreviewList from "./UserPreviewList";
 
 export default function UserPreview(props) {
 	const [search,] = useSearchParams()
@@ -73,7 +74,7 @@ export default function UserPreview(props) {
 		<div className='user-home-container'>
 			<div className='user-card-list-container' >
 				<UserPreviewInfo User={{userid:search.get('userid'),username:search.get('username')}}/>
-				<ArticleListArea
+				<UserPreviewList
 					ArticleListInfo={ArticleListInfo}
 					loading={loading}
 					getMoreArticleList={getMoreArticleList}
