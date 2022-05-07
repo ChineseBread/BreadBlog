@@ -38,7 +38,7 @@
  
  博客手机端正在适配中,手机访问部分功能无法使用，请尽量使用电脑端
  
- 开发进度和更新内容会写在React-18的[update-log.md](https://github.com/ChineseBread/BreadBlog/blob/React-18/update-log.md)中
+ 开发进度和更新内容会写在React-18的[更新日志](https://github.com/ChineseBread/BreadBlog/blob/React-18/Update-Log.md)中
  
  React17版博客已经停止开发不再维护
 
