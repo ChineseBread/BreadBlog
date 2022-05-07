@@ -50,10 +50,14 @@
 }
 //字体样式
 .sounso-rare{
-    font-family: sounso-rare;
+    font-family: sounso-rare, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 }
 .shangshou{
-    font-family: shangshou;
+    font-family: shangshou, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 }
 
 //---------------文章列表
@@ -110,14 +114,16 @@
         background-color: #f9f9f9;
         transition: background-color ease-out 0.2s;
     }
+    .ant-list-item-extra{
+        img{
+            width: 100%;
+        }
+    }
 }
-@media (max-width: 1000px) {
+@media (min-width: 576px) {
     .article-list-item{
-        // 原样式margin auto auto 0 会在手机端将icon挤到下面
         .ant-list-item-extra{
-            button{
-                display: none;
-            }
+            max-width: 200px;
         }
     }
 }

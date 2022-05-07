@@ -1,8 +1,5 @@
 @user-profile:user-profile;
-.user-profile-theme(){
-    background-color: #ffffff;
-    box-shadow: 1px 1px 4px 2px #d9d9d9;
-}
+
 .@{user-profile}-container{
     height: 100%;
     width: 85%;
@@ -16,15 +13,15 @@
         align-items: center;
         justify-content: space-around;
         height: 8%;
+        background-color: #fff;
         //文字和图标
         .@{user-profile}-header-content{
             width: 100%;
             height: 100%;
-            cursor: pointer;
-            .user-profile-theme();
+            padding: 0 10px;
             display: flex;
             align-items: center;
-            padding: 0 10px;
+            cursor: pointer;
             user-select: none;
             .anticon-left{
                 margin-right: 10px;
@@ -46,22 +43,47 @@
         .ant-card{
             height: 100%;
             width: 100%;
-            .user-profile-theme();
-            .ant-card-head-title{
-                font-weight: bold;
-            }
+            .ant-card-body{
+                height: calc(100% - 58px);
+                .ant-card-head-title{
+                    font-weight: bold;
+                }
 
-            .user-info-container{
-                width: 45%;
-            }
-            .user-avatar-settings{
-                position: absolute;
-                right: 25%;
-                top: 25%;
+                .user-info-container{
+                    width: 45%;
+                }
+                .user-avatar-settings{
+                    position: absolute;
+                    right: 25%;
+                    top: 25%;
+                }
             }
         }
 
 
     }
 
+}
+@media (max-width: 1000px){
+    .@{user-profile}-container{
+        width: 100%;
+        .@{user-profile}-content-container{
+            .ant-card{
+                .ant-card-body{
+                    overflow: auto;
+                    .user-info-container{
+                        width:90%;
+                    }
+                    .user-avatar-settings{
+                        width: 104px;
+                        position: relative;
+                        top: 0;
+                        right: 0;
+                        margin: 0 auto;
+                    }
+                }
+            }
+        }
+
+    }
 }

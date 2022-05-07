@@ -12,17 +12,17 @@
         width: 700px;
         .@{explore}-article-header{
             width: 100%;
-            box-shadow: 1px 1px 5px -1px #d9d9d9;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 15px;
+            box-shadow: 1px 1px 5px -1px #d9d9d9;
+
             position: sticky;
             top: 50px;
             z-index: 20;
-            .ant-menu{
-                height: 45px;
-                line-height: 45px;
-                li{
-                    font-size: 14px;
-                }
+            button{
+                height: 46px;
             }
         }
         .@{explore}-article-list{
@@ -86,10 +86,25 @@
         width: 100%;
         .@{explore}-major-container{
             width: 100%;
-
         }
         .@{explore}-minor-container{
             display: none;
+        }
+    }
+}
+@media (min-width: 1000px){
+    .double-column{
+        .ant-list-items{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            .article-list-item{
+                width: 340px;
+                .ant-list-item-extra{
+                    width: 100px;
+                    margin: 0;
+                }
+            }
         }
     }
 }

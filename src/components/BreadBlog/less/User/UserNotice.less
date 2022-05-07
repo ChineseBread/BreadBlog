@@ -1,0 +1,32 @@
+.user-notice-container{
+    height: 100%;
+    width: 80%;
+    padding: 15px 20px;
+    .ant-card{
+        height: 100%;
+        .ant-card-body{
+            height: calc(100% - 58px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            //警告标题
+            .warn-content{
+                color: #ff4d4f;
+                font-weight: bold;
+            }
+            //敏感评论容器
+            .sens-comment-container{
+                // 字体大小
+                .ant-comment-content-author-name,.ant-comment-content-author-time,.ant-comment-content{
+                    font-size: 14px;
+                }
+                .sens-comment-content{
+                    max-width: 400px;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+}
