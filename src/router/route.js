@@ -5,10 +5,14 @@ import {Navigate} from "react-router-dom";
 //用户收藏夹
 import CollectionsArticle from "../components/BreadBlog/UserComponents/User/UserCollection/CollectionsArticle";
 import CollectionsManage from "../components/BreadBlog/UserComponents/User/UserCollection/CollectionsManage";
-import Explore from "../components/BreadBlog/routeComponents/Explore/Explore";
+//用户通知
+import InfoNotice from "../components/BreadBlog/UserComponents/User/UserNotice/Notice/InfoNotice";
+import ForceNotice from "../components/BreadBlog/UserComponents/User/UserNotice/Notice/ForceNotice";
+import WarnNotice from "../components/BreadBlog/UserComponents/User/UserNotice/Notice/WarnNotice";
 
 const BreadBlog = lazy(() => import("../components/BreadBlog/BreadBlog"));
 const HomePage = lazy(() => import("../components/BreadBlog/routeComponents/HomePage/HomePage"));
+const Explore = lazy(() => import("../components/BreadBlog/routeComponents/Explore/Explore"));
 
 const UserComponentsRouterCuard = lazy(() => import("./UserComponentsRouterCuard"));
 
@@ -26,10 +30,10 @@ const Account = lazy(() => import("../components/BreadBlog/routeComponents/Accou
 const UserPreview = lazy(() => import("../components/BreadBlog/routeComponents/UserPreview/UserPreview"));
 const About = lazy(() => import("../components/BreadBlog/routeComponents/About/About"))
 const Topic = lazy(() => import("../components/BreadBlog/routeComponents/Topic")) ;
-const Comments = lazy(() => import("../components/BreadBlog/routeComponents/Comments")) ;
 const Search = lazy(() => import("../components/BreadBlog/routeComponents/Search/Search")) ;
 const ArticlePresent = lazy(() => import( "../components/BreadBlog/routeComponents/ArticlePresent/Article/ArticlePresent"));
 
+const UserNotice = lazy(() => import("../components/BreadBlog/UserComponents/User/UserNotice/UserNotice")) ;
 const UserDrafts = lazy(() => import("../components/BreadBlog/UserComponents/User/UserDrafts/UserDrafts")) ;
 const UserHomePage = lazy(() => import("../components/BreadBlog/UserComponents/User/UserHomePage/UserHomePage")) ;
 
@@ -62,10 +66,6 @@ const routesForm = [
                 element: <Topic/>
             },
             {
-                path: '/comments',
-                element: <Comments/>
-            },
-            {
                 path: '/search',
                 element: <Search/>
             },
@@ -85,7 +85,24 @@ const routesForm = [
                 path: '/user',
                 element: <UserComponentsRouterCuard/>,
                 children:[
-
+                    {
+                        path: '/user/notice',
+                        element: <UserNotice/>,
+                        children: [
+                            {
+                                path:'/user/notice/info',
+                                element: <InfoNotice/>
+                            },
+                            {
+                                path: '/user/notice/force',
+                                element: <ForceNotice/>
+                            },
+                            {
+                                path: '/user/notice/warn',
+                                element: <WarnNotice/>
+                            }
+                        ]
+                    },
                     {
                         path: '/user/drafts',
                         element: <UserDrafts/>
@@ -119,12 +136,8 @@ const routesForm = [
 
                 ]
             },
-            {
-                path: '/account',
-                element: <Account/>,
-            },
-        ]
 
+        ]
     },
     {
       path: '/article',
@@ -156,7 +169,10 @@ const routesForm = [
           }
       ]
     },
-
+    {
+        path: '/account',
+        element: <Account/>,
+    },
 
 ]
 export default routesForm
