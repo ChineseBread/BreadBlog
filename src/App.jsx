@@ -4,11 +4,10 @@ import Particles from 'particlesjs/dist/particles.min'
 import Loading from "./components/BreadBlog/utilsComponents/Loading/Loading";
 import CustomStorage from "./utils/StorageUtils/CustomStorage";
 import './App.less';
-import {message} from "antd";
 /**
  * @version 1.0
  * @description 基于react开发的博客管理系统
- * @Author Chinesebread
+ * @Browser Chinesebread
  * @Server Watish
  */
 const Index = lazy(() => import('./components/BreadBlog/index'))
