@@ -5,6 +5,7 @@ import {EditOutlined, LoadingOutlined, UploadOutlined} from "@ant-design/icons";
 import ImgCrop from "antd-img-crop";
 import UserLevel from "../../../utilsComponents/User/UserLevel";
 import CustomStorage from "../../../../../utils/StorageUtils/CustomStorage";
+import {beforeUpload} from "../../../../../utils/ImgUploadUtil";
 
 function UserInfoArea({changeCategory}){
 	const navigator = useNavigate()
@@ -30,17 +31,6 @@ function UploadBackGround({imgUrl}){
 	const [url,setUrl] = useState(imgUrl)
 	const [loading,setLoading] = useState(false)
 
-	const beforeUpload = file => {
-		const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-		if (!isJpgOrPng) {
-			message.error('仅支持jpeg或png格式图片上传');
-		}
-		const isLt2M = file.size / 1024 / 1024 < 2;
-		if (!isLt2M) {
-			message.error('图片大小需小于2MB');
-		}
-		return isJpgOrPng && isLt2M;
-	}
 	const handleChange = info => {
 		if (info.file.status === 'uploading') {
 			message.loading({content:'上传中',key:'uploading',duration:10})

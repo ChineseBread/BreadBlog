@@ -2,24 +2,8 @@ import React, {useState} from "react";
 import { Upload, message } from 'antd';
 import ImgCrop from "antd-img-crop";
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import {beforeUpload, getBase64} from "../../../../../utils/ImgUploadUtil";
 
-function getBase64(img, callback) {
-	const reader = new FileReader();
-	reader.addEventListener('load', () => callback(reader.result));
-	reader.readAsDataURL(img);
-}
-
-function beforeUpload(file) {
-	const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-	if (!isJpgOrPng) {
-		message.error('仅支持jpeg或png格式图片上传');
-	}
-	const isLt2M = file.size / 1024 / 1024 < 2;
-	if (!isLt2M) {
-		message.error('图片大小需小于2MB');
-	}
-	return isJpgOrPng && isLt2M;
-}
 export default function UploadAvatar({token}){
 
 	const [loading,setLoading] = useState(false)
