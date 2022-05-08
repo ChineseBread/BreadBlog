@@ -1,6 +1,6 @@
-import {doDataRequest} from "../request";
+import {doDataRequest, doRequest} from "../request";
 import CustomStorage from "../StorageUtils/CustomStorage";
-const errMsg = '服务器异常请稍后'
+import errMsg from "./errMsg";
 class UserDataRequest {
 
     //---------------------------//
@@ -157,6 +157,21 @@ class UserDataRequest {
                     resolve({Ok:true,TrashList:result.TrashData,total:result.Count})
                 }else{
                     if (result?.TrashData === null) resolve({Ok:true,TrashList:[],total:0})
+                    else resolve({Ok:false,Msg:result?.Msg || errMsg})
+                }
+            }catch (e){
+                resolve({Ok:false,Msg:errMsg})
+            }
+        })
+    }
+    static getUserNotice():Promise<object>{
+        return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doRequest({url:"notice/pop/all",data:{token:CustomStorage.getAccount().Token},method:'GET'})
+                if (result?.length){
+                    resolve({Ok:true,NoticeList:result})
+                }else{
+                    if (result === null) resolve({Ok:true,NoticeList:[]})
                     else resolve({Ok:false,Msg:result?.Msg || errMsg})
                 }
             }catch (e){

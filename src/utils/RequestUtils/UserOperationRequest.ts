@@ -1,8 +1,7 @@
-// import {RequestUtils} from "./index";
 import {doRequest} from "../request";
 import CustomStorage from "../StorageUtils/CustomStorage";
 import debounce from "../debounce";
-const errMsg = '服务器异常请稍后'
+import errMsg from "./errMsg";
 class UserOperationRequest{
     /**
      * @description 心跳token
@@ -367,6 +366,20 @@ class UserOperationRequest{
                 resolve({Ok:result?.Ok,Msg:result?.Msg})
             }catch (e){
                 resolve({Ok:false,Msg:errMsg})
+            }
+        })
+    }
+    static checkNotice():Promise<object>{
+        let token = CustomStorage.getAccount().Token
+        if (!token) return Promise.resolve({Ok:false})
+        else return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doRequest({url:'notice/check',data:{token},method:'GET'})
+                if (result?.Ok){
+                    resolve({Ok:true,count:result?.Count || 0})
+                }
+            }catch (e){
+                resolve({Ok:false})
             }
         })
     }

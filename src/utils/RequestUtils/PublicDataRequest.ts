@@ -1,8 +1,7 @@
 import {doDataRequest} from "../request";
 import CustomStorage from "../StorageUtils/CustomStorage";
 import debounce from "../debounce";
-
-const errMsg = '服务器异常请稍后';
+import errMsg from "./errMsg";
 class PublicDataRequest{
     //----------------------------//
     /**
