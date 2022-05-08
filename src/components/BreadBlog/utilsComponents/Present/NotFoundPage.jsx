@@ -1,6 +1,6 @@
 import {Button, Result} from "antd";
 import { useNavigate } from "react-router-dom";
-const errMsg = '服务器异常请稍后'
+import errMsg from "../../../../utils/RequestUtils/errMsg";
 export default function NotFoundPage({errText}) {
 	const navigator = useNavigate()
 	return (
