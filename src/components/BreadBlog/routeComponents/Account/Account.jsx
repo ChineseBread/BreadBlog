@@ -3,12 +3,12 @@
  */
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import {message} from "antd";
+import {Layout, message} from "antd";
 import background from '../../../../static/bg.jpg'
 import CustomStorage from "../../../../utils/StorageUtils/CustomStorage";
 import UserOperationRequest from "../../../../utils/RequestUtils/UserOperationRequest";
 import "../../less/routeComponents/Account.less"
-
+const {Content} = Layout
 export default function Login(){
 	const navigator = useNavigate()
 
@@ -73,33 +73,38 @@ export default function Login(){
 	}
 	return(
 		<div className="User_Container shangshou">
-			<div className="container">
-				<img src={background}/>
-				<div className="panel">
-					<div className="content login">
-						<div className="switch">
-							<span onClick={changeState('login')} className={`${(active === "login" && "active") || ""}`}>登陆</span>
-							<span>/</span>
-							<span onClick={changeState('register')} className={`${(active === "register" && "active") || ""}`}>注册</span>
-						</div>
-						<div className='form'>
-							<div>
-								<div className="input">
-									<input maxLength={20} type="text" onKeyPress={({code}) => code === 'Enter' && handleForm()()} value={userInfo.username} className={`${(userInfo.username && "hasValue") || ""}`} onChange={({target:{value}}) => setUserInfo({...userInfo,username:value}) } />
-									<label>用户名</label>
-								</div>
-								<div className="input">
-									<input maxLength={20} type="password" onKeyPress={({code}) => code === 'Enter' && handleForm()()}  value={userInfo.password} className={`${(userInfo.password && "hasValue") || ""}`} onChange={({target:{value}})=> setUserInfo({...userInfo,password:value})}/>
-									<label>密码</label>
+			<Layout className='layout'>
+				<Content>
+					<div className='site-layout-content'>
+							<div className="container">
+								<img src={background}/>
+								<div className="panel">
+									<div className="content login">
+										<div className="switch">
+											<span onClick={changeState('login')} className={`${(active === "login" && "active") || ""}`}>登陆</span>
+											<span>/</span>
+											<span onClick={changeState('register')} className={`${(active === "register" && "active") || ""}`}>注册</span>
+										</div>
+										<div className='form'>
+											<div>
+												<div className="input">
+													<input maxLength={20} type="text" onKeyPress={({code}) => code === 'Enter' && handleForm()()} value={userInfo.username} className={`${(userInfo.username && "hasValue") || ""}`} onChange={({target:{value}}) => setUserInfo({...userInfo,username:value}) } />
+													<label>用户名</label>
+												</div>
+												<div className="input">
+													<input maxLength={20} type="password" onKeyPress={({code}) => code === 'Enter' && handleForm()()}  value={userInfo.password} className={`${(userInfo.password && "hasValue") || ""}`} onChange={({target:{value}})=> setUserInfo({...userInfo,password:value})}/>
+													<label>密码</label>
+												</div>
+											</div>
+											<button type="button" onClick={handleForm()}>{(active === "login" && "登录") || "注册"}</button>
+											<button type="button" onClick={() => navigator('/')}>回到主页</button>
+										</div>
+									</div>
 								</div>
 							</div>
-							<button type="button" onClick={handleForm()}>{(active === "login" && "登录") || "注册"}</button>
-							<button type="button" onClick={() => navigator('/')}>回到主页</button>
 						</div>
-					</div>
-				</div>
-			</div>
+				</Content>
+			</Layout>
 		</div>
-
 	)
 }

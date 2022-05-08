@@ -39,9 +39,9 @@ export default function ExploreArticleList({ArticleList,loading}) {
 											<IconText icon={MessageOutlined} text={item.comments || 0} key="list-vertical-message" />,
 										]}
 										extra={
-											<img
+											item.cover &&  <img
 												alt="logo"
-												src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+												src={`/data/article/cover/${item.articleid}`}
 											/>
 										}
 									>
