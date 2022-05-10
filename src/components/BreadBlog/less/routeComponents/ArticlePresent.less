@@ -22,9 +22,9 @@
         }
     }
     .ant-space-horizontal{
+        width: 100%;
         margin-top: 10px;
         padding: 0 25%;
-        width: 100%;
         div{
             flex-grow: 1;
             text-align: center;
@@ -33,10 +33,10 @@
 }
 
 .@{article-present}-container{
-    width: 100%;
+    width: 1050px;
     display: flex;
-    justify-content: space-around;
-
+    justify-content: space-between;
+    padding: 20px 0;
     .article-action-nav{
         position: fixed;
         left: 5%;
@@ -49,12 +49,12 @@
         align-items: center;
     }
     .@{article-present}-major-container{
-        width: 55%;
+        width: 850px;
         display: flex;
         flex-direction: column;
-        margin-right: 15%;
-        padding: 20px 0;
-            //文章标题
+        margin-right: 50px;
+
+        //文章标题
         .ant-card-head-title{
             font-size: 20px;
             font-weight: bold;
@@ -75,11 +75,8 @@
                     margin-top: 5px;
                 }
                .article-author-header{
-                   //页头描述
-                   .ant-page-header-content{
-                       color: #8c8c8c;
-                   }
                    .ant-page-header-heading-tags{
+                       // 头部标签限制
                        .ant-tag{
                            max-width: 70px;
                            overflow: hidden;
@@ -87,7 +84,12 @@
                            white-space: nowrap;
                        }
                    }
+                   //页头描述
+                   .ant-page-header-content{
+                       color: #8c8c8c;
+                   }
                }
+                // 文章内容换行
                 .article-content{
                     word-break: break-all;
                     word-wrap:break-word;
@@ -95,11 +97,11 @@
 
             }
             .article-comment-container{
+                min-height: 140px;
                 width: 100%;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-                min-height: 140px;
                 .comment-title{
                     font-weight: bold;
                     font-size: 20px;
@@ -136,66 +138,68 @@
 
                     .ant-comment{
                         margin: 5px 0;
-                        // 用户发布时间
-                        .ant-comment-content-author-time{
-                            color: #8c8c8c;
-                        }
-                        //追平区背景
-                        .subcomment-container{
-                            background-color: #f8f8f8;
-                            padding: 0 15px;
-                            border-radius: 8px;
-                            .more-subcomment-button{
-                                width: 100%;
-                                margin-bottom: 10px;
-                            }
-
-                        }
-                        // 评论内容区 分为内容和评论发送器
-                        .comment-content-container{
-                            .comment{
-                                margin: 5px 0;
-                                font-family: -apple-system,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial
-                            }
-                            // 被回复者的评论
-                            .reply-comment{
-                                border: 1px solid #bfbfbf;
-                                border-radius: 4px;
-                                background-color: #f0f0f0;
+                        .ant-comment-content{
+                            // 用户发布时间
+                            .ant-comment-content-author-time{
                                 color: #8c8c8c;
-                                padding: 0 5px;
+                            }
 
-                            }
-                            // 文章评论文字大小
-                            .comment-content{
-                                color: #434343;
-                            }
-                            .comment-editor{
-                                padding: 10px 20px;
-                                textarea{
-                                    min-height: 80px;
-                                    max-height: 80px;
+                            //追评区背景
+                            .subcomment-container{
+                                background-color: #f8f8f8;
+                                padding: 0 15px;
+                                border-radius: 8px;
+                                .more-subcomment-button{
+                                    width: 100%;
+                                    margin-bottom: 10px;
                                 }
-                                .ant-btn-primary{
-                                    margin-top: 10px;
-                                    margin-right: 10px;
+
+                            }
+                            // 评论内容区 分为内容和评论发送器
+                            .comment-content-container{
+                                .comment{
+                                    margin: 5px 0;
+                                    font-family: -apple-system,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial
+                                }
+                                // 被回复者的评论
+                                .reply-comment{
+                                    border: 1px solid #bfbfbf;
+                                    border-radius: 4px;
+                                    background-color: #f0f0f0;
+                                    color: #8c8c8c;
+                                    padding: 0 5px;
+
+                                }
+                                // 文章评论文字大小
+                                .comment-content{
+                                    color: #434343;
+                                }
+                                .comment-editor{
+                                    padding: 10px 20px;
+                                    textarea{
+                                        min-height: 80px;
+                                        max-height: 80px;
+                                    }
+                                    .ant-btn-primary{
+                                        margin-top: 10px;
+                                        margin-right: 10px;
+                                    }
                                 }
                             }
-                        }
-
-                        .comment-action {
-                            padding-left: 8px;
-                            cursor: auto;
-                        }
-                        // 底部图标
-                        .ant-comment-actions{
-                            margin-top: 5px;
-                            [class*='-col-rtl'] .comment-action {
-                                padding-right: 8px;
-                                padding-left: 0;
+                            // 底部图标
+                            .ant-comment-actions{
+                                margin-top: 5px;
+                                .anticon{
+                                    font-size: 14px;
+                                }
+                                .comment-action {
+                                    padding-right: 4px;
+                                    padding-left: 6px;
+                                    cursor: auto;
+                                }
                             }
-                        }
 
+                        }
 
                     }
                 }
@@ -203,15 +207,46 @@
         }
 
     }
-    @media(max-width: 1000px){
-        .article-minor-container{
+    .article-minor-container{
+
+        .article-card-container{
+            position: sticky;
+            .article-card-item{
+                width: 250px;
+                margin-bottom: 15px;
+                background-color: #fff;
+
+            }
+            // markdown文章的目录
+            .article-markdown-catalog{
+                padding: 10px 15px;
+            }
+        }
+
+        .markdown-sticky-box{
+            top: -119px;
+        }
+        .common-sticky-box{
+            top: 60px;
+        }
+
+    }
+
+}
+@media(max-width: 1200px){
+    .@{article-present}-container{
+        display: flex;
+        width: 100%;
+        padding: 0;
+        .@{article-present}-major-container{
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .article-minor-container,.article-action-nav{
             display: none;
         }
     }
-    .article-minor-container{
-        position: fixed;
-        right: 6%;
-        top: 20%;
-        box-shadow: 1px 1px 2px 3px #d9d9d9;
-    }
+
 }
+
