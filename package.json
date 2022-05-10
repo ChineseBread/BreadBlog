@@ -1,12 +1,13 @@
 {
   "name": "breadblog",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
-    "antd": "^4.20.0",
-    "axios": "^0.26.0",
+    "antd": "^4.20.2",
     "animate.css": "^4.1.1",
+    "antd-img-crop": "^4.2.3",
+    "axios": "^0.26.0",
     "braft-editor": "^2.3.9",
     "md-editor-rt": "^1.6.3",
     "nanoid": "3.3.1",
@@ -14,8 +15,8 @@
     "qs": "^6.10.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-router-dom": "^6.3.0",
-    "react-infinite-scroll-component": "^6.1.0"
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
     "react-app-polyfill": "^3.0.0",
@@ -64,6 +65,7 @@
     "postcss-loader": "^6.2.1",
     "postcss-normalize": "^10.0.1",
     "postcss-preset-env": "^7.0.1",
+    "postcss-pxtorem": "^5.1.1",
     "prompts": "^2.4.2",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
