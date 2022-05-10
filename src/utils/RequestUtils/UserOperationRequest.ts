@@ -1,8 +1,7 @@
-// import {RequestUtils} from "./index";
 import {doRequest} from "../request";
 import CustomStorage from "../StorageUtils/CustomStorage";
 import debounce from "../debounce";
-const errMsg = '服务器异常请稍后'
+import errMsg from "./errMsg";
 class UserOperationRequest{
     /**
      * @description 心跳token
@@ -116,9 +115,20 @@ class UserOperationRequest{
     static doModifyUserName(name: string): Promise<object> {
         return this.doModifyOperation(CustomStorage.getAccount().Token,{name},'user/changename','username')
     }
-    static uploadAvatar(file:object):Promise<object>{
-        return new Promise(async (resolve,reject) => {
 
+    /**
+     * @description 删除用户主页已经创建的分类
+     * @param sortname
+     * @param force 分类所包含的文章将会全部删除
+     */
+    static deleteUserCateGory(sortname:string,force:boolean):Promise<object>{
+        return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doRequest({url:'sort/remove',data:{token:CustomStorage.getAccount().Token,sortname,force},method:'GET'})
+                resolve({Ok:result?.Ok,Msg:result?.Msg || errMsg})
+            }catch (e){
+                resolve({Ok:false,Msg:errMsg})
+            }
         })
     }
     /**
@@ -204,6 +214,20 @@ class UserOperationRequest{
     }
 
     /**
+     * @description 用户删除已有文章
+     * @param articleid
+     */
+    static deleteArticle(articleid:string):Promise<object>{
+        return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doRequest({url:'article/del',data:{token:CustomStorage.getAccount().Token,articleid},method:'GET'})
+                resolve({Ok:result?.Ok,Msg:result?.Msg || errMsg})
+            }catch (e){
+                resolve({Ok:false,Msg:errMsg})
+            }
+        })
+    }
+    /**
      * @description 用户评论操作
      * @undetermined 用户评论成功需要给commentid
      */
@@ -287,7 +311,6 @@ class UserOperationRequest{
      * @description 用户追评操作
      */
     static likeSubComment(commentsid:string,commentid:string,fcommentid:string):Promise<object>{
-        console.log(fcommentid)
         let token = CustomStorage.getAccount().Token;
         if (!token) return Promise.resolve({Ok:false,Msg:'请先登录'})
         else return this.doSubCommentOpreation('like/fcomment/add',{token,commentsid,commentid,fcommentid})
@@ -297,32 +320,6 @@ class UserOperationRequest{
         if (!token) return Promise.resolve({Ok:false,Msg:'请先登录'})
         else return this.doSubCommentOpreation('like/fcomment/remove',{token,commentsid,commentid,fcommentid})
     }
-    /**
-     * @description 用户草稿箱
-     */
-    static addArticleDraft(title:string,content:string,type:'markdown' | 'common'):Promise<object>{
-        return new Promise(async (resolve,reject) => {
-            try {
-                let result = await doRequest({url:"draft/add",data:{title:title || '无标题',content:content || '无内容',type,token:CustomStorage.getAccount().Token},method:'GET'})
-                resolve({Ok:result?.Ok,DraftId:result?.DraftId})
-            }catch (e){
-                resolve({Ok:false})
-            }
-        })
-        // else return this.doUserArticleDraftOperation('draft/add',{title,content,type,token})
-    }
-    private static _updateArticleDraft(draftid:string,title:string,content:string,type:'markdown' | 'common'):Promise<object>{
-        return new Promise(async (resolve,reject) => {
-            try {
-                let result = await doRequest({url:'draft/update',data:{draftid,title:title || '无标题',content:content || '无内容',type,token:CustomStorage.getAccount().Token},method:'GET'})
-                resolve({Ok:result?.Ok})
-            }catch (e){
-                resolve({Ok:false})
-            }
-        })
-        // else return this.doUserArticleDraftOperation('draft/update',{draftid,title,content,type,token})
-    }
-    static updateArticleDraft = debounce(this._updateArticleDraft,2000,false)
     /**
      * @description 用户草稿箱界面删除操作
      */
@@ -336,6 +333,29 @@ class UserOperationRequest{
             }
         })
     }
-
+    static removeTrash(trashid:string,type:string):Promise<object>{
+        return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doRequest({url:`trash/${type === 'redo' ? 'restore' : 'remove'}`,data:{trashid,token:CustomStorage.getAccount().Token},method:'GET'})
+                resolve({Ok:result?.Ok,Msg:result?.Msg})
+            }catch (e){
+                resolve({Ok:false,Msg:errMsg})
+            }
+        })
+    }
+    static checkNotice():Promise<object>{
+        let token = CustomStorage.getAccount().Token
+        if (!token) return Promise.resolve({Ok:false})
+        else return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doRequest({url:'notice/check',data:{token},method:'GET'})
+                if (result?.Ok){
+                    resolve({Ok:true,count:result?.Count || 0})
+                }
+            }catch (e){
+                resolve({Ok:false})
+            }
+        })
+    }
 }
 export default UserOperationRequest;

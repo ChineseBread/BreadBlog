@@ -1,7 +1,11 @@
-// import {ArticleOperation} from "./index";
 import {doRequest} from "../request";
 import CustomStorage from "../StorageUtils/CustomStorage";
 import debounce from "../debounce";
+import axios from "axios";
+
+/**
+ * @description 用户的文章操作 指在文章编辑见面的文章操作
+ */
 class ArticleOperationRequest{
 
     /**
@@ -9,27 +13,23 @@ class ArticleOperationRequest{
      * @content 可以不传默认空串
      */
 
-    private static _createArticle(title: string, content: string | undefined = "", ispublic: 1 | -1,isMarkdown: boolean, publicsort:string | undefined, sortname: string | undefined,tag:string[], description:string): Promise<object> {
+    private static _createArticle(title: string, content: string | undefined = "", ispublic: 1 | -1,isMarkdown: boolean, publicsort:string | undefined, sortname: string | undefined,tag:string[], description:string,file:File | null): Promise<object> {
         return new Promise(async resolve => {
             try {
                 let result = await doRequest({url:isMarkdown ? 'edit/writemd' : 'edit/write',data:{token:CustomStorage.getAccount().Token,title,content,ispublic,sortname},method:'POST'})
 
                 if (result?.Ok){
-                    // console.log('创建文章',result)
                     let ArticleID = result.ArticleID;
-                    if (tag?.length >= 1){
-                        let TagStr = JSON.stringify(tag)
-                        await this.addArticleTag(ArticleID,TagStr.substring(1,TagStr.length - 1))
-                        //文章创建成功即为成功标签信息和描述信息不造成影响
-                    }
-                    if (description){
-                        await this.setArticleDescription(ArticleID,description);
-                    }
-                    resolve({Ok:true})
+                    Promise.all([
+                        this.addArticleTags(ArticleID,tag),
+                        this.setArticleDescription(ArticleID,description),
+                        this.setArticleCover(ArticleID,file)
+                    ]).then(result => {
+                        resolve({Ok:result.length === result.filter(Ok => Ok).length})
+                    })
                 }else{
                     resolve({Ok:false})
                 }
-
             }catch (e){
                 resolve({Ok:false})
             }
@@ -68,6 +68,79 @@ class ArticleOperationRequest{
             }
         })
     }
+
+    static setArticleDescription(articleid:string,description:string):Promise<object>{
+        if (!description) return Promise.resolve({Ok:true})
+        else return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doRequest({url:'description/set',data:{token:CustomStorage.getAccount().Token,articleid,description},method:'POST'})
+                resolve({Ok:result?.Ok})
+            }catch (e){
+                resolve({Ok:false})
+            }
+        })
+    }
+    static addArticleTags(articleid: string, tags: string[]): Promise<object> {
+        if (tags.length < 1) return Promise.resolve({Ok:true})
+        else return new Promise(async (resolve,reject) => {
+            try {
+                let tagStr = JSON.stringify(tags)
+                let result:any = await doRequest({url:'tags/add',data:{token:CustomStorage.getAccount().Token,articleid,tags:tagStr.substring(1,tagStr.length - 1)},method:'GET'})
+                resolve({Ok:result?.Ok,Msg:result?.Msg})
+            }catch (e){
+                resolve({Ok:false})
+            }
+        })
+    }
+
+    /**
+     * @description 设置文章封面
+     * @param articleid
+     * @param file
+     */
+    static setArticleCover(articleid:string,file:File | null):Promise<object>{
+        if (!file) return Promise.resolve({Ok:true})
+        else return new Promise(async (resolve,reject) => {
+            try {
+                const form = new FormData()
+                form.append('image',file)
+                let result =  await axios.post(`/api/upload/article/cover/${articleid}/${CustomStorage.getAccount().Token}`,form,{
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                resolve({Ok:result.data.Ok})
+            }catch (e){
+                resolve({Ok:false})
+            }
+        })
+    }
+    /**
+     * @description 文章图片上传
+     * @param file
+     */
+    static uploadImg(file:File):Promise<object>{
+        if (file.size / 1024 / 1024 > 5) return Promise.resolve({Ok:false,Msg:'图片不能超过5MB'})
+        else return new Promise(async (resolve,reject) => {
+            try {
+                const form = new FormData()
+                form.append('image',file)
+                let result = await axios.post(`/api/upload/attach/${CustomStorage.getAccount().Token}`,form,{
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                if (result.data.Ok){
+                    resolve({Ok:true,path:result.data.Path})
+                }else{
+                    resolve({Ok:false,Msg:result.data?.Msg || '服务器异常请稍后'})
+                }
+            }catch (e){
+                resolve({Ok:false,Msg:'服务器异常请稍后'})
+            }
+        })
+    }
+
     private static doArticleCategoryOperation(token: string, articleid: string, sortname: string, url: string):Promise<object>{
         return new Promise(async resolve => {
             try {
@@ -79,10 +152,14 @@ class ArticleOperationRequest{
         })
     }
 
-    private static doArticleTagOperation(token: string, articleid: string, tags: string, url: string):Promise<object>{
+    /**
+     * @deprecated
+     * @private
+     */
+    private static doArticleTagOperation(token: string, articleid: string, tag: string, url: string):Promise<object>{
         return new Promise(async resolve => {
             try {
-                let result:any = await doRequest({url,data:{token,articleid,tags},method:'GET'})
+                let result:any = await doRequest({url,data:{token,articleid,tag},method:'GET'})
                 resolve({Ok:result?.Ok,Msg:result?.Msg})
             }catch (e){
                 resolve({Ok:false})
@@ -90,28 +167,17 @@ class ArticleOperationRequest{
         })
     }
 
-    static setArticleDescription(articleid:string,description:string):Promise<object>{
-        return new Promise(async (resolve,reject) => {
-            try {
-                let result = await doRequest({url:'description/set',data:{token:CustomStorage.getAccount().Token,articleid,description},method:'POST'})
-                resolve({Ok:result?.Ok})
-            }catch (e){
-                resolve({Ok:false})
-            }
-        })
+    /**
+     * @deprecated
+     */
+    static addArticleTag(articleid: string, tag: string){
+        return this.doArticleTagOperation(CustomStorage.getAccount().Token, articleid, tag,'tag/add');
     }
-   /* sendComment(comment:string,anonymous:'public' | 'anonymous',userid:string,articleid:string):Promise<object>{
-        switch (anonymous){
-            case "public":
-                return this.sendPublicComment(comment,userid,articleid)
-            case 'anonymous':
-                return this.sendAnonymousComment(comment,articleid);
-        }
-    }*/
-    static addArticleTag(articleid: string, tags: string): Promise<object> {
-        return this.doArticleTagOperation(CustomStorage.getAccount().Token, articleid, tags,'tags/add');
-    }
-
+    /**
+     * @deprecated
+     * @param articleid
+     * @param tag
+     */
     static removeArticleTag(articleid: string, tag: string): Promise<object> {
         return this.doArticleTagOperation(CustomStorage.getAccount().Token, articleid, tag,'tag/del');
     }
