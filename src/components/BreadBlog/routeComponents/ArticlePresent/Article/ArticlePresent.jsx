@@ -4,7 +4,7 @@ import {Card, Divider,Skeleton} from "antd";
 import ArticlePresentHeader from "./ArticlePresentHeader";
 import ArticleActionNav from "./ArticleActionNav";
 import ArticleContent from "./ArticleContent";
-import MarkDownContent from "./MarkDownContent";
+import {MarkDownContent,MarkDownCatalog} from "./MarkDownContent";
 import CommentsList from "../Comment/CommentsList";
 import TimeShow from "../../../utilsComponents/Present/TimeShow";
 import NotFoundPage from "../../../utilsComponents/Present/NotFoundPage";
@@ -61,8 +61,17 @@ export default function ArticlePresent(props) {
 						</div>
 					</Card>
 				</div>
-				<div className='article-minor-container box-shadow'>
-					<TimeShow/>
+				<div className='article-minor-container'>
+					<div className={`article-card-container ${ArticleInfo.type === 'markdown' ? 'markdown-sticky-box' : 'common-sticky-box'}`}>
+						<div className='article-card-item box-shadow'>
+							<TimeShow/>
+						</div>
+						{ArticleInfo.type === 'markdown' &&
+						<div className='article-card-item box-shadow article-markdown-catalog'>
+							<MarkDownCatalog/>
+						</div>
+						}
+					</div>
 				</div>
 			</div> : <NotFoundPage errText={isError.errText}/>}
 		</Fragment>
