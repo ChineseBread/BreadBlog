@@ -15,13 +15,13 @@ export default function UserProfile(props) {
 
 	return (
 		<div className='user-profile-container'>
-			<div className='user-profile-header'>
+			<div className='user-profile-header box-shadow'>
 				<div className='user-profile-header-content' onClick={() => navigator('/user/home')}>
 					<LeftOutlined/>
 					<span>点击返回个人主页</span>
 				</div>
 			</div>
-			<div className='user-profile-content-container'>
+			<div className='user-profile-content-container box-shadow'>
 				<Card title="个人资料">
 					<div className='user-info-container'>
 						<Form

@@ -1,12 +1,21 @@
 import React, {Fragment} from "react";
-import {Menu} from "antd";
+import {Button, Empty, Menu} from "antd";
+import {useNavigate} from "react-router-dom";
 
 export default function CollectionsMenu({changeFav,favs}) {
+	const navigator = useNavigate()
 	return (
 		<Fragment>
-			<Menu mode='vertical'>
-				{favs.map(favItem => <Menu.Item key={favItem.favid} onClick={changeFav(favItem.info.name)}>{favItem.info.name}</Menu.Item>)}
-			</Menu>
+			{favs.length >= 1 ?
+				<Menu mode='vertical'>
+					{favs.map(favItem => <Menu.Item key={favItem.favid} onClick={changeFav(favItem.info.name)}>{favItem.info.name}</Menu.Item>)}
+				</Menu> :
+				<Empty description='没有收藏夹'>
+					<Button type="primary" onClick={() => navigator('/user/collections/manage')}>去创建</Button>
+				</Empty>
+			}
+
 		</Fragment>
 	);
 }
+

@@ -1,11 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
 import {
     Divider, Drawer, Input, Radio, Switch,
-    Form, Button, Select, message, notification
+    Form, Button, Select, message, notification, Upload
 } from "antd";
-import {BarsOutlined, UserOutlined} from "@ant-design/icons";
-import {useNavigate} from "react-router-dom";
+import {BarsOutlined,UploadOutlined, UserOutlined} from "@ant-design/icons";
+import ImgCrop from "antd-img-crop";
+import {beforeUpload, getBase64} from "../../../../../utils/ImgUploadUtil";
 import ArticleOperationRequest from "../../../../../utils/RequestUtils/ArticleOperationRequest";
+
 const {TextArea} = Input
 //文章分类选择
 const DrawerCategoryChoice = [
@@ -22,8 +25,11 @@ const DrawerCategoryChoice = [
 function _ArticleDrawer({visible,onClose,title,markdown,editorState,isMarkdown}){
 
     const navigator = useNavigate()
+    // 表单不支持含有状态的上传组件 需要自己定义
+    const [file,setFile] = useState(null)
 
-    let onFinish =  async ({publicsort,ispublic,sortname,tag,description}) => {
+    let onFinish =  async ({ispublic,publicsort,sortname,tag,description}) => {
+        // console.log(ispublic,publicsort,sortname,tag,description,file)
         if (!title) {
             message.warn("请输入标题!")
             return
@@ -31,10 +37,9 @@ function _ArticleDrawer({visible,onClose,title,markdown,editorState,isMarkdown})
         message.loading({content:'发布中',key:'publishing'}).then(() => {
             onClose(false)
         })
-        //  发布文章
-        // let isMarkdown = pathname === '/article/edit/md';
+        // 发布文章
         let content = isMarkdown ? markdown : editorState.toHTML()
-        let result = await ArticleOperationRequest.createArticle(title,content,ispublic ? 1 : -1,isMarkdown,publicsort,sortname,tag,description)
+        let result = await ArticleOperationRequest.createArticle(title,content,ispublic ? 1 : -1,isMarkdown,publicsort,sortname,tag,description,file)
         if (result?.Ok){
             message.success({content:"创建成功!",key:'publishing'})
             navigator('/user/home')
@@ -60,21 +65,20 @@ function _ArticleDrawer({visible,onClose,title,markdown,editorState,isMarkdown})
             onClose={onClose}
             getContainer={false}
             style={{ position: 'absolute' }}
-            width={500}
             // forceRender={false}
         >
             <Form
                 onFinish={onFinish}
             >
-                <span>
-                   <div>
+                <div>
+                    <div>
                         <BarsOutlined/>
                         选择分类
-                   </div>
+                    </div>
                     <Button type="primary" htmlType="submit">
                         确认发布
                     </Button>
-                </span>
+                </div>
                 <Form.Item
                     name='publicsort'
                     rules={[{required:true,message:'请选择一个公共分类!'}]}
@@ -85,7 +89,7 @@ function _ArticleDrawer({visible,onClose,title,markdown,editorState,isMarkdown})
                         })}
                     </Radio.Group>
                 </Form.Item>
-                <div className='custom_category_header'>
+                <div className='custom-category-header'>
                     <div>
                         <UserOutlined />
                         自定义
@@ -124,7 +128,49 @@ function _ArticleDrawer({visible,onClose,title,markdown,editorState,isMarkdown})
                     <TextArea placeholder='文章概述' showCount maxLength={200}/>
                 </Form.Item>
             </Form>
+            <Divider/>
+            <CoverUpload setFile={setFile}/>
         </Drawer>
     )
+}
+function CoverUpload({setFile}){
+
+    const [imageUrl,setUrl] = useState('')
+
+    const handleChange = info => {
+        getBase64(info.file.originFileObj, imageUrl =>{
+                setUrl(imageUrl)
+                setFile(info.file.originFileObj)
+            }
+        );
+    }
+    return(
+        <div className='cover-upload-container'>
+            <div className='cover-upload-advice'>
+                建议上传大小200 * 123px
+            </div>
+            <div className='cover-upload'>
+                <ImgCrop rotate aspect={200 / 123} quality={1} modalOk='确认上传' modalCancel='取消' modalTitle='裁剪图片'>
+                    <Upload
+                        name="logo"
+                        listType="picture-card"
+                        className="cover-upload-picture"
+                        showUploadList={false}
+                        beforeUpload={beforeUpload}
+                        onChange={handleChange}
+                    >
+                        {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> :
+                            <div>
+                                <UploadOutlined/>
+                                上传封面
+                            </div>
+                        }
+                    </Upload>
+                </ImgCrop>
+            </div>
+        </div>
+
+    )
+
 }
 export default React.memo(_ArticleDrawer,(prevProps, nextProps) => (prevProps.title === nextProps.title) && (prevProps.visible === nextProps.visible))

@@ -11,7 +11,7 @@ const IconText = ({ icon, text }) => (
 	</Space>
 );
 
-export default function ArticleListArea({ArticleListInfo,getMoreArticleList,loading,extra,scrollTarget}) {
+export default function UserPreviewList({ArticleListInfo,getMoreArticleList,loading,extra,scrollTarget}) {
 
 	const navigator = useNavigate()
 	let checkArticle = articleid =>{
@@ -49,13 +49,12 @@ export default function ArticleListArea({ArticleListInfo,getMoreArticleList,load
 												<IconText icon={LikeOutlined} text={item.likes || 0} key="list-vertical-like-o" />,
 												<IconText icon={MessageOutlined} text={item.comments || 0} key="list-vertical-message" />,
 											]}
-											extra={[
-												extra(item),
+											extra={
 												item.cover &&  <img
 													alt="logo"
 													src={`/data/article/cover/${item.articleid}`}
 												/>
-											]}
+											}
 										>
 											<List.Item.Meta
 												avatar={<Avatar src={`/data/logo/${item.authorid}`} />}

@@ -104,7 +104,7 @@ const toolbars = [
 	'codeRow',
 	'code',
 	'link',
-	// 'image',
+	'image',
 	'table',
 	'mermaid',
 	'katex',

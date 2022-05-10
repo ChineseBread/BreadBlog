@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useMemo, useState} from "react";
 import moment from "moment";
 import {Card} from "antd";
 
-export default function TimeShow({actions}){
+export default function TimeShow({actions,extra}){
 	const [time,setTime] = useState(moment().format("HH:mm:ss"))
 	useEffect(() => {
 		let timer = setInterval(() => {
@@ -26,13 +26,13 @@ export default function TimeShow({actions}){
 	}
 	return(
 		<Fragment>
-			<Card title="你好,今天感觉如何?" actions={actions}>
+			<Card title="你好,今天感觉如何?" actions={actions} extra={extra}>
 				{useMemo(() => {
 					return(
 						<div className='time-container'>
 							<i className={`iconfont ${getIcon()} time-icon`}/>
 							<div className='time-info'>
-								<h1>{time}</h1>
+								<h1 className='sounso-rare'>{time}</h1>
 							</div>
 						</div>
 					)
