@@ -1,9 +1,18 @@
-import React from "react";
-import {Button, Avatar} from 'antd';
+import React, {useContext} from "react";
+import {useNavigate} from "react-router-dom";
+import {Button, Avatar, Menu} from 'antd';
 import {PlusOutlined} from "@ant-design/icons";
 import UserLevel from "../../utilsComponents/User/UserLevel";
+import UserPreviewContext from "./UserPreviewContext";
 
-function UserPreviewInfo({User:{userid,username}}){
+function UserPreviewInfo(){
+	const navigator = useNavigate()
+	const {userid,username} = useContext(UserPreviewContext)
+	const handleChange = key => {
+		return () => {
+			navigator(`/preview/${userid}/${key}`)
+		}
+	}
 	return(
 		<div className='user-header-container'>
 			<div className='user-avatar-container'>
@@ -16,6 +25,11 @@ function UserPreviewInfo({User:{userid,username}}){
 				<UserLevel user={username}/>
 				<Button type='text' icon={<PlusOutlined/>} key="edit-user-info">关注</Button>
 			</div>
+			<Menu theme="light" mode="horizontal" defaultSelectedKeys={['all']}>
+				<Menu.Item key="article" onClick={handleChange('')}>文章</Menu.Item>
+				<Menu.Item key="dynamic" onClick={handleChange('dynamic')}>动态</Menu.Item>
+				<Menu.Item key="subscribe" onClick={handleChange('subscribe')}>关注</Menu.Item>
+			</Menu>
 		</div>
 	)
 }

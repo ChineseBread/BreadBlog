@@ -1,89 +1,46 @@
 import React, {useEffect, useState} from "react";
-import {useSearchParams} from "react-router-dom";
-import {message} from "antd";
-import ArticleListArea from "../../utilsComponents/Present/ArticleListArea";
+import {Outlet, useNavigate, useParams} from "react-router-dom";
 import UserPreviewMinor from "./UserPreviewMinor";
 import UserPreviewInfo from "./UserPreviewInfo";
-import PublicDataRequest from "../../../../utils/RequestUtils/PublicDataRequest";
-import UserPreviewList from "./UserPreviewList";
+import UserPreviewContext from "./UserPreviewContext";
+import Loading from "../../utilsComponents/Loading/Loading";
+import NotFoundPage from "../../utilsComponents/Present/NotFoundPage";
+import UserDataRequest from "../../../../utils/RequestUtils/UserDataRequest";
 
 export default function UserPreview(props) {
-	const [search,] = useSearchParams()
-	const [ArticleCategoryList,setCateGoryList] = useState([])
+	const {userid} = useParams()
+	const navigator = useNavigate()
+	const [isPending,setPending] = useState(true)
+	const [isError,setError] = useState({status:false,errText:''})
 
-	const [ArticleListInfo,setArticleListInfo] = useState({ArticleList:[],hasMore:false})
-	const [page,setPage] = useState(1)
-	// const [hasMore,setHasMore] = useState(true)
-	const [category,setCateGory] = useState('all')
-	const [loading,setLoading] = useState(true)
-
+	const [userinfo,setUserInfo] = useState({username:'',userid:''})
 	useEffect(() => {
-		PublicDataRequest.getUserArticleCategory(search.get('userid')).then(result => {
-			if (result?.Ok){
-				setCateGoryList(result.ArticleCateGory)
-			}
-		})
-	},[])
-
-	useEffect(() => {
-		PublicDataRequest.getUserArticle(search.get('userid'),1).then(result => {
-			if (result?.Ok){
-				let {ArticleList,total} = result
-				setPage(page => page + 1)
-				setArticleListInfo({ArticleList,hasMore:ArticleList.length < total})
-			}
-		}).finally(() => {
-			setLoading(false)
-		})
-	},[])
-
-	const changeCategory = key => {
-		return () => {
-			setPage(1)
-			setLoading(true)
-			PublicDataRequest.getUserArticleByCateGory(search.get('userid'),page,key).then(result => {
-				if (result?.Ok){
-					let {ArticleList,total} = result;
-					setArticleListInfo({ArticleList, hasMore: ArticleList.length < total})
-					setCateGory(key)
-				}
-			}).finally(() => {
-				setLoading(false)
-			})
-		}
-	}
-
-	const getMoreArticleList = () => {
-		PublicDataRequest.getUserArticleByCateGory(search.get('userid'),page + 1,category).then(result => {
-			if (result?.Ok){
-				let {ArticleList,total} = result;
-				setPage(page => page + 1)
-				setArticleListInfo(ListInfo => {
-					return{
-						ArticleList: [...ListInfo.ArticleList,...ArticleList],
-						hasMore: ArticleList.length + ListInfo.ArticleList.length < total
-					}
-				})
+		UserDataRequest.getUserInfo(userid).then(result => {
+			if (result.Ok){
+				setUserInfo({username: result.UserInfo.name,userid})
 			}else{
-				message.warn(result.Msg)
+				setError({status: true,errText: result.Msg})
 			}
-
+			setPending(false)
 		})
-	}
+	},[])
 	return (
-		<div className='user-home-container'>
-			<div className='user-card-list-container' >
-				<UserPreviewInfo User={{userid:search.get('userid'),username:search.get('username')}}/>
-				<UserPreviewList
-					ArticleListInfo={ArticleListInfo}
-					loading={loading}
-					getMoreArticleList={getMoreArticleList}
-					scrollTarget='scrollableDiv'
-				/>
-			</div>
-			<div className='user-minor-container'>
-				<UserPreviewMinor ArticleCategoryList={ArticleCategoryList} changeCategory={changeCategory} setCateGoryList={setCateGoryList}/>
-			</div>
-		</div>
+		<>
+			{
+				isPending ? <Loading/> : isError.status ? <NotFoundPage errText={isError.errText}/> :
+					<UserPreviewContext.Provider value={{...userinfo}}>
+						<div className='user-home-container'>
+							<div className='user-card-list-container single-column' >
+								<UserPreviewInfo/>
+								<Outlet/>
+							</div>
+							<div className='user-minor-container'>
+								<UserPreviewMinor/>
+							</div>
+						</div>
+					</UserPreviewContext.Provider>
+			}
+		</>
+
 	);
 }

@@ -9,6 +9,7 @@ import ArticleDraftStorage from "../../../../../utils/StorageUtils/ArticleDraftS
 const {Content} = Layout
 
 export default function DraftsCommon(props) {
+
 	const {draftid} = useParams()
 	const navigator = useNavigate()
 	const location = useLocation()

@@ -15,6 +15,7 @@ export default function Explore(props) {
 	const [isError,setError] = useState({status:false,errText:''})
 
 	useEffect(() => {
+
 		message.loading({content:'获取文章中',key:"loading",duration:10})
 		// 获取公共文章
 		PublicDataRequest.getHomePageData("random").then(result => {
@@ -42,17 +43,15 @@ export default function Explore(props) {
 							/>
 							<Button onClick={() => setColumn(e => !e)} icon={<UnorderedListOutlined />} type='text'/>
 						</div>
-						<div className={`explore-article-list clear-scroll ${column && 'double-column'}`}>
+						<div className={`explore-article-list clear-scroll ${column ? 'double-column' : 'single-column'}`}>
 							<ExploreArticleList ArticleList={ArticleList} loading={loading}/>
 						</div>
 					</div>
 					<div className="explore-minor-container">
-						<div className='explore-card-container'>
-							<ExploreMinorArea
-								setArticleList={setArticleList}
-								setListLoading={setLoading}
-							/>
-						</div>
+						<ExploreMinorArea
+							setArticleList={setArticleList}
+							setListLoading={setLoading}
+						/>
 					</div>
 				</div> : <NotFoundPage errText={isError.errText}/>
 			}

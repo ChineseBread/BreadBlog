@@ -53,7 +53,7 @@ export default function MarkDownEditor(props){
             textarea.focus();
         }, 0);
     };
-    // const [text, setText] = useState('## 写点东西呗....');
+
     const handleUploadImg = (files,callback) => {
         let file = files[0]
         message.loading({content:"上传中...",key:'uploading',duration:10})

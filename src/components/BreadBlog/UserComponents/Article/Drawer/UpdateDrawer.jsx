@@ -79,7 +79,7 @@ function _UpdateDrawer({visible,onClose,title,markdown,editorState,ArticleInfo,l
 				<Form
 					onFinish={onFinish}
 				>
-                <span>
+                <div>
                    <div>
                         <BarsOutlined/>
                         选择分类
@@ -87,7 +87,7 @@ function _UpdateDrawer({visible,onClose,title,markdown,editorState,ArticleInfo,l
                     <Button type="primary" htmlType="submit">
                         确认发布
                     </Button>
-                </span>
+                </div>
 					<Form.Item
 						name='publicsort'
 						rules={[{required:true,message:'请选择一个公共分类!'}]}

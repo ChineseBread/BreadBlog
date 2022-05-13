@@ -92,8 +92,8 @@ function AuthorListCard(){
 		})
 	},[])
 
-	const checkUser = (userid,username) => {
-		return () => navigator(`/preview?userid=${userid}&username=${username}`)
+	const checkUser = userid => {
+		return () => navigator(`/preview/${userid}`)
 	}
 	return(
 		<>

@@ -7,8 +7,13 @@ import UserLevel from "../../../utilsComponents/User/UserLevel";
 import CustomStorage from "../../../../../utils/StorageUtils/CustomStorage";
 import {beforeUpload} from "../../../../../utils/ImgUploadUtil";
 
-function UserInfoArea({changeCategory}){
+function UserInfoArea(){
 	const navigator = useNavigate()
+	const handleChange = key => {
+		return () => {
+			navigator(`/user/home/${key}`)
+		}
+	}
 	return(
 		<div className='user-header-container'>
 			<div className='user-avatar-container'>
@@ -19,9 +24,10 @@ function UserInfoArea({changeCategory}){
 				<UserLevel user={CustomStorage.getAccount().User}/>
 				<Button type='text' shape='circle' icon={<EditOutlined/>} key="edit-user-info" onClick={() => navigator('/user/profile')}/>
 			</div>
-			<Menu theme="light" mode="horizontal" defaultSelectedKeys={'article'}>
-				<Menu.Item key="all"  onClick={changeCategory('all')}>所有文章</Menu.Item>
-				<Menu.Item key="private" onClick={changeCategory('private')}>私人文章</Menu.Item>
+			<Menu theme="light" mode="horizontal" defaultSelectedKeys={['all']}>
+				<Menu.Item key="all" onClick={handleChange('')}>文章</Menu.Item>
+				<Menu.Item key="dynamic" onClick={handleChange('dynamic')}>动态</Menu.Item>
+				<Menu.Item key="subscribe" onClick={handleChange('subscribe')}>关注</Menu.Item>
 			</Menu>
 		</div>
 	)
