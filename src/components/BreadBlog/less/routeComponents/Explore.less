@@ -83,6 +83,7 @@
         }
     }
 }
+// < 1000
 @media(max-width: 1000px){
     .@{explore}-show-container{
         width: 100%;
@@ -94,18 +95,25 @@
         }
     }
 }
-@media (min-width: 1000px){
+// >= 576
+@media (min-width: 576px){
     .double-column{
+        //瀑布流
         .ant-list-items{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            column-count: 2;
+            column-width: 340px;
+            column-gap: 20px;
             .article-list-item{
-                width: 340px;
-                .ant-list-item-extra{
-                    width: 100px;
-                    margin: 0;
+                break-inside: avoid;
+                li{
+                    flex-direction: column;
+                    .ant-list-item-extra{
+                        width: 100%;
+                        order: -1;
+                        margin: 0 0 15px 0;
+                    }
                 }
+
             }
         }
     }

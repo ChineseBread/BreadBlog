@@ -33,10 +33,10 @@
 }
 
 .@{article-present}-container{
-    width: 100%;
+    width: 1050px;
     display: flex;
-    justify-content: space-around;
-
+    justify-content: space-between;
+    padding: 20px 0;
     .article-action-nav{
         position: fixed;
         left: 5%;
@@ -49,11 +49,11 @@
         align-items: center;
     }
     .@{article-present}-major-container{
-        width: 800px;
+        width: 850px;
         display: flex;
         flex-direction: column;
-        margin-right: 230px;
-        padding: 20px 0;
+        margin-right: 50px;
+
         //文章标题
         .ant-card-head-title{
             font-size: 20px;
@@ -208,14 +208,36 @@
 
     }
     .article-minor-container{
-        position: fixed;
-        width: 250px;
-        right: 6%;
-        top: 20%;
+
+        .article-card-container{
+            position: sticky;
+            .article-card-item{
+                width: 250px;
+                margin-bottom: 15px;
+                background-color: #fff;
+
+            }
+            // markdown文章的目录
+            .article-markdown-catalog{
+                padding: 10px 15px;
+            }
+        }
+
+        .markdown-sticky-box{
+            top: -119px;
+        }
+        .common-sticky-box{
+            top: 60px;
+        }
+
     }
+
 }
 @media(max-width: 1200px){
     .@{article-present}-container{
+        display: flex;
+        width: 100%;
+        padding: 0;
         .@{article-present}-major-container{
             width: 100%;
             margin: 0;
