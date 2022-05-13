@@ -321,32 +321,6 @@ class UserOperationRequest{
         else return this.doSubCommentOpreation('like/fcomment/remove',{token,commentsid,commentid,fcommentid})
     }
     /**
-     * @description 用户草稿箱
-     */
-    static addArticleDraft(title:string,content:string,type:'markdown' | 'common'):Promise<object>{
-        return new Promise(async (resolve,reject) => {
-            try {
-                let result = await doRequest({url:"draft/add",data:{title:title || '无标题',content:content || '无内容',type,token:CustomStorage.getAccount().Token},method:'GET'})
-                resolve({Ok:result?.Ok,DraftId:result?.DraftId})
-            }catch (e){
-                resolve({Ok:false})
-            }
-        })
-        // else return this.doUserArticleDraftOperation('draft/add',{title,content,type,token})
-    }
-    private static _updateArticleDraft(draftid:string,title:string,content:string,type:'markdown' | 'common'):Promise<object>{
-        return new Promise(async (resolve,reject) => {
-            try {
-                let result = await doRequest({url:'draft/update',data:{draftid,title:title || '无标题',content:content || '无内容',type,token:CustomStorage.getAccount().Token},method:'GET'})
-                resolve({Ok:result?.Ok})
-            }catch (e){
-                resolve({Ok:false})
-            }
-        })
-        // else return this.doUserArticleDraftOperation('draft/update',{draftid,title,content,type,token})
-    }
-    static updateArticleDraft = debounce(this._updateArticleDraft,2000,false)
-    /**
      * @description 用户草稿箱界面删除操作
      */
     static deleteDraft(draftid:string):Promise<object>{

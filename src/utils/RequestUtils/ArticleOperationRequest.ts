@@ -1,7 +1,6 @@
-import {doRequest} from "../request";
+import {doRequest, doUploadRequest} from "../request";
 import CustomStorage from "../StorageUtils/CustomStorage";
 import debounce from "../debounce";
-import axios from "axios";
 
 /**
  * @description 用户的文章操作 指在文章编辑见面的文章操作
@@ -69,7 +68,7 @@ class ArticleOperationRequest{
         })
     }
 
-    static setArticleDescription(articleid:string,description:string):Promise<object>{
+    private static setArticleDescription(articleid:string,description:string):Promise<object>{
         if (!description) return Promise.resolve({Ok:true})
         else return new Promise(async (resolve,reject) => {
             try {
@@ -80,7 +79,7 @@ class ArticleOperationRequest{
             }
         })
     }
-    static addArticleTags(articleid: string, tags: string[]): Promise<object> {
+    private static addArticleTags(articleid: string, tags: string[]): Promise<object> {
         if (tags.length < 1) return Promise.resolve({Ok:true})
         else return new Promise(async (resolve,reject) => {
             try {
@@ -98,18 +97,12 @@ class ArticleOperationRequest{
      * @param articleid
      * @param file
      */
-    static setArticleCover(articleid:string,file:File | null):Promise<object>{
+    private static setArticleCover(articleid:string,file:File | null):Promise<object>{
         if (!file) return Promise.resolve({Ok:true})
         else return new Promise(async (resolve,reject) => {
             try {
-                const form = new FormData()
-                form.append('image',file)
-                let result =  await axios.post(`/api/upload/article/cover/${articleid}/${CustomStorage.getAccount().Token}`,form,{
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                })
-                resolve({Ok:result.data.Ok})
+                let result = await doUploadRequest({url:`article/cover/${articleid}/${CustomStorage.getAccount().Token}`,FormData:{param:'image',file}})
+                resolve({Ok:result?.Ok})
             }catch (e){
                 resolve({Ok:false})
             }
@@ -123,17 +116,11 @@ class ArticleOperationRequest{
         if (file.size / 1024 / 1024 > 5) return Promise.resolve({Ok:false,Msg:'图片不能超过5MB'})
         else return new Promise(async (resolve,reject) => {
             try {
-                const form = new FormData()
-                form.append('image',file)
-                let result = await axios.post(`/api/upload/attach/${CustomStorage.getAccount().Token}`,form,{
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                })
-                if (result.data.Ok){
-                    resolve({Ok:true,path:result.data.Path})
-                }else{
-                    resolve({Ok:false,Msg:result.data?.Msg || '服务器异常请稍后'})
+                let result = await doUploadRequest({url:`attach/${CustomStorage.getAccount().Token}`,FormData:{param:'image',file}})
+                if (result?.Ok){
+                    resolve({Ok:true,path:result.Path})
+                }else {
+                    resolve({Ok:false,Msg:result?.Msg || '服务器异常请稍后'})
                 }
             }catch (e){
                 resolve({Ok:false,Msg:'服务器异常请稍后'})
@@ -170,7 +157,7 @@ class ArticleOperationRequest{
     /**
      * @deprecated
      */
-    static addArticleTag(articleid: string, tag: string){
+    private static addArticleTag(articleid: string, tag: string){
         return this.doArticleTagOperation(CustomStorage.getAccount().Token, articleid, tag,'tag/add');
     }
     /**
@@ -178,15 +165,15 @@ class ArticleOperationRequest{
      * @param articleid
      * @param tag
      */
-    static removeArticleTag(articleid: string, tag: string): Promise<object> {
+    private static removeArticleTag(articleid: string, tag: string): Promise<object> {
         return this.doArticleTagOperation(CustomStorage.getAccount().Token, articleid, tag,'tag/del');
     }
 
-    static modifyArticleCategory(articleid:string,sortname: string): Promise<object> {
+    private static modifyArticleCategory(articleid:string,sortname: string): Promise<object> {
         return this.doArticleCategoryOperation(CustomStorage.getAccount().Token, articleid, sortname,'sort/resort')
     }
 
-    static setArticleCategory(articleid: string, sortname: string): Promise<object> {
+    private static setArticleCategory(articleid: string, sortname: string): Promise<object> {
         return this.doArticleCategoryOperation(CustomStorage.getAccount().Token, articleid, sortname,'sort/set')
     }
 

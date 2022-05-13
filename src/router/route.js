@@ -10,6 +10,14 @@ import InfoNotice from "../components/BreadBlog/UserComponents/User/UserNotice/N
 import ForceNotice from "../components/BreadBlog/UserComponents/User/UserNotice/Notice/ForceNotice";
 import WarnNotice from "../components/BreadBlog/UserComponents/User/UserNotice/Notice/WarnNotice";
 
+//用户预览
+import UserDynamic from "../components/BreadBlog/UserComponents/User/UserHomePage/UserDynamic";
+import UserArticleList from "../components/BreadBlog/UserComponents/User/UserHomePage/UserArticleList";
+import UserSubscribe from "../components/BreadBlog/UserComponents/User/UserHomePage/UserSubscribe";
+import UserPreviewArticleList from "../components/BreadBlog/routeComponents/UserPreview/UserPreviewArticleList";
+import UserPreviewDynamic from "../components/BreadBlog/routeComponents/UserPreview/UserPreviewDynamic";
+import UserPreviewSubscribe from "../components/BreadBlog/routeComponents/UserPreview/UserPreviewSubscribe";
+
 const BreadBlog = lazy(() => import("../components/BreadBlog/BreadBlog"));
 const HomePage = lazy(() => import("../components/BreadBlog/routeComponents/HomePage/HomePage"));
 const Explore = lazy(() => import("../components/BreadBlog/routeComponents/Explore/Explore"));
@@ -54,8 +62,22 @@ const routesForm = [
         element:<BreadBlog/>,
         children:[
             {
-                path: '/preview',
-                element: <UserPreview/>
+                path: '/preview/:userid',
+                element: <UserPreview/>,
+                children:[
+                    {
+                        path:'/preview/:userid',
+                        element: <UserPreviewArticleList/>
+                    },
+                    {
+                        path: "/preview/:userid/dynamic",
+                        element: <UserPreviewDynamic/>
+                    },
+                    {
+                        path: '/preview/:userid/subscribe',
+                        element: <UserPreviewSubscribe/>
+                    }
+                ]
             },
             {
               path: '/',
@@ -109,7 +131,21 @@ const routesForm = [
                     },
                     {
                         path: "/user/home",
-                        element: <UserHomePage/>
+                        element: <UserHomePage/>,
+                        children: [
+                            {
+                                path:'/user/home',
+                                element: <UserArticleList/>
+                            },
+                            {
+                                path: '/user/home/dynamic',
+                                element: <UserDynamic/>
+                            },
+                            {
+                                path: '/user/home/subscribe',
+                                element: <UserSubscribe/>
+                            }
+                        ]
                     },
                     {
                         path: '/user/collections',

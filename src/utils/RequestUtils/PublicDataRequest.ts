@@ -41,11 +41,11 @@ class PublicDataRequest{
         else return new Promise(async (resolve,reject) => {
             try {
                 let result = await doDataRequest({url:"user/sort",data:{page,userid,sortname},method:'GET'})
-                if (result?.articles){
-                    resolve({Ok:true,ArticleList:result.articles,total:result.total})
+                if (Object.hasOwn(result,'articles')){
+                    let articles = result.articles || []
+                    resolve({Ok:true,ArticleList:articles,total:result.total})
                 }else {
-                    if (result?.articles == null) resolve({Ok:true,ArticleList:[],total:-1})
-                    resolve({Ok:false,Msg:result?.Msg || '服务器异常请稍后'})
+                    resolve({Ok: false, Msg: result?.Msg || '服务器异常请稍后'})
                 }
             }catch (e){
                 resolve({Ok:false,Msg:errMsg})

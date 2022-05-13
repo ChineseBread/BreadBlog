@@ -67,42 +67,34 @@ class UserDataRequest {
             try {
                 let {Token:token,UserID:userid} = CustomStorage.getAccount()
                 let result = await doDataRequest({url:"user/sort",data:{token,userid,sortname,page},method:'GET'})
-                if (result?.articles){
-                    resolve({Ok:true,ArticleList:result.articles,total:result.total})
+                if (Object.hasOwn(result,'articles')){
+                    let articles = result.articles || []
+                    resolve({Ok:true,ArticleList:articles,total:result.total})
                 }else {
-                    if (result?.articles == null) resolve({Ok:true,ArticleList:[],total:-1})
-                    resolve({Ok:false,Msg:result?.Msg || '服务器异常请稍后'})
+                    resolve({Ok: false, Msg: result?.Msg || '服务器异常请稍后'})
                 }
             }catch (e){
                 resolve({Ok:false,Msg:'服务器异常请稍后'})
             }
         })
     }
-    //------------------
-    // static getUserInfo(userid:string){
-    //
-    //     return new Promise(async (resolve,reject) => {
-    //         try {
-    //             let user = await CustomStorage.getUserInfoByID(userid);
-    //             if (user){
-    //                 resolve({Ok:true,UserInfo:user})
-    //             }else{
-    //                 let result = await doDataRequest({url:'user/info',data:{userid},method:'GET'})
-    //                 if (result?.name){
-    //                     CustomStorage.addUserInfo(result).then(() => {
-    //                         resolve({Ok:true,UserInfo:result})
-    //                     })
-    //                 }else {
-    //                     resolve({Ok:false})
-    //                 }
-    //             }
-    //
-    //         }catch (e){
-    //             resolve({Ok:false})
-    //         }
-    //
-    //     })
-    // }
+    // ------------------
+    static getUserInfo(userid:string){
+
+        return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doDataRequest({url:'user/info',data:{userid},method:'GET'})
+                if (result?.name){
+                    resolve({Ok:true,UserInfo:result})
+                }else {
+                    resolve({Ok:false,Msg:result.Msg || errMsg})
+                }
+            }catch (e){
+                resolve({Ok:false,Msg:errMsg})
+            }
+
+        })
+    }
     static getUserFavorites():Promise<object>{
         let token = CustomStorage.getAccount().Token;
         if (!token) return Promise.resolve({Ok:false,Msg:'请先登录'})
