@@ -30,7 +30,7 @@ class UserOperationRequest{
                 }else{
                     let result:any = await doRequest({url,data:{user,pwd},method:'GET'})
                     if (result?.User) {
-                        CustomStorage.saveAccount({...result,user,pwd})
+                        CustomStorage.saveAccount({...result,pwd})
                         resolve({Ok:true})
                     } else {
                         resolve({Ok:false,Msg:result?.Msg || errMsg})
@@ -61,46 +61,7 @@ class UserOperationRequest{
     }
     private static doModifyOperation = debounce(this._doModifyOperation,2000,true)
 
-    private static doUserFavoriteOperation(url:string,data:object):Promise<object>{
-        return new Promise(async (resolve,reject) => {
-            try {
-                let result = await doRequest({url,data,method:'GET'})
-                resolve({Ok:result?.Ok,Msg:result?.Msg})
-            }catch (e){
-                resolve({Ok:false,Msg:errMsg})
-            }
-        })
-    }
-    private static doUserLikeOperation(url:string,data:object):Promise<object>{
-        return new Promise(async (resolve,reject) => {
-            try {
-                let result = await doRequest({url,data,method:'GET'})
-                resolve({Ok:result?.Ok,Msg:result?.Msg})
-            }catch (e){
-                resolve({Ok:false,Msg:errMsg})
-            }
-        })
-    }
-    private static doCommentOperation(url:string,data:object):Promise<object>{
-        return new Promise(async (resolve,reject) => {
-            try {
-                let result = await doRequest({url,data,method:'GET'})
-                resolve({Ok:result?.Ok,Msg:result?.Msg})
-            }catch (e){
-                resolve({Ok:false,Msg:errMsg})
-            }
-        })
-    }
-    private static doSubCommentOpreation(url:string,data:object):Promise<object>{
-        return new Promise(async (resolve,reject) => {
-            try {
-                let result = await doRequest({url,data,method:'GET'})
-                resolve({Ok:result?.Ok,Msg:result.Msg || errMsg})
-            }catch (e){
-                resolve({Ok:false,Msg:errMsg})
-            }
-        })
-    }
+
     static doLogin(user: string, pwd: string): Promise<object> {
        return this.doUserOperation(user,pwd,'auth/login')
     }
@@ -131,19 +92,11 @@ class UserOperationRequest{
             }
         })
     }
+
     /**
-     * @description 收藏夹
+     * @description 创建收藏夹
+     * @param favname
      */
-    static updateFav(favnames:string[],articleid:string):Promise<object>{
-        return new Promise(async (resolve,reject) => {
-            try {
-                let result = await doRequest({url:'fav/update',data:{favnames:JSON.stringify(favnames),articleid,token:CustomStorage.getAccount().Token},method:'GET'})
-                resolve({Ok:result?.Ok,Msg:result?.Msg || '服务器异常请稍后...'})
-            }catch (e){
-                resolve({Ok:false,Msg:'服务器异常请稍后...'})
-            }
-        })
-    }
     static createFav(favname:string):Promise<object>{
         return new Promise(async (resolve,reject) => {
             try {
@@ -159,58 +112,19 @@ class UserOperationRequest{
         })
     }
 
+    /**
+     * @description 删除收藏夹
+     * @param favname
+     */
     static deleteFav(favname:string):Promise<object>{
-        return this.doUserFavoriteOperation('fav/remove', {favname,token:CustomStorage.getAccount().Token})
-    }
-
-    static subscribeArticle(favname:string,articleid:string):Promise<object>{
-        return this.doUserFavoriteOperation('fav/add',{favname,articleid,token:CustomStorage.getAccount().Token})
-    }
-
-    static checkFav(articleid:string):Promise<object>{
-        let token = CustomStorage.getAccount().Token;
-        if (!token) return Promise.resolve({Ok:false})
-        else return new Promise(async (resolve,reject) => {
-                try {
-                    let result = await doRequest({url:'fav/check',data:{token:CustomStorage.getAccount().Token,articleid},method:'GET'})
-                    if (result?.Msg === '文章已收藏') resolve({Ok:true,isFav:true,Favs:result?.Favs || []})
-                    else resolve({Ok:true,isFav:false})
-                }catch (e){
-                    resolve({Ok:false})
-                }
-            })
-
-    }
-    static unsubscribeArticle(articleid:string,favname:string):Promise<object>{
         return new Promise(async (resolve,reject) => {
             try {
-                let result = await doRequest({url:'fav/del',data:{token:CustomStorage.getAccount().Token,articleid,favname},method:'GET'})
+                let result = await doRequest({url:'fav/remove',data:{favname,token:CustomStorage.getAccount().Token},method:"GET"})
                 resolve({Ok:result?.Ok,Msg:result?.Msg || errMsg})
             }catch (e){
                 resolve({Ok:false,Msg:errMsg})
             }
         })
-    }
-    /**
-     * @description 文章点赞
-     */
-    static checkLike(articleid:string):Promise<object>{
-        let token = CustomStorage.getAccount().Token
-        if (!token) return Promise.resolve({Ok:false,Msg:'尚未点赞'})
-        else return this.doUserLikeOperation('like/article/check',{token,articleid})
-    }
-
-    static likeArticle(articleid:string):Promise<object>{
-        let token = CustomStorage.getAccount().Token
-        if (!token) return Promise.resolve({Ok:false,Msg:'请先登录'})
-        else return this.doUserLikeOperation('like/article/add',{token:CustomStorage.getAccount().Token,articleid})
-    }
-
-    static unlikeArticle(articleid:string):Promise<object>{
-        let token = CustomStorage.getAccount().Token
-        if (!token) return Promise.resolve({Ok:false,Msg:'请先登录'})
-        else return this.doUserLikeOperation('like/article/remove',{token:CustomStorage.getAccount().Token,articleid})
-
     }
 
     /**
@@ -226,99 +140,6 @@ class UserOperationRequest{
                 resolve({Ok:false,Msg:errMsg})
             }
         })
-    }
-    /**
-     * @description 用户评论操作
-     * @undetermined 用户评论成功需要给commentid
-     */
-    static sendComment(comment:string,articleid:string,anonymous:boolean):Promise<object>{
-        let token = CustomStorage.getAccount().Token
-        if (!token) return Promise.resolve({Ok:false,Msg:'您尚未登录无法发送评论'})
-        else return new Promise(async (resolve,reject) => {
-            try {
-                let result = await doRequest({url:'comment/article',data:{comment,articleid,anonymous:anonymous ? 1 : -1,token},method:'POST'})
-                if(result.Ok){
-                    resolve({Ok:true,CommentId:result.CommentId})
-                }else{
-                    resolve({Ok:false,Msg:result.Msg || errMsg})
-                }
-                //resolve({Ok:result?.Ok,Msg:result?.Msg || errMsg})
-            }catch (e){
-                resolve({Ok:false,Msg:errMsg})
-            }
-        })
-    }
-    static sendSubComment(comment:string,commentsid:string,commentid:string,anonymous:boolean):Promise<object>{
-        let token = CustomStorage.getAccount().Token
-        if (!token) return Promise.resolve({Ok:false,Msg:'请先登录'})
-        else return new Promise(async (resolve,reject) => {
-            try {
-                let result = await doRequest({url:'fcomment/push',data:{comment,commentid,commentsid,anonymous:anonymous ? 1 : -1,token},method:'POST'})
-                if (result?.Ok){
-                    let {FCommentData:{fcommentid,isanonymous,comment,createdtime,username,like}} = result
-                    resolve({Ok:true,FComment:{fcommentid,fcommentdata:{isanonymous,comment,createdtime,username,like}}})
-                }else{
-                    resolve({Ok:false,Msg:result?.Msg || errMsg})
-                }
-            }catch (e){
-                resolve({Ok:false,Msg:errMsg})
-            }
-        })
-    }
-
-    /**
-     *
-     * @param commentsid
-     * @param commentid
-     * @param anonymous
-     * @param comment
-     * @param reply 回复对象的fcommentid
-     */
-    static sendSubCommentReply(commentsid:string,commentid:string,anonymous:boolean,comment:string,reply:string):Promise<object>{
-        let token = CustomStorage.getAccount().Token
-        if (!token) return Promise.resolve({Ok:false,Msg:'请先登录'})
-        else return new Promise(async (resolve,reject) => {
-            try {
-                let result = await doRequest({url:'fcomment/reply',data:{commentsid,commentid,anonymous:anonymous ? 1 : -1,comment,reply,token},method:"POST"})
-                if (result?.Ok){
-                    let {FCommentData,ReplyData} = result
-                    resolve({Ok:true,FComment:{fcommentid:FCommentData.fcommentid,fcommentdata:FCommentData,replydata:ReplyData}})
-                }else{
-                    resolve({Ok:false,Msg:result?.Msg || errMsg})
-                }
-            }catch (e){
-                resolve({Ok:false,Msg:errMsg})
-            }
-        })
-    }
-    static likeComment(commentsid:string,commentid:string):Promise<object>{
-        let token = CustomStorage.getAccount().Token
-        if (!token) return Promise.resolve({Ok:false,Msg:'请先登录'})
-        else return this.doCommentOperation('like/comment/add',{commentsid,commentid,token})
-    }
-    static unlikeComment(commentsid:string,commentid:string):Promise<object>{
-        let token = CustomStorage.getAccount().Token
-        if (!token) return Promise.resolve({Ok:false,Msg:'请先登录'})
-        else return this.doCommentOperation('like/comment/remove',{commentsid,commentid,token})
-    }
-    static checkComment(commentsid:string,commentid:string){
-        let token = CustomStorage.getAccount().Token
-        if (!token) return Promise.resolve({Ok:false,Msg:'请先登录'})
-        else return this.doCommentOperation('like/comment/check',{commentsid,commentid,token})
-    }
-
-    /**
-     * @description 用户追评操作
-     */
-    static likeSubComment(commentsid:string,commentid:string,fcommentid:string):Promise<object>{
-        let token = CustomStorage.getAccount().Token;
-        if (!token) return Promise.resolve({Ok:false,Msg:'请先登录'})
-        else return this.doSubCommentOpreation('like/fcomment/add',{token,commentsid,commentid,fcommentid})
-    }
-    static unlikeSubComment(commentsid:string,commentid:string,fcommentid:string):Promise<object>{
-        let token = CustomStorage.getAccount().Token;
-        if (!token) return Promise.resolve({Ok:false,Msg:'请先登录'})
-        else return this.doSubCommentOpreation('like/fcomment/remove',{token,commentsid,commentid,fcommentid})
     }
     /**
      * @description 用户草稿箱界面删除操作
@@ -356,6 +177,56 @@ class UserOperationRequest{
                 resolve({Ok:false})
             }
         })
+    }
+
+    /**
+     * @description 用户关注的操作
+     */
+    private static followUserOperation(url:string,userid:string):Promise<object>{
+        let {Token:token,UserID} = CustomStorage.getAccount()
+        if (!token) return Promise.resolve({Ok:false,Msg:'尚未登录'})
+        if (userid === UserID) return Promise.resolve({Ok:false,Msg:'不能关注自己'})
+        else return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doRequest({url,data:{userid,token},method:'GET'})
+                let Msg = result?.Msg || errMsg
+                if (Msg === '取消关注成功' || Msg === '关注用户成功') resolve({Ok:true,Msg})
+                else resolve({Ok:false,Msg})
+            }catch (e){
+                resolve({Ok:false})
+            }
+        })
+    }
+    /**
+     * @description 检查是否关注了某个用户
+     * @param userid
+     */
+    static checkFollow(userid:string):Promise<object>{
+        let {Token:token,UserID} = CustomStorage.getAccount()
+        if (!token) return Promise.resolve({Ok:false,Msg:'尚未关注'})
+        if (userid === UserID) return Promise.resolve({Ok:false,Msg:'尚未关注'})
+        else return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doRequest({url:'follow/check',data:{userid,token},method:'GET'})
+                resolve({Ok:result?.Ok,Msg:result?.Msg || '尚未关注'})
+            }catch (e){
+                resolve({Ok:false,Msg:errMsg})
+            }
+        })
+    }
+
+    /**
+     * @description 关注用户
+     */
+    static followUser(userid:string):Promise<object>{
+       return this.followUserOperation('follow/user',userid)
+    }
+
+    /**
+     * @description 取消关注用户
+     */
+    static unFollowUser(userid:string):Promise<object>{
+        return this.followUserOperation('unfollow/user',userid)
     }
 }
 export default UserOperationRequest;

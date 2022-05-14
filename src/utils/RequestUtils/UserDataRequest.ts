@@ -171,5 +171,21 @@ class UserDataRequest {
             }
         })
     }
+    static getUserFollows():Promise<object>{
+        return new Promise(async (resolve,reject) => {
+            try {
+                let result = await doDataRequest({url:'follow/list',data:{token:CustomStorage.getAccount().Token},method:'GET'})
+                if (result?.Ok && Object.hasOwn(result,'Followings')){
+                    let follows = result.Followings || []
+                    resolve({Ok:true,Followings:follows})
+                }else {
+                    resolve({Ok:false,MsgL:result?.Msg || errMsg})
+                }
+
+            }catch (e){
+                resolve({Ok:false,Msg:errMsg})
+            }
+        })
+    }
 }
 export default UserDataRequest;

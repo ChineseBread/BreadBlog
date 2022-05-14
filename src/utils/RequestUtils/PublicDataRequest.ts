@@ -327,6 +327,11 @@ class PublicDataRequest{
             }
         })
     }
-
+    static getUserAvatarUrl(userid:string):string{
+        return `/data/logo/${userid}`
+    }
+    static getUserBackgroundUrl(userid:string):string{
+        return `/data/background/${userid}`
+    }
 }
 export default PublicDataRequest;

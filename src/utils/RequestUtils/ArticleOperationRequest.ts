@@ -3,7 +3,7 @@ import CustomStorage from "../StorageUtils/CustomStorage";
 import debounce from "../debounce";
 
 /**
- * @description 用户的文章操作 指在文章编辑见面的文章操作
+ * @description 用户的文章操作 指在文章编辑页面的文章操作
  */
 class ArticleOperationRequest{
 
