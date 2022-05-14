@@ -1,9 +1,9 @@
 import {useNavigate} from "react-router-dom";
-import {Button, PageHeader, Tag} from "antd";
+import {PageHeader, Tag} from "antd";
 import moment from "moment";
-import {PlusOutlined} from "@ant-design/icons";
 import React from "react";
 import {nanoid} from "nanoid";
+import SubscribeBtn from "../../../utilsComponents/User/SubscribeBtn";
 
 export default function ArticlePresentHeader({ArticleInfo}){
 	const navigator = useNavigate()
@@ -16,7 +16,7 @@ export default function ArticlePresentHeader({ArticleInfo}){
 			tags={ArticleInfo.tags.map(ele => <Tag key={nanoid()}>{JSON.parse(ele)}</Tag>)}
 			// subTitle="This is a subtitle"
 			extra={[
-				<Button key="subscribe" icon={<PlusOutlined />}>关注</Button>,
+				<SubscribeBtn key='subscribe' type='default' userid={ArticleInfo.authorid}/>
 			]}
 			avatar={{ src: `/data/logo/${ArticleInfo.authorid}` }}
 		>

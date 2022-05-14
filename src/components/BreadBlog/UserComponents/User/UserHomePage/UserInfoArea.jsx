@@ -6,7 +6,7 @@ import ImgCrop from "antd-img-crop";
 import UserLevel from "../../../utilsComponents/User/UserLevel";
 import CustomStorage from "../../../../../utils/StorageUtils/CustomStorage";
 import {beforeUpload} from "../../../../../utils/ImgUploadUtil";
-
+const {User,Level} = CustomStorage.getAccount()
 function UserInfoArea(){
 	const navigator = useNavigate()
 	const handleChange = key => {
@@ -21,7 +21,7 @@ function UserInfoArea(){
 				<Avatar src={CustomStorage.getAvatarUrl()}/>
 			</div>
 			<div className='user-info-container shangshou'>
-				<UserLevel user={CustomStorage.getAccount().User}/>
+				<UserLevel user={User} level={Level}/>
 				<Button type='text' shape='circle' icon={<EditOutlined/>} key="edit-user-info" onClick={() => navigator('/user/profile')}/>
 			</div>
 			<Menu theme="light" mode="horizontal" defaultSelectedKeys={['all']}>

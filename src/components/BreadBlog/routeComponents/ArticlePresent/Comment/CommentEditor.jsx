@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Button, message, Switch,Input} from "antd";
-import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperationRequest";
+import ArticlePreviewRequest from "../../../../../utils/RequestUtils/ArticlePreviewRequest";
 
 /**
  * @description 子评论列表
@@ -24,7 +24,7 @@ export default function CommentEditor({username,commentid,commentsid,setSubComme
 			message.warn('请输入评论')
 			return
 		}
-		UserOperationRequest.sendSubComment(text,commentsid,commentid,isAnonymous).then(result => {
+		ArticlePreviewRequest.sendSubComment(text,commentsid,commentid,isAnonymous).then(result => {
 			if (result.Ok){
 				setSubCommentsListInfo(CommentsInfo => {
 					return{

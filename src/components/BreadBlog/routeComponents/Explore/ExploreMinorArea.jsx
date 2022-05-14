@@ -102,11 +102,11 @@ function AuthorListCard(){
 					<Card title="作者榜">
 						<Skeleton loading={loading}>
 							<div className='author-list-container clear-scroll'>
-								{AuthorList.map(({username,userid},index) =>{
+								{AuthorList.map(({username,userid,level},index) =>{
 									return(
 										<div className='author-list-item' key={userid} onClick={checkUser(userid,username)}>
-											<Avatar  src={`/data/logo/${userid}`}/>
-											<UserLevel user={username}/>
+											<Avatar  src={PublicDataRequest.getUserAvatarUrl(userid)}/>
+											<UserLevel user={username} level={level}/>
 										</div>
 									)
 								})}

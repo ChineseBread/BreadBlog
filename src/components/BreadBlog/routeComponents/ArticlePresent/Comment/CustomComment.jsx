@@ -2,7 +2,7 @@ import {Avatar, Button, message, Switch} from "antd";
 import TextArea from "antd/es/input/TextArea";
 import React, {useState} from "react";
 import CustomStorage from "../../../../../utils/StorageUtils/CustomStorage";
-import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperationRequest";
+import ArticlePreviewRequest from "../../../../../utils/RequestUtils/ArticlePreviewRequest";
 
 /**
  *
@@ -18,7 +18,7 @@ function CustomComment({articleid,setCommentListInfo}){
 			message.warn("请输入评论")
 			return
 		}
-		let result = await UserOperationRequest.sendComment(comment,articleid,isAnonymous)
+		let result = await ArticlePreviewRequest.sendComment(comment,articleid,isAnonymous)
 		if (result.Ok){
 			let {UserID,User} = CustomStorage.getAccount()
 			let { CommentId } = result

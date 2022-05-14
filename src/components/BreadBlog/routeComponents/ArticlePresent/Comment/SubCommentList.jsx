@@ -3,8 +3,9 @@ import {Avatar, Button, Comment, message} from "antd";
 import {CommentOutlined, LikeFilled, LikeOutlined} from "@ant-design/icons";
 import moment from "moment";
 import SubCommentEditor from "./SubCommentEditor";
-import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperationRequest";
 import {CommentContext} from "./CommentContext";
+import ArticlePreviewRequest from "../../../../../utils/RequestUtils/ArticlePreviewRequest";
+import PublicDataRequest from "../../../../../utils/RequestUtils/PublicDataRequest";
 
 export default function SubCommentList({SubCommentsListInfo,getMoreSubComment}){
 
@@ -50,7 +51,7 @@ function SubCommentItem({fcommentid,fcommentdata:{isanonymous,username,createdti
 	const [commentVisible,setVisible] = useState(false)
 
 	const likeComment = () => {
-		UserOperationRequest[likes.isLike ? 'unlikeSubComment' : 'likeSubComment'](commentsid,commentid,fcommentid).then(result => {
+		ArticlePreviewRequest[likes.isLike ? 'unlikeSubComment' : 'likeSubComment'](commentsid,commentid,fcommentid).then(result => {
 			if (result.Ok){
 				setLikes(likes => {
 					return{
@@ -77,7 +78,7 @@ function SubCommentItem({fcommentid,fcommentdata:{isanonymous,username,createdti
 				</span>
 			]}
 			author={<a>{isanonymous ? '匿名用户' : reply ? `${username} 回复 ${replydata.username || '匿名用户'}` : username}</a>}
-			avatar={<Avatar src={isanonymous ? '/sources/Anonymous.png' : `/data/logo/${userid}`}/>}
+			avatar={<Avatar src={isanonymous ? '/sources/Anonymous.png' : PublicDataRequest.getUserAvatarUrl(userid)}/>}
 			datetime={moment(createdtime * 1000).format('YYYY-MM-DD HH:mm:ss')}
 			content={
 				<div className='comment-content-container'>

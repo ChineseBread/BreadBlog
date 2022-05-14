@@ -1,13 +1,14 @@
 import React, {useContext} from "react";
 import {useNavigate} from "react-router-dom";
-import {Button, Avatar, Menu} from 'antd';
-import {PlusOutlined} from "@ant-design/icons";
+import {Avatar, Menu} from 'antd';
 import UserLevel from "../../utilsComponents/User/UserLevel";
 import UserPreviewContext from "./UserPreviewContext";
+import SubscribeBtn from "../../utilsComponents/User/SubscribeBtn";
+import PublicDataRequest from "../../../../utils/RequestUtils/PublicDataRequest";
 
 function UserPreviewInfo(){
 	const navigator = useNavigate()
-	const {userid,username} = useContext(UserPreviewContext)
+	const {userid,username,level} = useContext(UserPreviewContext)
 	const handleChange = key => {
 		return () => {
 			navigator(`/preview/${userid}/${key}`)
@@ -17,13 +18,13 @@ function UserPreviewInfo(){
 		<div className='user-header-container'>
 			<div className='user-avatar-container'>
 				<div className='user-background'>
-					<img src={`/data/background/${userid}`}/>
+					<img src={PublicDataRequest.getUserBackgroundUrl(userid)}/>
 				</div>
-				<Avatar size={100} src={`/data/logo/${userid}`}/>
+				<Avatar size={100} src={PublicDataRequest.getUserAvatarUrl(userid)}/>
 			</div>
 			<div className='user-info-container preview-user-info'>
-				<UserLevel user={username}/>
-				<Button type='text' icon={<PlusOutlined/>} key="edit-user-info">关注</Button>
+				<UserLevel user={username} level={level}/>
+				<SubscribeBtn userid={userid} type='text'/>
 			</div>
 			<Menu theme="light" mode="horizontal" defaultSelectedKeys={['all']}>
 				<Menu.Item key="article" onClick={handleChange('')}>文章</Menu.Item>

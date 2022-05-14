@@ -1,8 +1,8 @@
 import TextArea from "antd/es/input/TextArea";
 import {Button, message, Switch} from "antd";
 import React, {useContext, useState} from "react";
-import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperationRequest";
 import {CommentContext} from "./CommentContext";
+import ArticlePreviewRequest from "../../../../../utils/RequestUtils/ArticlePreviewRequest";
 
 /**
  * @description 追评间互相回复
@@ -25,7 +25,7 @@ export default function SubCommentEditor({username,fcommentid,setVisible}) {
 			message.warn('请输入评论')
 			return
 		}
-		UserOperationRequest.sendSubCommentReply(commentsid,commentid,isAnonymous,text,fcommentid).then(result => {
+		ArticlePreviewRequest.sendSubCommentReply(commentsid,commentid,isAnonymous,text,fcommentid).then(result => {
 			if (result.Ok){
 				setSubCommentsListInfo(CommentsInfo => {
 					return{

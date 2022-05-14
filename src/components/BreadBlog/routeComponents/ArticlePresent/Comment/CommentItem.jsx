@@ -6,7 +6,7 @@ import SubCommentList from "./SubCommentList";
 import CommentEditor from "./CommentEditor";
 import {CommentContextProvider} from "./CommentContext";
 import PublicDataRequest from "../../../../../utils/RequestUtils/PublicDataRequest";
-import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperationRequest";
+import ArticlePreviewRequest from "../../../../../utils/RequestUtils/ArticlePreviewRequest";
 
 /**
  * @attention token过期拿不到数据
@@ -32,7 +32,7 @@ export default function CommentItem({commentItem:{isanonymous,userid,username,co
 		})
 	},[])
 	const likeComment = () => {
-		UserOperationRequest[likes.isLike ? 'unlikeComment' : 'likeComment'](commentsid,commentid).then(result => {
+		ArticlePreviewRequest[likes.isLike ? 'unlikeComment' : 'likeComment'](commentsid,commentid).then(result => {
 			if (result.Ok){
 				setLikes(likes => {
 					return{
@@ -76,7 +76,7 @@ export default function CommentItem({commentItem:{isanonymous,userid,username,co
 					</span>
 				]}
 				author={<a>{isanonymous? '匿名用户' : username}</a>}
-				avatar={<Avatar src={isanonymous ? '/sources/Anonymous.png' : `/data/logo/${userid}`}/>}
+				avatar={<Avatar src={isanonymous ? '/sources/Anonymous.png' : PublicDataRequest.getUserAvatarUrl(userid)}/>}
 				datetime={moment(createdtime * 1000).format('YYYY-MM-DD HH:mm:ss')}
 				content={
 					<div className='comment-content-container'>

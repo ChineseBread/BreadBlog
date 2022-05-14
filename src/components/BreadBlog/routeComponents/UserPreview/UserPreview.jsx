@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Outlet, useNavigate, useParams} from "react-router-dom";
+import {Outlet, useParams} from "react-router-dom";
 import UserPreviewMinor from "./UserPreviewMinor";
 import UserPreviewInfo from "./UserPreviewInfo";
 import UserPreviewContext from "./UserPreviewContext";
@@ -9,15 +9,14 @@ import UserDataRequest from "../../../../utils/RequestUtils/UserDataRequest";
 
 export default function UserPreview(props) {
 	const {userid} = useParams()
-	const navigator = useNavigate()
 	const [isPending,setPending] = useState(true)
 	const [isError,setError] = useState({status:false,errText:''})
 
-	const [userinfo,setUserInfo] = useState({username:'',userid:''})
+	const [userinfo,setUserInfo] = useState({username:'',userid:'',level:1})
 	useEffect(() => {
 		UserDataRequest.getUserInfo(userid).then(result => {
 			if (result.Ok){
-				setUserInfo({username: result.UserInfo.name,userid})
+				setUserInfo({username: result.UserInfo.name,userid,level: result.UserInfo.level})
 			}else{
 				setError({status: true,errText: result.Msg})
 			}

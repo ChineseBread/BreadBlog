@@ -4,7 +4,7 @@ import {
 	LikeFilled, LikeOutlined, MessageOutlined, PlusOutlined,
 	PrinterOutlined, ShareAltOutlined, StarFilled, StarOutlined
 } from "@ant-design/icons";
-import UserOperationRequest from "../../../../../utils/RequestUtils/UserOperationRequest";
+import ArticlePreviewRequest from "../../../../../utils/RequestUtils/ArticlePreviewRequest";
 import UserDataRequest from "../../../../../utils/RequestUtils/UserDataRequest";
 
 export default function ArticleActionNav({articleid}) {
@@ -64,13 +64,13 @@ function Like({articleid}){
 	const [isLike,setLike] = useState(false)
 
 	useEffect(() => {
-		UserOperationRequest.checkLike(articleid).then(result => {
-			setLike(result.Msg !== '尚未点赞')
+		ArticlePreviewRequest.checkLike(articleid).then(result => {
+			setLike(result.Msg === '已点赞过')
 		})
 	},[])
 
 	let likeArticle = () => {
-		UserOperationRequest[isLike ? 'unlikeArticle' : 'likeArticle'](articleid).then(result => {
+		ArticlePreviewRequest[isLike ? 'unlikeArticle' : 'likeArticle'](articleid).then(result => {
 			if (result.Ok){
 				setLike(like => !like)
 			}else{
@@ -96,12 +96,9 @@ function Subscribe({articleid}){
 	const [hasFav,setHasFav] = useState([])
 
 	useEffect(() => {
-		UserOperationRequest.checkFav(articleid).then(result => {
-			if (result.Ok){
-				if (result.isFav) {
-					// setIsFav(true)
-					setHasFav(result.Favs)
-				}
+		ArticlePreviewRequest.checkFav(articleid).then(result => {
+			if (result.Ok && result.isFav){
+				setHasFav(result.Favs)
 			}
 		})
 	},[])
@@ -127,7 +124,7 @@ function Subscribe({articleid}){
 
 	const completeFav = () => {
 		message.loading({content:'请稍后',key:'updating'})
-		UserOperationRequest.updateFav(hasFav,articleid).then(result =>{
+		ArticlePreviewRequest.updateFav(hasFav,articleid).then(result =>{
 			message[result.Ok ? 'success' : 'warn']({content:result.Msg,key:'updating'})
 		})
 		setVisible(false)
@@ -140,7 +137,7 @@ function Subscribe({articleid}){
 
 	const createFav = () => {
 		message.loading({content:'创建新收藏夹',key:'creating'})
-		UserOperationRequest.createFav(text).then(result => {
+		ArticlePreviewRequest.createFav(text).then(result => {
 			if (result.Ok){
 				message.success({content:'创建成功',key:'creating'})
 				setFavs(favs => [...favs,result.FavInfo])
