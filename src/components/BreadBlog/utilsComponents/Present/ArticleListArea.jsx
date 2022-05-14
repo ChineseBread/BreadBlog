@@ -4,6 +4,7 @@ import {Avatar, Card, Divider, List, Skeleton, Space} from "antd";
 import {EyeOutlined, LikeOutlined, MessageOutlined} from "@ant-design/icons";
 import InfiniteScroll from "react-infinite-scroll-component";
 import moment from "moment/moment";
+import PublicDataRequest from "../../../../utils/RequestUtils/PublicDataRequest";
 const IconText = ({ icon, text }) => (
 	<Space>
 		{React.createElement(icon)}
@@ -50,7 +51,7 @@ export default function ArticleListArea({ArticleListInfo,getMoreArticleList,load
 												<IconText icon={MessageOutlined} text={item.comments || 0} key="list-vertical-message" />,
 											]}
 											extra={[
-												extra(item),
+												extra && extra(item),
 												item.cover &&  <img
 													alt="logo"
 													src={`/data/article/cover/${item.articleid}`}
@@ -58,7 +59,7 @@ export default function ArticleListArea({ArticleListInfo,getMoreArticleList,load
 											]}
 										>
 											<List.Item.Meta
-												avatar={<Avatar src={`/data/logo/${item.authorid}`} />}
+												avatar={<Avatar src={PublicDataRequest.getUserAvatarUrl(item.authorid)} />}
 												title={item.title}
 												description={`${item.sortname || '无分类'} | ${moment(item.createdtime * 1000).format('YYYY-MM-DD')}`}
 											/>

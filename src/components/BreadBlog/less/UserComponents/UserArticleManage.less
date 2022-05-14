@@ -1,0 +1,45 @@
+@user-manage:user-manage;
+.@{user-manage}-container{
+    height: 100%;
+    width: 100%;
+    padding: 15px 20px;
+
+    //收藏夹
+    .ant-card{
+        height: 100%;
+        .ant-card-body{
+            height: calc(100% - 58px);
+            display: flex;
+            justify-content: space-between;
+            .@{user-manage}-item-container{
+                width: 49%;
+                height: 100%;
+                overflow: auto;
+                // 用户分类
+                .tags-list-container{
+                    width: 100%;
+                    span{
+                        margin: 5px;
+                        cursor: pointer;
+                        &:hover{
+                            background-color: #d9d9d9;
+                            transition:background-color 0.1s ease-in-out;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width: 1000px){
+    .@{user-manage}-container{
+        .ant-card{
+            .ant-card-body{
+                flex-direction: column;
+                .@{user-manage}-item-container{
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
