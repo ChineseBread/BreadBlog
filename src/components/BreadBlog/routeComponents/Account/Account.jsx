@@ -5,9 +5,8 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {Layout, message} from "antd";
 import background from '../../../../static/bg.jpg'
-import CustomStorage from "../../../../utils/StorageUtils/CustomStorage";
-import UserOperationRequest from "../../../../utils/RequestUtils/UserOperationRequest";
-import "../../less/routeComponents/Account.less"
+import CustomStorage from "@utils/StorageUtils/CustomStorage";
+import UserOperationRequest from "@utils/RequestUtils/Operation/UserOperationRequest";
 const {Content} = Layout
 export default function Login(){
 	const navigator = useNavigate()

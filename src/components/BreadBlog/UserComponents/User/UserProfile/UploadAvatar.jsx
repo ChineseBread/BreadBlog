@@ -1,14 +1,13 @@
 import React, {useState} from "react";
 import { Upload, message } from 'antd';
 import ImgCrop from "antd-img-crop";
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import {beforeUpload, getBase64} from "../../../../../utils/ImgUploadUtil";
+import {LoadingOutlined, UploadOutlined} from '@ant-design/icons';
+import {beforeUpload, getBase64} from "@utils/PresentUtils/ImgUploadUtil";
 
 export default function UploadAvatar({token}){
 
 	const [loading,setLoading] = useState(false)
 	const [imageUrl,setUrl] = useState('')
-
 	const handleChange = info => {
 		if (info.file.status === 'uploading') {
 			setLoading(true)
@@ -42,7 +41,7 @@ export default function UploadAvatar({token}){
 			>
 				{imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> :
 					<div>
-						{loading ? <LoadingOutlined /> : <PlusOutlined />}
+						{loading ? <LoadingOutlined /> : <UploadOutlined />}
 						<div style={{ marginTop: 8 }}>点击上传头像</div>
 					</div>
 				}

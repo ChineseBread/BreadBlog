@@ -70,7 +70,7 @@
             margin-bottom: 18px;
 
             .article-show-container{
-                width: 100%;
+                width: 750px;
                 .ant-divider{
                     margin-top: 5px;
                 }
@@ -161,18 +161,22 @@
                                     margin: 5px 0;
                                     font-family: -apple-system,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial
                                 }
+                                // 文章评论文字大小
+                                .comment-content{
+                                    color: #434343;
+                                }
                                 // 被回复者的评论
                                 .reply-comment{
                                     border: 1px solid #bfbfbf;
                                     border-radius: 4px;
-                                    background-color: #f0f0f0;
+                                    background-color: #f7f7f7;
                                     color: #8c8c8c;
-                                    padding: 0 5px;
+                                    padding: 5px;
 
                                 }
-                                // 文章评论文字大小
-                                .comment-content{
-                                    color: #434343;
+                                // 用户敏感评论 将不会显示
+                                .no-reply-comment{
+                                    color:#ff4d4f;
                                 }
                                 .comment-editor{
                                     padding: 10px 20px;
@@ -219,7 +223,9 @@
             }
             // markdown文章的目录
             .article-markdown-catalog{
-                padding: 10px 15px;
+                .md-catalog-link{
+                    padding: 10px 15px;
+                }
             }
         }
 

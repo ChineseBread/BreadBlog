@@ -1,5 +1,5 @@
 import {Button, Dropdown, Menu} from "antd";
-import {DeleteOutlined, EditOutlined, MoreOutlined} from "@ant-design/icons";
+import {DeleteOutlined, EditOutlined, EllipsisOutlined} from "@ant-design/icons";
 import React from "react";
 import {useNavigate} from "react-router-dom";
 
@@ -33,8 +33,8 @@ const useMenu = (articleid,type,deleteArticle) => {
 
 export default function ArticleDropMenu({articleid,type,deleteArticle}){
 	return(
-		<Dropdown key="more" overlay={useMenu(articleid,type,deleteArticle)} placement="bottomRight" overlayClassName='article-dropdown' arrow>
-			<Button type="text" icon={<MoreOutlined/>} />
+		<Dropdown key="more" overlay={useMenu(articleid,type,deleteArticle)} placement="top" overlayClassName='article-dropdown' trigger={['hover','click']} arrow>
+			<Button type="text" icon={<EllipsisOutlined />} />
 		</Dropdown>
 	)
 }

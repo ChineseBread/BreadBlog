@@ -2,10 +2,9 @@ import React from "react";
 import {Card,PageHeader, Row, Tag} from 'antd';
 import {AntDesignOutlined, GithubOutlined, HomeOutlined, MediumOutlined, YuqueOutlined} from "@ant-design/icons";
 import Paragraph from "antd/es/typography/Paragraph";
-import CustomStorage from "../../../../utils/StorageUtils/CustomStorage";
 
 
-function About(props) {
+function About() {
 	const Content = ({ children, extraContent }) => (
 		<Row>
 			<div style={{ flex: 1 }}>{children}</div>
@@ -22,8 +21,7 @@ function About(props) {
 						className="site-page-header"
 						subTitle='1057143786@qq.com'
 						tags={[<Tag color='#85a5ff' key='1'>Browser</Tag>,<Tag color='#85a5ff' key='2'>React</Tag>]}
-						avatar={{src:CustomStorage.getAvatarUrl()}}
-						// breadcrumb={{ routes }}
+						avatar={{src:'https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae361584a42c48df9e9930f36319cadd~tplv-k3u1fbpfcp-no-mark:100:100:100:100.awebp?'}}
 					>
 						<Content>
 							<Paragraph>

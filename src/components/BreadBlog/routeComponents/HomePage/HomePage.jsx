@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import {useNavigate} from "react-router-dom";
 import {Button} from "antd";
-import CustomStorage from "../../../../utils/StorageUtils/CustomStorage";
+import CustomStorage from "@utils/StorageUtils/CustomStorage";
 function HomePage(){
     const navigator = useNavigate()
     return(

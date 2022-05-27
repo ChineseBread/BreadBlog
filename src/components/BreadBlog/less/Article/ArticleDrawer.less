@@ -1,25 +1,39 @@
+//抽屉宽度
+.ant-drawer-content-wrapper{
+    width: 500px !important;
+}
 .editor-site-layout-content{
     //抽屉
     .ant-drawer-body{
-
+        // 封面上传
+        .cover-upload-container{
+            //height: 100px;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            .cover-upload-advice{
+                color: #8c8c8c;
+            }
+        }
         .ant-form{
-            height: 100%;
+            //height: calc(100% - 120px);
             display: flex;
             flex-direction: column;
             justify-content: space-around;
 
-            & > span{
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                width: 100%;
-                .ant-btn-primary:hover{
-                    background-color:#096dd9;
-                }
-            }
+            // 第一个div
+            //& > div{
+            //    display: flex;
+            //    align-items: center;
+            //    justify-content: space-between;
+            //    width: 100%;
+            //    .ant-btn-primary:hover{
+            //        background-color:#096dd9;
+            //    }
+            //}
             //每个表单项
             .ant-form-item{
-                margin: 0;
+                margin: 15px 0;
             }
             //选择分类的图标
             .anticon-bars,.anticon-user{
@@ -44,18 +58,44 @@
                     width: 20%;
                 }
             }
-            .custom_category_header{
+            .custom-category-header{
                 display: flex;
-                justify-content: space-between;
                 align-items: center;
-                padding-right: 70%;
+                & > div{
+                    margin-right: 10px;
+                }
             }
             textarea{
-                max-height: 180px;
-                min-height: 180px;
+                max-height: 150px;
+                min-height: 150px;
             }
         }
 
+    }
+
+}
+@media (max-width: 1000px) {
+    .ant-drawer-content-wrapper{
+        width: 70% !important;
+    }
+    .editor-site-layout-content{
+        .ant-drawer-body{
+            .ant-form{
+                //选择项
+                .ant-radio-group{
+                    label{
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        text-align: center;
+                        margin: 4px 2px;
+                    }
+                }
+                //.custom-category-header{
+                //    padding: 0;
+                //}
+            }
+        }
 
     }
 

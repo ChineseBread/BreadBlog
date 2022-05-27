@@ -2,7 +2,7 @@ import {useNavigate} from "react-router-dom";
 import {Button} from "antd";
 import {DownOutlined} from "@ant-design/icons";
 import React from "react";
-import CustomStorage from "../../../../utils/StorageUtils/CustomStorage";
+import CustomStorage from "@utils/StorageUtils/CustomStorage";
 
 function _HomePageBanner(){
 	let navigator = useNavigate()

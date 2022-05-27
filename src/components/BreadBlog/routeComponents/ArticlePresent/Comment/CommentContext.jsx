@@ -1,5 +1,5 @@
 import React from "react";
-export const CommentContext = React.createContext(null);
+export const CommentContext = React.createContext({commentid:'',commentsid:'',setSubCommentsListInfo:CommentsInfo => {}});
 
 export function CommentContextProvider({value,children}) {
 	return (

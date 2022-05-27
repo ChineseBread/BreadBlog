@@ -7,9 +7,10 @@ import {
 	LogoutOutlined, SettingOutlined,
 	StarOutlined,
 	UserAddOutlined,
-	UserOutlined
+	UserOutlined,
+	HomeOutlined
 } from "@ant-design/icons";
-import CustomStorage from "../../../../utils/StorageUtils/CustomStorage";
+import CustomStorage from "@utils/StorageUtils/CustomStorage";
 
 export default function AvatarDropMenu() {
 
@@ -58,13 +59,13 @@ export default function AvatarDropMenu() {
 				{/*	<span >标签管理</span>*/}
 				{/*</Menu.Item>*/}
 
-				{/*<Menu.Item key='toHome' onClick={() => navigator('/')}>
-					<HomeOutlined />
-					<span >回到首页</span>
-				</Menu.Item>*/}
 				<Menu.Item key='settings' onClick={() => navigator('/user/profile')}>
 					<SettingOutlined />
 					<span >用户设置</span>
+				</Menu.Item>
+				<Menu.Item key='toHome' onClick={() => navigator('/')}>
+					<HomeOutlined />
+					<span >回到首页</span>
 				</Menu.Item>
 				{
 					CustomStorage.getAccount().Token ?

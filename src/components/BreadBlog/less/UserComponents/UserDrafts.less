@@ -1,0 +1,53 @@
+.drafts-dropdown{
+    width: 80px;
+    .ant-dropdown-menu-title-content{
+        span{
+            margin-right: 10px;
+        }
+    }
+}
+.user-drafts-container{
+    padding: 15px 20px;
+    height: 100%;
+    width: 100%;
+    .ant-card{
+        margin: 0 auto;
+        height: 100%;
+        width: 75%;
+        @media(max-width: 1000px){
+            width: 100%;
+        }
+        .ant-card-body{
+            height: 90%;
+            .user-drafts-list{
+                height: 100%;
+                width: 100%;
+                overflow: auto;
+                .version-item{
+                    margin: 0 auto;
+                    width: 90%;
+                    cursor: pointer;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    &:hover{
+                        background-color: #f0f0f0;
+                        transition: background-color ease-in-out 0.1s;
+                    }
+                    .version-title,.version-type {
+                        font-size: 15px;
+                        margin-right: 10px;
+                    }
+                    .version-time{
+                        color: #8c8c8c;
+                    }
+                    //.version-content{
+                    //    font-size: 16px;
+                    //    padding: 5px 10px;
+                    //    color: #8c8c8c;
+                    //}
+                }
+            }
+        }
+
+    }
+}

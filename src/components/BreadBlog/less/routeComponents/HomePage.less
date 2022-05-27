@@ -10,23 +10,23 @@
     width: 100%;
 
     .@{home-page}-banner{
-        backdrop-filter: blur(2px);
-        //background-color: #096dd9;
+        height: 100%;
+
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
-        height: 100%;
+
+        backdrop-filter: blur(2px);
         .banner-content{
             width: 90%;
             height: 80%;
             padding: 0 50px;
-            //background-color: #434343;
+
             display: flex;
             flex-direction: column;
             justify-content: space-around;
             .text-container{
-                //background-color: #afafaf;
                 height: 40%;
                 display: flex;
                 justify-content: space-around;
@@ -52,6 +52,7 @@
                     }
                 }
             }
+
         }
         .anticon-down{
             font-size: 20px;
@@ -59,62 +60,77 @@
             animation-iteration-count:infinite;
         }
     }
-    .@{home-page}-show-container{
-        display: flex;
-        justify-content: space-around;
-        position: relative;
-        min-height: 100vh - 10px;
-        padding-top: 10px;
-
-        .@{home-page}-major-container{
-            width: 47%;
-            margin-right: 17%;
-            .@{home-page}-article-header{
-                width: 100%;
-                box-shadow: 1px 1px 4px 2px #d9d9d9;
-                margin-bottom: 10px;
-            }
-            .@{home-page}-article-list{
-                width: 100%;
-                max-height: 100vh - 20px;
-                overflow: auto;
-                //&::-webkit-scrollbar { width: 0 !important }
-            }
-
-        }
-        .@{home-page}-minor-container {
-            position: absolute;
-            width: 20%;
-            right: 7%;
-            .home-page-card-item {
-                box-shadow: 1px 1px 4px 2px #d9d9d9;
-                margin-bottom: 20px;
-                .category-container{
-                    max-height: 400px;
-                    overflow: auto;
-                    //&::-webkit-scrollbar { width: 0 !important }
-                    //display: flex;
-                    //flex-wrap: wrap;
-                    //justify-content: space-between;
-                    span{
-                        max-width: 50%;
-                        margin: 5px;
-                        text-align: center;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                        overflow: hidden;
-                        background-color: #f0f5ff;
-                        cursor: pointer;
-                        &:hover{
-                            background-color: #d6e4ff;
-                            transition:background-color 0.1s ease-in-out;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
+    //.@{home-page}-show-container{
+    //    display: flex;
+    //    justify-content: space-evenly;
+    //    position: relative;
+    //    min-height: 100%;
+    //    width: 80%;
+    //    padding-top: 10px;
+    //    margin: 0 auto;
+    //    //文章区
+    //    .@{home-page}-major-container{
+    //        width: 60%;
+    //
+    //        .@{home-page}-article-header{
+    //            width: 100%;
+    //            box-shadow: 1px 1px 5px -1px #d9d9d9;
+    //            margin-bottom: 10px;
+    //            position: sticky;
+    //            top: 50px;
+    //            z-index: 20;
+    //        }
+    //        .@{home-page}-article-list{
+    //            width: 100%;
+    //        }
+    //
+    //    }
+    //    //有边框
+    //    .@{home-page}-minor-container {
+    //        width: 22%;
+    //        .home-page-card-container{
+    //            position: sticky;
+    //            top: 60px;
+    //            .home-page-card-item {
+    //                margin-bottom: 15px;
+    //                .category-container{
+    //                    max-height: 400px;
+    //                    span{
+    //                        max-width: 50%;
+    //                        margin: 5px;
+    //                        text-align: center;
+    //                        text-overflow: ellipsis;
+    //                        white-space: nowrap;
+    //                        overflow: hidden;
+    //                        background-color: #f0f5ff;
+    //                        cursor: pointer;
+    //                        &:hover{
+    //                            background-color: #d6e4ff;
+    //                            transition:background-color 0.1s ease-in-out;
+    //                        }
+    //                    }
+    //                }
+    //                .author-list-container{
+    //                    max-height: 200px;
+    //                    overflow: auto;
+    //                    .author-list-item{
+    //                        margin: 5px 0;
+    //                        padding: 5px 10px;
+    //                        border-radius: 5px;
+    //                        cursor: pointer;
+    //                        transition: background-color ease-in-out 0.2s;
+    //                        &:hover{
+    //                            background-color:#f0f0f0;
+    //                        }
+    //                        span{
+    //                            margin-right: 10px;
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 }
 
 

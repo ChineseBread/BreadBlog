@@ -2,7 +2,7 @@ import React from "react";
 import {Card, Divider, Input, Form, Button} from "antd";
 import { LeftOutlined } from "@ant-design/icons";
 import {useNavigate} from "react-router-dom";
-import CustomStorage from "../../../../../utils/StorageUtils/CustomStorage";
+import CustomStorage from "@utils/StorageUtils/CustomStorage";
 import UploadAvatar from "./UploadAvatar";
 
 const {User,pwd,Token} = CustomStorage.getAccount()
