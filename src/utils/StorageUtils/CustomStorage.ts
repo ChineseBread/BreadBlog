@@ -1,11 +1,12 @@
-import {doRequest} from "../request";
+import {doRequest} from "../RequestUtils/request";
 
 declare type account = {
     User:string,
     Token:string,
     UserID:string,
-    user:string,
-    pwd:string
+    // user:string,
+    pwd:string,
+    Level:number
 }
 declare type UserInfo = {
     name:string,
@@ -27,7 +28,7 @@ class CustomStorage {
     static getAccount(): account {
         let account:any = sessionStorage.getItem('account');
         if (account)  return JSON.parse(account);
-        return {User:'',Token:'',UserID:'',pwd:'',user:''}
+        return {User:'',Token:'',UserID:'',pwd:'',Level:0}
     }
 
 
@@ -39,7 +40,7 @@ class CustomStorage {
                 break;
             case "username":
                 account.User = changeContent.name
-                account.user = changeContent.name
+                // account.user = changeContent.name
                 break;
             default:
                 //do nothing
@@ -63,6 +64,7 @@ class CustomStorage {
             if (account?.Token){
                 let result = await doRequest({url:'check/token',data:{token:account.Token},method:'GET'})
                 if (!result?.Ok){
+                    this.removeAccount()
                     resolve({Ok:false,Msg:'您的登录会话已经过期'})
                 }
             }else{

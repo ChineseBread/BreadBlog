@@ -1,5 +1,5 @@
 import debounce from "../debounce";
-import {doRequest} from "../request";
+import {doRequest} from "../RequestUtils/request";
 import CustomStorage from "./CustomStorage";
 
 class ArticleDraftStorage{
