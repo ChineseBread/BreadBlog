@@ -53,6 +53,9 @@ const emojis = [
 	'🤬',
 	'🤯',
 	'😳',
+    '😓',
+    '🤗',
+    '🙄',
 	'👀',
 	'👍',
 	'🙏',
@@ -63,6 +66,12 @@ const emojis = [
 	'❤',
 	'⭕',
 	'❌',
+    '☀️',
+    '🌤',
+    '⛅️',
+    '☁️',
+    '🌧',
+    '💨'
 ];
 const MarkDownExtension = {
 	name: 'MarkExtension',
@@ -125,4 +134,18 @@ const toolbars = [
 	'catalog',
 	// 'github'
 ]
+
+// const CDN = {
+// 	highlightJs:'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js',
+// 	highlightCss:'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/atom-one-dark.min.css',
+// 	prettierCDN:'https://cdnjs.cloudflare.com/ajax/libs/prettier/2.6.2/standalone.js',
+// 	prettierMDCDN:'https://cdnjs.cloudflare.com/ajax/libs/prettier/2.6.2/parser-markdown.min.js',
+// 	cropperCss:'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.css',
+// 	cropperJs:'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js',
+// 	// iconfontJs:'',
+// 	screenfullJs:'https://cdnjs.cloudflare.com/ajax/libs/screenfull.js/5.2.0/screenfull.min.js',
+// 	mermaidJs:'https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.1/mermaid.min.js',
+// 	katexJs:'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.15.3/katex.min.js',
+// 	katexCss:'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.15.3/katex.min.css'
+// }
 export {MarkDownExtension,emojis,toolbars}

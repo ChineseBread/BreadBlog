@@ -1,5 +1,6 @@
+import {useLocation, useNavigate,useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
-import {Layout} from "antd";
+import {Layout, message} from "antd";
 import ArticleDrawer from "../Drawer/ArticleDrawer";
 import BraftEditor from "braft-editor";
 import ArticleEditor from "../editor/ArticleEditor";
@@ -7,16 +8,29 @@ import EditorHeader from "../Header/EditorHeader";
 import ArticleDraftStorage from "@utils/StorageUtils/ArticleDraftStorage";
 const {Content} = Layout
 
-export default function EditCommon(){
+export default function DraftsCommon() {
 
+	const {draftid} = useParams()
+	const navigator = useNavigate()
+	const location = useLocation()
 	const [visible,setVisible] = useState(false)
 	const [title,setTitle] = useState('')
-
-	const [editorState,setEditorState] = useState(BraftEditor.createEditorState('<p>写点东西呗...</p>'))
+	const [editorState,setEditorState] = useState(BraftEditor.createEditorState(''))
 
 	useEffect(() => {
-		ArticleDraftStorage.createArticleDraft(title,editorState.toHTML(),'common')
+		//@ts-ignore
+		if (!draftid || !location?.state?.Versions){
+			message.warn('未找到草稿信息')
+			navigator('/user/drafts')
+		}else{
+			//@ts-ignore
+			let {Versions:{title,content}} = location.state;
+			setTitle(title)
+			setEditorState(BraftEditor.createEditorState(content))
+			ArticleDraftStorage.saveArticleDraftID(draftid)
+		}
 	},[])
+
 	useEffect(() => {
 		ArticleDraftStorage.updateArticleDraft(title,editorState.toHTML(),'common')
 	},[title,editorState])
@@ -27,7 +41,7 @@ export default function EditCommon(){
 	const closeDrawer = () => {
 		setVisible(false)
 	}
-	const handleTitleChange = ({target}) => {
+	const handleTitleChange = ({target}:any) => {
 		setTitle(target.value)
 	}
 	return(
@@ -36,19 +50,15 @@ export default function EditCommon(){
 				<EditorHeader
 					handleTitleChange={handleTitleChange}
 					openDrawer={openDrawer}
-					visible={visible}
 					title={title}
-					pathname={'/article/edit/md'}
-					toolTip='写MarkDown文章'
-					isEdit={true}
+					isEdit={false}
 				/>
 				<Content>
-					<div className="editor-site-layout-content" id='article-drawer'>
+					<div className="editor-site-layout-content" >
 						<ArticleDrawer
 							visible={visible}
 							onClose={closeDrawer}
 							title={title}
-							// markdown={text}
 							editorState={editorState}
 							isMarkdown={false}
 						/>

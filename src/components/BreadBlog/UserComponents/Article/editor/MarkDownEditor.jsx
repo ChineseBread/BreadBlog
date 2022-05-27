@@ -1,13 +1,14 @@
 import {Fragment, useMemo, useState} from "react";
 import {message} from "antd";
 import Editor from 'md-editor-rt';
-import {emojis, MarkDownExtension,toolbars} from "./DataSource";
+import {emojis, MarkDownExtension, toolbars} from "./DataSource";
 import {HighlightOutlined, SmileOutlined} from "@ant-design/icons";
-import ArticleOperationRequest from "../../../../../utils/RequestUtils/ArticleOperationRequest";
+import ArticleOperationRequest from "@utils/RequestUtils/Operation/ArticleOperationRequest";
 
 export default function MarkDownEditor(props){
     let {text,setText} = props
     const [emojiVisible, setEmojiVisible] = useState(false);
+
     const emojiHandler = (emoji) => {
         // 获取输入框
         const textarea = document.querySelector('#md-prev-textarea');
@@ -53,7 +54,7 @@ export default function MarkDownEditor(props){
             textarea.focus();
         }, 0);
     };
-    // const [text, setText] = useState('## 写点东西呗....');
+
     const handleUploadImg = (files,callback) => {
         let file = files[0]
         message.loading({content:"上传中...",key:'uploading',duration:10})
@@ -113,10 +114,9 @@ export default function MarkDownEditor(props){
                     ]}
                     extensions={[MarkDownExtension]}
                     toolbars={toolbars}
-                    onChange={(value) => setText(value)}
+                    onChange={setText}
                 />
             },[text,emojiVisible])}
         </Fragment>
-        // <Editor editorClass='markdown_editor' toolbarsExclude={['fullscreen','pageFullscreen','github','save']} modelValue={text} onChange={setText} />
     )
 }

@@ -1,32 +1,47 @@
+import {useLocation, useNavigate,useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
-import {Layout} from "antd";
+import {Layout, message} from "antd";
+import ArticleDrawer from "../Drawer/ArticleDrawer";
 import MarkDownEditor from "../editor/MarkDownEditor";
 import EditorHeader from "../Header/EditorHeader";
-import ArticleDrawer from "../Drawer/ArticleDrawer";
 import ArticleDraftStorage from "@utils/StorageUtils/ArticleDraftStorage";
+
 const {Content} = Layout
+export default function DraftsMarkDown() {
+	const {draftid} = useParams()
 
-export default function EditMarkDown(){
-
+	const navigator = useNavigate()
+	const location = useLocation()
 	const [visible,setVisible] = useState(false)
 	const [title,setTitle] = useState('')
 
-	const [text,setText] = useState('## 写点东西呗')
+	const [text,setText] = useState('')
 
 	useEffect(() => {
-		//创建草稿箱
-		ArticleDraftStorage.createArticleDraft(title,text,'markdown')
+		// @ts-ignore
+		if (!draftid || !location?.state?.Versions){
+			message.warn('未找到草稿信息')
+			navigator('/user/drafts')
+		}else{
+			// @ts-ignore
+			let {Versions:{title,content}} = location.state
+			setTitle(title)
+			setText(content)
+			ArticleDraftStorage.saveArticleDraftID(draftid)
+		}
 	},[])
+
 	useEffect(() => {
 		ArticleDraftStorage.updateArticleDraft(title,text,'markdown')
 	},[title,text])
+
 	const openDrawer = () =>{
 		setVisible(true)
 	}
 	const closeDrawer = () => {
 		setVisible(false)
 	}
-	const handleTitleChange = ({target}) => {
+	const handleTitleChange = ({target}:any) => {
 		setTitle(target.value)
 	}
 	return(
@@ -35,20 +50,16 @@ export default function EditMarkDown(){
 				<EditorHeader
 					handleTitleChange={handleTitleChange}
 					openDrawer={openDrawer}
-					visible={visible}
 					title={title}
-					pathname={'/article/edit/common'}
-					toolTip='写普通文章'
-					isEdit={true}
+					isEdit={false}
 				/>
 				<Content>
-					<div className="editor-site-layout-content" id='article-drawer'>
+					<div className="editor-site-layout-content" >
 						<ArticleDrawer
 							visible={visible}
 							onClose={closeDrawer}
 							title={title}
 							markdown={text}
-							// editorState={editorState}
 							isMarkdown={true}
 						/>
 						<MarkDownEditor text={text} setText={setText}/>

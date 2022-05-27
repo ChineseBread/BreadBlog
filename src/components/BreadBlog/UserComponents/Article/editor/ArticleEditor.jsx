@@ -1,8 +1,6 @@
 import {Fragment, useMemo} from "react";
 import BraftEditor from 'braft-editor'
-import ArticleOperationRequest from "../../../../../utils/RequestUtils/ArticleOperationRequest";
-
-
+import ArticleOperationRequest from "@utils/RequestUtils/Operation/ArticleOperationRequest";
 export default function ArticleEditor(props){
 
     const {editorState,setEditorState} = props
