@@ -12,23 +12,25 @@
     <title>BreadBlog</title>
   </head>
   <body>
-    <noscript>
-      <div style="color: #f5222d; font-size: 100px">兄弟把JavaScript打开</div>
-    </noscript>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
     <div id="root"></div>
-    <canvas id="background"></canvas>
+    <canvas id="background" style="height: 100%;width: 100%"></canvas>
   </body>
-  <script>
 
+  <script>
+    // 适配大屏
     const baseSize = 16;
 
     (function setRem() {
       const scale = document.documentElement.clientWidth / 1500
-      if (scale >= 1){
+      if (scale >= 0.9){
         document.documentElement.style.fontSize = baseSize * scale + 'px'
       }
     })()
 
   </script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
 </html>
