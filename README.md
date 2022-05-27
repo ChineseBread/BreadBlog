@@ -35,7 +35,7 @@
  main下为非最新进度的React18分支版本
  
  JSX最新进度版本请参考[React-18分支](https://github.com/ChineseBread/BreadBlog/tree/React-18)
- TSX版本为当前最新维护进度版本,请参考(TSX分支)[https://github.com/ChineseBread/BreadBlog/tree/React-18-ts]
+ TSX版本为当前最新维护进度版本,请参考[TypeScript分支](https://github.com/ChineseBread/BreadBlog/tree/React-18-ts)
  
  博客手机端正在适配中,手机访问部分功能无法使用，请尽量使用电脑端
  
