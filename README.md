@@ -2,6 +2,7 @@
 由于要期末考试并且后端摸鱼，开发暂缓🤒
 # BreadBlog
 基于React开发的博客系统
+[项目演示视频](https://www.bilibili.com/video/BV1k5411m7bf)
 
 ### 包含以下功能
 #### 1. 公共文章
