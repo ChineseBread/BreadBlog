@@ -9,7 +9,7 @@
     "axios": "^0.26.1",
     "braft-editor": "^2.3.9",
     "dayjs": "^1.11.2",
-    "md-editor-rt": "^1.6.13",
+    "md-editor-rt": "^2.1.0",
     "qs": "^6.10.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
