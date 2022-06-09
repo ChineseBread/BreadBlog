@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from "react";
 import {useSearchParams} from "react-router-dom";
-import {Card, Divider,Skeleton} from "antd";
+import {Card, Divider} from "antd";
 import ArticlePresentHeader from "./ArticlePresentHeader";
 import ArticleActionNav from "./ArticleActionNav";
 import ArticleContent from "./ArticleContent";
@@ -39,25 +39,21 @@ export default function ArticlePresent() {
 					{!loading && <ArticleActionNav articleid={search.get('articleid')}/>}
 				</div>
 				<div className='article-present-major-container'>
-					<Skeleton active loading={loading}>
-						<Card title={ArticleInfo.title}>
-							<div className='article-show-container'>
-								<div className='article-author-header'>
-									<ArticlePresentHeader ArticleInfo={ArticleInfo}/>
-								</div>
-								<Divider/>
-								{ArticleInfo.type === 'markdown' ?
-									<MarkDownContent content={ArticleInfo.content}/> :
-									<ArticleContent content={ArticleInfo.content}/>
-								}
+					<Card title={ArticleInfo.title} loading={loading}>
+						<div className='article-show-container'>
+							<div className='article-author-header'>
+								<ArticlePresentHeader ArticleInfo={ArticleInfo}/>
 							</div>
-						</Card>
-					</Skeleton>
-					<Card>
+							<Divider/>
+							{ArticleInfo.type === 'markdown' ?
+								<MarkDownContent content={ArticleInfo.content}/> :
+								<ArticleContent content={ArticleInfo.content}/>
+							}
+						</div>
+					</Card>
+					<Card loading={loading}>
 						<div className='article-comment-container'>
-							<Skeleton active loading={loading}>
-								<CommentsList articleid={search.get("articleid")} commentsid={ArticleInfo.commentsid} reply={search.get('reply')}/>
-							</Skeleton>
+							<CommentsList articleid={search.get("articleid")} commentsid={ArticleInfo.commentsid} reply={search.get('reply')}/>
 						</div>
 					</Card>
 				</div>

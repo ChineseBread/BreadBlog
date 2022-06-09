@@ -29,11 +29,15 @@ function CategoryList(){
 	const location = useLocation()
 	const navigator = useNavigate()
 	const [ArticleCategoryList,setCateGoryList] = useState<string[]>([])
+	const [loading,setLoading] = useState(true)
 	useEffect(() => {
 		PublicDataRequest.getUserArticleCategory(userid).then(result => {
 			if (result.Ok){
 				result.ArticleCateGory && setCateGoryList(result.ArticleCateGory)
 			}
+			setTimeout(() => {
+				setLoading(false)
+			},500)
 		})
 	},[])
 	const handleChange = (category:string) => {
@@ -50,7 +54,7 @@ function CategoryList(){
 		<>
 			{useMemo(() => {
 				return(
-					<Card title='文章分类'>
+					<Card title='文章分类' loading={loading}>
 						<div className='tags-list-container'>
 							<Tag icon={<UnorderedListOutlined />} onClick={handleChange('all')}>全部文章</Tag>
 							{ArticleCategoryList.filter(category => category && category.trim()).map(category => {
@@ -61,7 +65,7 @@ function CategoryList(){
 						</div>
 					</Card>
 				)
-			},[ArticleCategoryList])}
+			},[loading])}
 		</>
 	)
 }

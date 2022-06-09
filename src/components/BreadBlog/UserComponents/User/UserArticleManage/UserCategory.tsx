@@ -1,5 +1,5 @@
 import {useEffect, useMemo, useState} from "react";
-import {Card, message, Skeleton, Switch, Tag, Tooltip} from "antd";
+import {Card, message, Switch, Tag, Tooltip} from "antd";
 import UserDataRequest from "@utils/RequestUtils/Data/UserDataRequest";
 import UserOperationRequest from "@utils/RequestUtils/Operation/UserOperationRequest";
 
@@ -21,20 +21,18 @@ export default function UserCategory() {
 		<Card type='inner' title='分类管理' extra={[
 			<Tooltip title='强制会删除对应全部文章' placement='left' key='force'>
 				<Switch onChange={() => setForce(force => !force)} defaultChecked checkedChildren='强制' unCheckedChildren='非强制'/>
-			</Tooltip>]}>
-			<Skeleton loading={loading}>
-				<div className='tags-list-container'>
-					{useMemo(() => {
-						return(
-							CategoryList.filter(category => category && category.trim()).map(category => {
-								return(
-									<Category key={category} category={category} force={force} setCategoryList={setCategoryList}/>
-								)
-							})
-						)
-					},[CategoryList,force])}
-				</div>
-			</Skeleton>
+			</Tooltip>]} loading={loading}>
+			<div className='tags-list-container'>
+				{useMemo(() => {
+					return(
+						CategoryList.filter(category => category && category.trim()).map(category => {
+							return(
+								<Category key={category} category={category} force={force} setCategoryList={setCategoryList}/>
+							)
+						})
+					)
+				},[CategoryList,force])}
+			</div>
 		</Card>
 
 	);

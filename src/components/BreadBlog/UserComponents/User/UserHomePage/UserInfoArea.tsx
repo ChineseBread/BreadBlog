@@ -3,7 +3,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {Button, Menu, Avatar, Upload, message} from 'antd';
 import {EditOutlined, LoadingOutlined, UploadOutlined} from "@ant-design/icons";
 import ImgCrop from "antd-img-crop";
-import UserLevel from "../../../utilsComponents/User/UserLevel";
+import UserLevel from "@utilsComponents/User/UserLevel";
 import CustomStorage from "@utils/StorageUtils/CustomStorage";
 import {beforeUpload} from "@utils/PresentUtils/ImgUploadUtil";
 import getDefaultUrlValue from "@utils/PresentUtils/getDefaultUrlValue";

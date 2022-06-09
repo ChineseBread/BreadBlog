@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Avatar, Card, message, Result, Skeleton} from "antd";
+import {Avatar, Card, message, Result} from "antd";
 import {SmileOutlined} from "@ant-design/icons";
 import UserDataRequest from "@utils/RequestUtils/Data/UserDataRequest";
 import UserLevel from "@utilsComponents/User/UserLevel";
@@ -27,9 +27,7 @@ export default function UserSubscribe() {
 	return (
 		<div className='user-subscribe-list'>
 			{loading ?
-				<Card title="请稍后">
-					<Skeleton active/>
-				</Card> :
+				<Card title="请稍后" loading={true}/> :
 				follows.length >= 1 ? follows.map(({UserId,UserName,UserLevel:level}) => {
 					return (
 						<div key={UserId} className='user-subscribe-item'>

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
-import {Card, message , Segmented, Skeleton} from "antd";
+import {Card, message , Segmented} from "antd";
 import UserDataRequest from "@utils/RequestUtils/Data/UserDataRequest";
 import getDefaultUrlValue from "@utils/PresentUtils/getDefaultUrlValue";
 export default function UserNotice(){
@@ -23,7 +23,7 @@ export default function UserNotice(){
     }
     return(
         <div className='user-notice-container'>
-            <Card title='消息中心' className='user-notice-card' extra={[
+            <Card title='消息中心' className='user-notice-card' loading={loading} extra={[
                 <Segmented
                     key='choice'
                     onChange={onChange}
@@ -45,9 +45,7 @@ export default function UserNotice(){
                     ]}
                 />
             ]}>
-                <Skeleton loading={loading}>
-                    <Outlet context={{NoticeList,pathname:location.pathname}}/>
-                </Skeleton>
+                <Outlet context={{NoticeList,pathname:location.pathname}}/>
             </Card>
         </div>
     )

@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useState} from "react";
-import {Avatar, Button, Card, Divider, Dropdown, List, Menu, message, Skeleton} from "antd";
+import {Avatar, Button, Card, Divider, Dropdown, List, Menu, message} from "antd";
 import {DeleteOutlined, MoreOutlined, RedoOutlined} from "@ant-design/icons";
 import InfiniteScroll from "react-infinite-scroll-component";
 import UserDataRequest from "@utils/RequestUtils/Data/UserDataRequest";
@@ -53,44 +53,42 @@ export default function UserTrash() {
 		}
 	}
 	return (
-		<Card type='inner' title='垃圾箱'>
-			<Skeleton active loading={loading}>
-				<InfiniteScroll
-					dataLength={TrashListInfo.TrashList.length}
-					next={getMoreTrashList}
-					hasMore={TrashListInfo.hasMore}
-					loader={<Divider plain>🧐 加载中</Divider>}
-					endMessage={<Divider plain>你已经到达世界的尽头 🤐</Divider>}
-					scrollableTarget='user-trash-list'
-				>
-					{useMemo(() => {
-						return(
-							<List
-								itemLayout="vertical"
-								size="large"
-								dataSource={TrashListInfo.TrashList}
-								renderItem={({TrashId,TrashData:{title,createdtime,sortname,description,authorid}}) => (
-									<div className='article-list-item'>
-										<List.Item
-											key={TrashId}
-											extra={<TrashMenu TrashId={TrashId} removeTrash={removeTrash}/>}
-										>
-											<List.Item.Meta
-												avatar={<Avatar src={`/data/logo/${authorid}`} />}
-												title={title}
-												description={`${sortname || '无分类'} | ${getFormatTime(createdtime,'YYYY-MM-DD')}`}
-											/>
-											<div className='article-list-item-content'>
-												{description || '无内容'}
-											</div>
-										</List.Item>
-									</div>
-								)}
-							/>
-						)
-					},[TrashListInfo.TrashList])}
-				</InfiniteScroll>
-			</Skeleton>
+		<Card type='inner' title='垃圾箱' loading={loading}>
+			<InfiniteScroll
+				dataLength={TrashListInfo.TrashList.length}
+				next={getMoreTrashList}
+				hasMore={TrashListInfo.hasMore}
+				loader={<Divider plain>🧐 加载中</Divider>}
+				endMessage={<Divider plain>你已经到达世界的尽头 🤐</Divider>}
+				scrollableTarget='user-trash-list'
+			>
+				{useMemo(() => {
+					return(
+						<List
+							itemLayout="vertical"
+							size="large"
+							dataSource={TrashListInfo.TrashList}
+							renderItem={({TrashId,TrashData:{title,createdtime,sortname,description,authorid}}) => (
+								<div className='article-list-item'>
+									<List.Item
+										key={TrashId}
+										extra={<TrashMenu TrashId={TrashId} removeTrash={removeTrash}/>}
+									>
+										<List.Item.Meta
+											avatar={<Avatar src={`/data/logo/${authorid}`} />}
+											title={title}
+											description={`${sortname || '无分类'} | ${getFormatTime(createdtime,'YYYY-MM-DD')}`}
+										/>
+										<div className='article-list-item-content'>
+											{description || '无内容'}
+										</div>
+									</List.Item>
+								</div>
+							)}
+						/>
+					)
+				},[TrashListInfo.TrashList])}
+			</InfiniteScroll>
 		</Card>
 	);
 }

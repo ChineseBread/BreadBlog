@@ -1,7 +1,7 @@
 import React from "react";
+import {Outlet} from "react-router-dom";
 import UserInfoArea from "./UserInfoArea";
 import UserMinorArea from "./UserMinorArea";
-import {Outlet} from "react-router-dom";
 
 /**
  * @description 用户主页

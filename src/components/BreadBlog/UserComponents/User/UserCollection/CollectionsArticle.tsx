@@ -4,7 +4,6 @@ import CollectionsMenu from "./CollectionsMenu";
 import CollectionsDropMenu from "./CollectionsDropMenu";
 import ArticleListArea from "@utilsComponents/Present/ArticleListArea";
 import UserDataRequest from "@utils/RequestUtils/Data/UserDataRequest";
-import UserOperationRequest from "@utils/RequestUtils/Operation/UserOperationRequest";
 import ArticlePreviewRequest from "@utils/RequestUtils/Operation/ArticlePreviewRequest";
 
 export default function CollectionsArticle() {
@@ -96,16 +95,14 @@ export default function CollectionsArticle() {
 				</Skeleton>
 			</div>
 			<div className='collections-article-list-container' id='collections-article-list-container'>
-				<Card type='inner' title={loading ? '加载中...' : category}>
-					<Skeleton active loading={loading}>
-						<ArticleListArea
-							ArticleListInfo={ArticleListInfo}
-							loading={false}
-							getMoreArticleList={getMoreArticleList}
-							scrollTarget='collections-article-list-container'
-							extra={(item:UserArticle) => <CollectionsDropMenu unsubscribeArticle={unsubscribeArticle} articleid={item.articleid} favname={category}/>}
-						/>
-					</Skeleton>
+				<Card type='inner' title={loading ? '加载中...' : category} loading={loading}>
+					<ArticleListArea
+						ArticleListInfo={ArticleListInfo}
+						loading={false}
+						getMoreArticleList={getMoreArticleList}
+						scrollTarget='collections-article-list-container'
+						extra={(item:UserArticle) => <CollectionsDropMenu unsubscribeArticle={unsubscribeArticle} articleid={item.articleid} favname={category}/>}
+					/>
 				</Card>
 			</div>
 		</Fragment>

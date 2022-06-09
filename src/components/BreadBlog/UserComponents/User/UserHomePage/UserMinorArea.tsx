@@ -22,7 +22,7 @@ export default function UserMinorArea() {
 							<StarOutlined key='subscribe' style={{marginRight:'15px'}} />
 							收藏夹
 						</div>,
-						<div className='user-actions' onClick={() => navigator('/article/edit/md')}>
+						<div className='user-actions' onClick={() => navigator('/article/Edit/md')}>
 							<EditOutlined key="edit" style={{marginRight:'15px'}} />
 							写文章
 						</div>
@@ -41,11 +41,15 @@ function CategoryList(){
 	const location = useLocation()
 	const [,setSearch] = useSearchParams()
 	const [CategoryList,setCategoryList] = useState<string[]>([])
+	const [loading,setLoading] = useState(true)
 	useEffect(() => {
 		UserDataRequest.getUserArticleCategory().then(result => {
 			if (result.Ok){
 				result.ArticleCateGory && setCategoryList(result.ArticleCateGory)
 			}
+			setTimeout(() => {
+				setLoading(false)
+			},500)
 		})
 	},[])
 	const handleChange = (category:string) => {
@@ -64,7 +68,7 @@ function CategoryList(){
 			{useMemo(() => {
 				return(
 					<div className='minor-card-content-container'>
-						<Card title='文章分类' actions={[<div onClick={() => navigator('/user/article/manage')}>
+						<Card title='文章分类' loading={loading} actions={[<div onClick={() => navigator('/user/article/manage')}>
 							<div className='user-actions'>
 								<FolderOpenOutlined key='folder' style={{marginRight:'15px'}} />
 								文章管理
@@ -82,7 +86,7 @@ function CategoryList(){
 						</Card>
 					</div>
 				)
-			},[CategoryList])}
+			},[loading])}
 		</>
 	)
 }

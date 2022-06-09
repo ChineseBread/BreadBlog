@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Button, Card, message, Skeleton} from "antd";
+import {Button, Card, message} from "antd";
 import DraftsList from "./DraftsList";
 import DraftDropMenu from "./DraftDropMenu";
 import UserOperationRequest from "@utils/RequestUtils/Operation/UserOperationRequest";
@@ -61,15 +61,13 @@ export default function UserDrafts() {
 	}
  	return (
 		<div className='user-drafts-container'>
-			<Card title='草稿箱' extra={<Button onClick={() => navigator('/article/edit/md')}>写文章</Button>}>
+			<Card title='草稿箱' extra={<Button onClick={() => navigator('/article/Edit/md')}>写文章</Button>} loading={loading}>
 				<div className="user-drafts-list" id='user-drafts-list'>
-					<Skeleton active loading={loading}>
-						<DraftsList
-							getMoreArticleList={getMoreArticleList}
-							DraftsListInfo={DraftsListInfo}
-							extra={(DraftId:string) => <DraftDropMenu deleteDraft={deleteDraft} DraftId={DraftId}/>}
-						/>
-					</Skeleton>
+					<DraftsList
+						getMoreArticleList={getMoreArticleList}
+						DraftsListInfo={DraftsListInfo}
+						extra={(DraftId:string) => <DraftDropMenu deleteDraft={deleteDraft} DraftId={DraftId}/>}
+					/>
 				</div>
 			</Card>
 		</div>

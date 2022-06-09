@@ -1,6 +1,6 @@
 import React, {useMemo} from "react";
 import {useNavigate} from "react-router-dom";
-import {Avatar, Card, List, Skeleton} from "antd";
+import {Avatar, Card, List} from "antd";
 import {EyeOutlined, LikeOutlined, MessageOutlined} from "@ant-design/icons";
 import {getFormatTime} from "@utils/PresentUtils/TimeUtils";
 import IconText from "@utils/PresentUtils/IconText";
@@ -18,9 +18,7 @@ export default function ExploreArticleList({ArticleList,loading}:{ArticleList:Ar
 			{useMemo(() => {
 				return(
 					loading ?
-						<Card title="请稍后">
-							<Skeleton active/>
-						</Card> :
+						<Card title="请稍后" loading={loading}/> :
 						<List
 							itemLayout="vertical"
 							size="large"

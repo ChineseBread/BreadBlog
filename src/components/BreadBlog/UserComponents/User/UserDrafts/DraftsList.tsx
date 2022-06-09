@@ -6,36 +6,6 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import CustomStorage from "@utils/StorageUtils/CustomStorage";
 import {getFormatTime} from "@utils/PresentUtils/TimeUtils";
 const { Panel } = Collapse
-const CollapseContent =　({DraftId,Versions}:any) => {
-	const navigator = useNavigate()
-	const editArticle = (DraftId:string,Versions:any) => {
-		return () => {
-			navigator(`/article/draft/${Versions.type === 'markdown' ? 'md' : 'common'}/${DraftId}/${Versions.VersionId}`,{
-				state:{
-					Versions
-				}
-			})
-		}
-	}
-
-	return(
-		<Collapse ghost>
-			<Panel key='panel' header={Versions[0].Data.title}>
-				{Versions.map(({VersionId,Data:{title,time,type,content}}:any) => {
-					return(
-						<div className='version-item' key={VersionId} onClick={editArticle(DraftId,{VersionId,title,content,type})}>
-							<div >
-								<span className='version-type'>{type === 'markdown' ? <MediumOutlined /> : <EditOutlined />}</span>
-								<span className='version-title'>{title || '无标题'}</span>
-								<span className='version-time'>{getFormatTime(time,'YYYY-MM-DD HH:mm:ss')}</span>
-							</div>
-						</div>
-					)
-				})}
-			</Panel>
-		</Collapse>
-	)
-}
 export default function DraftsList({DraftsListInfo,getMoreArticleList,extra}:any) {
 
 	return (
@@ -73,6 +43,33 @@ export default function DraftsList({DraftsListInfo,getMoreArticleList,extra}:any
 		</Fragment>
 	);
 }
-/*
+const CollapseContent =　({DraftId,Versions}:any) => {
+	const navigator = useNavigate()
+	const editArticle = (DraftId:string,Versions:any) => {
+		return () => {
+			navigator(`/article/draft/${Versions.type === 'markdown' ? 'md' : 'common'}/${DraftId}/${Versions.VersionId}`,{
+				state:{
+					Versions
+				}
+			})
+		}
+	}
 
- */
+	return(
+		<Collapse ghost>
+			<Panel key='panel' header={Versions[0].Data.title}>
+				{Versions.map(({VersionId,Data:{title,time,type,content}}:any) => {
+					return(
+						<div className='version-item' key={VersionId} onClick={editArticle(DraftId,{VersionId,title,content,type})}>
+							<div >
+								<span className='version-type'>{type === 'markdown' ? <MediumOutlined /> : <EditOutlined />}</span>
+								<span className='version-title'>{title || '无标题'}</span>
+								<span className='version-time'>{getFormatTime(time,'YYYY-MM-DD HH:mm:ss')}</span>
+							</div>
+						</div>
+					)
+				})}
+			</Panel>
+		</Collapse>
+	)
+}

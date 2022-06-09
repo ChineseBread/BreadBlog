@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Avatar, Card, message, Skeleton, Tag} from "antd";
+import {Avatar, Card, message ,Tag} from "antd";
 import UserLevel from "@utilsComponents/User/UserLevel";
 import TimeShow from "@utilsComponents/Present/TimeShow";
 import PublicDataRequest from "@utils/RequestUtils/Data/PublicDataRequest";
@@ -65,16 +65,14 @@ function CategoryCard({setArticleList,setListLoading}:any){
 		<>
 			{useMemo(() => {
 				return(
-					<Card title="今天想看什么?">
-						<Skeleton loading={loading} active>
-							<div className='tags-list-container clear-scroll'>
-								{ArticleCategoryList.map(category =>{
-									return(
-										<Tag onClick={handleClickTag(category)} key={category}>{category}</Tag>
-									)
-								})}
-							</div>
-						</Skeleton>
+					<Card title="今天想看什么?" loading={loading}>
+						<div className='tags-list-container clear-scroll'>
+							{ArticleCategoryList.map(category =>{
+								return(
+									<Tag onClick={handleClickTag(category)} key={category}>{category}</Tag>
+								)
+							})}
+						</div>
 					</Card>
 				)
 			},[loading])}
@@ -104,19 +102,17 @@ function AuthorListCard(){
 		<>
 			{useMemo(() => {
 				return(
-					<Card title="作者榜">
-						<Skeleton loading={loading} active>
-							<div className='author-list-container clear-scroll'>
-								{AuthorList.map(({username,userid,level},index) =>{
-									return(
-										<div className='author-list-item' key={userid} onClick={checkUser(userid)}>
-											<Avatar  src={PublicDataRequest.getUserAvatarUrl(userid)}/>
-											<UserLevel user={username} level={level}/>
-										</div>
-									)
-								})}
-							</div>
-						</Skeleton>
+					<Card title="作者榜" loading={loading}>
+						<div className='author-list-container clear-scroll'>
+							{AuthorList.map(({username,userid,level},index) =>{
+								return(
+									<div className='author-list-item' key={userid} onClick={checkUser(userid)}>
+										<Avatar  src={PublicDataRequest.getUserAvatarUrl(userid)}/>
+										<UserLevel user={username} level={level}/>
+									</div>
+								)
+							})}
+						</div>
 					</Card>
 				)
 			},[loading])}
