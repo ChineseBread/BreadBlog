@@ -3,7 +3,7 @@
     "baseUrl": "./",
     "paths": {
       "@utils/*": ["./src/utils/*"],
-      "@utilsComponents/*": [".src/components/BreadBlog/utilsComponents/*"]
+      "@utilsComponents/*": ["./src/components/BreadBlog/utilsComponents/*"]
     },
     "target": "es5",
     "lib": [

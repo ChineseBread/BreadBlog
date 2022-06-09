@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
-    "antd": "^4.20.4",
+    "antd": "^4.21.0",
     "antd-img-crop": "^4.2.3",
     "axios": "^0.26.1",
     "braft-editor": "^2.3.9",
