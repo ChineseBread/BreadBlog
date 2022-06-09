@@ -1,6 +1,6 @@
 import React, {Fragment, useMemo} from "react";
 import {useNavigate} from "react-router-dom";
-import {Avatar, Card, Divider, List, Skeleton} from "antd";
+import {Avatar, Card, Divider, List} from "antd";
 import {EyeOutlined, LikeOutlined, MessageOutlined} from "@ant-design/icons";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {getFormatTime} from "@utils/PresentUtils/TimeUtils";
@@ -12,7 +12,7 @@ export default function ArticleListArea({ArticleListInfo,getMoreArticleList,load
 	const navigator = useNavigate()
 	const checkArticle = (articleid:string) =>{
 		return () => {
-			navigator(`/post?articleid=${articleid}`)
+			articleid && navigator(`/post?articleid=${articleid}`)
 		}
 	}
 	const checkUser = (authorid:string) => {
@@ -21,12 +21,9 @@ export default function ArticleListArea({ArticleListInfo,getMoreArticleList,load
 	return (
 		<Fragment>
 			{useMemo(() => {
-
 				return (
 					loading ?
-						<Card title="请稍后">
-							<Skeleton active/>
-						</Card>
+						<Card title="请稍后" loading={true}/>
 						:
 						<InfiniteScroll
 							dataLength={ArticleListInfo.ArticleList.length}

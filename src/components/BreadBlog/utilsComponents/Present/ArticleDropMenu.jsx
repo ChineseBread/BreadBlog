@@ -1,11 +1,11 @@
-import {Button, Dropdown, Menu} from "antd";
-import {DeleteOutlined, EditOutlined, EllipsisOutlined} from "@ant-design/icons";
 import React from "react";
 import {useNavigate} from "react-router-dom";
+import {Button, Dropdown, Menu} from "antd";
+import {DeleteOutlined, EditOutlined, EllipsisOutlined} from "@ant-design/icons";
 
 const useMenu = (articleid,type,deleteArticle) => {
 	const navigator = useNavigate()
-	let onClick = ({key}) => {
+	const onClick = ({key}) => {
 		switch (key){
 			case "edit":
 				navigator(`/article/update/${type === 'markdown' ? 'md' : 'common'}?articleid=${articleid}`)
@@ -33,7 +33,7 @@ const useMenu = (articleid,type,deleteArticle) => {
 
 export default function ArticleDropMenu({articleid,type,deleteArticle}){
 	return(
-		<Dropdown key="more" overlay={useMenu(articleid,type,deleteArticle)} placement="top" overlayClassName='article-dropdown' trigger={['hover','click']} arrow>
+		<Dropdown key="more" overlay={useMenu(articleid,type,deleteArticle)} placement="top" overlayClassName='article-dropdown' trigger={['click']} arrow>
 			<Button type="text" icon={<EllipsisOutlined />} />
 		</Dropdown>
 	)

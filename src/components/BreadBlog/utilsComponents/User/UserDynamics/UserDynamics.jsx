@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Avatar, Card, List, message, Result, Skeleton} from "antd";
+import {Avatar, Card, List, message, Result} from "antd";
 import {EyeOutlined, LikeOutlined, MessageOutlined, SmileOutlined} from "@ant-design/icons";
 import LikeArticle from "./LikeArticle";
 import NewArticle from "./NewArticle";
@@ -32,9 +32,7 @@ export default function UserDynamics({userid}) {
 			{useMemo(() => {
 				return (
 					loading ?
-						<Card title="请稍后">
-							<Skeleton active/>
-						</Card> :
+						<Card title="请稍后" loading={true}/> :
 						dynamics.length >= 1 ? <List
 							itemLayout="vertical"
 							size="large"

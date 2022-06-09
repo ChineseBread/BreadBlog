@@ -37,7 +37,7 @@ export default function AvatarDropMenu() {
 				<p>注销后将会返回首页且当前用户操作不会保存</p>
 			</Modal>
 			<Menu>
-				<Menu.Item key="toMd" onClick={() => navigator('/article/edit/md')}>
+				<Menu.Item key="toMd" onClick={() => navigator('/article/Edit/md')}>
 					<EditOutlined />
 					<span>写文章</span>
 				</Menu.Item>
