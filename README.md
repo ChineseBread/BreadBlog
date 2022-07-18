@@ -1,6 +1,6 @@
 # 开发事项
-由于要期末考试并且后端摸鱼，开发暂缓🤒
-今年上半年前会完成全部功能开发,有可能会开发配套的后台管理系统用于管理博客内容
+项目除公开预览用户关注列表外其余功能已经全部开发完成,可用[最新版本](https://github.com/ChineseBread/BreadBlog/tree/React-18)本地调试
+目前做Next.js网站开发,博客系统先放一放
 # BreadBlog
 基于React开发的博客系统
 [项目演示视频](https://www.bilibili.com/video/BV1k5411m7bf)
