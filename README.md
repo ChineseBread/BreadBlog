@@ -40,6 +40,8 @@
 ## 安装
  请根据package.json中的依赖自行安装所需依赖,webpack.config.js中有自定义的打包配置，不使用可能会有报错并且会影响css样式和界面布局
 ## 注意事项
+ 请自行搭建create-react-app后`npm run eject`,复制源码到当前脚手架中运行
+ 
  main下当前为最新进度的[TypeScript分支](https://github.com/ChineseBread/BreadBlog/tree/React-18-ts)分支版本
  
  JSX最新进度版本请参考[React-18分支](https://github.com/ChineseBread/BreadBlog/tree/React-18)
