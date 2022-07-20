@@ -5,7 +5,7 @@
 基于React开发的博客系统 [项目演示视频](https://www.bilibili.com/video/BV1k5411m7bf)
 
 技术栈:
-* React 18(all hooks)
+* React 18 with hooks
 * React Router V6
 * TypeScript
 * Less
