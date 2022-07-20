@@ -3,4 +3,4 @@
  
 **不建议用户使用过于极端的设备访问该页面**
 ### 开发日志
-请参考开发[更新进度](https://github.com/ChineseBread/BreadBlog/blob/React-18/Update-Log.md)
+请参考开发[更新进度](https://github.com/ChineseBread/BreadBlog/blob/main/UPDATE-LOG.md)
