@@ -1,5 +1,5 @@
 # 开发事项
-项目除公开预览用户关注列表外其余功能已经全部开发完成,可用[最新版本](https://github.com/ChineseBread/BreadBlog/tree/React-18)本地调试
+项目除公开预览用户关注列表外其余功能已经全部开发完成,可下载后本地调试
 目前做Next.js网站开发,博客系统先放一放
 # BreadBlog
 基于React开发的博客系统
@@ -34,16 +34,14 @@
 ## 安装
  请根据package.json中的依赖自行安装所需依赖,webpack.config.js中有自定义的打包配置，不使用可能会有报错并且会影响css样式和界面布局
 ## 注意事项
- main下为非最新进度的React18分支版本
+ main下当前为最新进度的[TypeScript分支](https://github.com/ChineseBread/BreadBlog/tree/React-18-ts)分支版本
  
  JSX最新进度版本请参考[React-18分支](https://github.com/ChineseBread/BreadBlog/tree/React-18)
  TSX版本为当前最新维护进度版本,请参考[TypeScript分支](https://github.com/ChineseBread/BreadBlog/tree/React-18-ts)
  
- 博客手机端正在适配中,手机访问部分功能无法使用，请尽量使用电脑端
+ 博客手机端已经基本适配完成,手机访问部分功能无法使用，请尽量使用电脑端
  
  开发进度和更新内容会写在[更新日志](https://github.com/ChineseBread/BreadBlog/blob/main/UPDATE-LOG.md)中
- 
- React17版博客已经停止开发不再维护
 
 ## 项目赞助
 如果觉得软件用的还挺顺手的话可以请开发者喝杯奶茶🤪
