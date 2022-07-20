@@ -2,8 +2,14 @@
 项目除公开预览用户关注列表外其余功能已经全部开发完成,可下载后本地调试
 目前做Next.js网站开发,博客系统先放一放
 # BreadBlog
-基于React开发的博客系统
-[项目演示视频](https://www.bilibili.com/video/BV1k5411m7bf)
+基于React开发的博客系统 [项目演示视频](https://www.bilibili.com/video/BV1k5411m7bf)
+
+技术栈:
+* React 18(all hooks)
+* React Router V6
+* TypeScript
+* Less
+* Ant-Design
 
 ### 包含以下功能
 #### 1. 公共文章
