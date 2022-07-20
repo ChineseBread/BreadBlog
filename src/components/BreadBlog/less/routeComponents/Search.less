@@ -1,0 +1,59 @@
+@search:search;
+
+.@{search}-article-container{
+    height: 100%;
+    width: 70%;
+    max-width: 100%;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-around;
+
+    //卡片阴影
+    //.ant-list-empty-text,.article-list-item{
+    //    box-shadow: 1px 1px 4px 2px #d9d9d9;
+    //    //box-shadow: 1px 1px 5px 2px #8c8c8c;
+    //}
+    //左边list区域
+    .article-list-container{
+        width: 70%;
+        margin-right: 20%;
+    }
+    //右边框
+    .@{search}-minor-container{
+        top: 77px;
+        right: 8%;
+        position: fixed;
+        width: 20%;
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .ant-card-head-title:hover{
+            animation: headShake;
+            animation-duration: 1s;
+        }
+        .user-minor-card{
+            width: 100%;
+            margin-bottom: 20px;
+
+            .tags-list-container{
+                span{
+                    margin: 5px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 1000px) {
+    .@{search}-article-container{
+        width: 100%;
+        .article-list-container{
+            width: 100%;
+            margin-right: 0;
+        }
+        .@{search}-minor-container{
+            display: none;
+        }
+    }
+}

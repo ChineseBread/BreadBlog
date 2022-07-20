@@ -1,0 +1,136 @@
+@home-page:home-page;
+@keyframes icon-move {
+    0%{transform:translateY(0)}
+    50%{transform:translateY(10px)}
+    0%{transform:translateY(0px)}
+}
+
+.@{home-page}-container{
+    height: 100%;
+    width: 100%;
+
+    .@{home-page}-banner{
+        height: 100%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+
+        backdrop-filter: blur(2px);
+        .banner-content{
+            width: 90%;
+            height: 80%;
+            padding: 0 50px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            .text-container{
+                height: 40%;
+                display: flex;
+                justify-content: space-around;
+                flex-direction: column;
+                font-weight: 500;
+                color: #434343;
+                user-select: none;
+
+                .blog-title{
+                    font-size: 60px;
+                    width: 25%;
+                    &:hover{
+                        animation: tada 1s;
+                    }
+                }
+                .blog-description{
+                    font-size: 20px;
+                }
+                .ant-btn-ghost{
+                    border: 1px solid #434343;
+                    &:hover{
+                        animation: headShake 1s;
+                    }
+                }
+            }
+
+        }
+        .anticon-down{
+            font-size: 20px;
+            animation: icon-move 1.5s ease-in-out;
+            animation-iteration-count:infinite;
+        }
+    }
+    //.@{home-page}-show-container{
+    //    display: flex;
+    //    justify-content: space-evenly;
+    //    position: relative;
+    //    min-height: 100%;
+    //    width: 80%;
+    //    padding-top: 10px;
+    //    margin: 0 auto;
+    //    //文章区
+    //    .@{home-page}-major-container{
+    //        width: 60%;
+    //
+    //        .@{home-page}-article-header{
+    //            width: 100%;
+    //            box-shadow: 1px 1px 5px -1px #d9d9d9;
+    //            margin-bottom: 10px;
+    //            position: sticky;
+    //            top: 50px;
+    //            z-index: 20;
+    //        }
+    //        .@{home-page}-article-list{
+    //            width: 100%;
+    //        }
+    //
+    //    }
+    //    //有边框
+    //    .@{home-page}-minor-container {
+    //        width: 22%;
+    //        .home-page-card-container{
+    //            position: sticky;
+    //            top: 60px;
+    //            .home-page-card-item {
+    //                margin-bottom: 15px;
+    //                .category-container{
+    //                    max-height: 400px;
+    //                    span{
+    //                        max-width: 50%;
+    //                        margin: 5px;
+    //                        text-align: center;
+    //                        text-overflow: ellipsis;
+    //                        white-space: nowrap;
+    //                        overflow: hidden;
+    //                        background-color: #f0f5ff;
+    //                        cursor: pointer;
+    //                        &:hover{
+    //                            background-color: #d6e4ff;
+    //                            transition:background-color 0.1s ease-in-out;
+    //                        }
+    //                    }
+    //                }
+    //                .author-list-container{
+    //                    max-height: 200px;
+    //                    overflow: auto;
+    //                    .author-list-item{
+    //                        margin: 5px 0;
+    //                        padding: 5px 10px;
+    //                        border-radius: 5px;
+    //                        cursor: pointer;
+    //                        transition: background-color ease-in-out 0.2s;
+    //                        &:hover{
+    //                            background-color:#f0f0f0;
+    //                        }
+    //                        span{
+    //                            margin-right: 10px;
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
+}
+
+

@@ -1,0 +1,193 @@
+//基础布局样式
+//导航栏具体的样式
+@logo_container_width:170px;
+@navigation_width:900px;
+@header_height:50px;
+//头部dropdown菜单
+.ant-dropdown{
+    width: 120px;
+    .ant-dropdown-menu-vertical{
+        .ant-dropdown-menu-item{
+            height: 40px;
+            margin: 4px 0;
+            padding: 0 10px;
+            .ant-dropdown-menu-title-content{
+                display: flex;
+                align-items: center;
+                height: 100%;
+                span{
+                    font-size: 14px;
+                    flex-grow: 1;
+                }
+            }
+        }
+    }
+
+    .ant-divider-horizontal{
+        margin: 5px 0;
+    }
+}
+//头部导航栏
+.ant-layout-header{
+    height:@header_height;
+    width: 100%;
+    padding: 0;
+    background-color: #f5f5f5;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    position: fixed;
+    z-index: 10;
+    //图片logo
+    .logo_container{
+
+        width: @logo_container_width;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        //透明图片的阴影
+        filter: drop-shadow(1px 1px 0.5px #8c8c8c);
+
+        img{
+
+            width: 100%;
+            height: 85%;
+            cursor: pointer;
+            &:hover{
+              animation: headShake;
+              animation-duration: 1s;
+            }
+
+        }
+    }
+    //导航栏容器
+    .header_nav_container{
+        height: 100%;
+        width: calc(100% - @logo_container_width);
+        line-height: @header_height;
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        //-------input框样式
+        .ant-input-affix-wrapper{
+            width: 200px;
+            height: 30px;
+            .ant-input-prefix{
+                font-size: 14px;
+            }
+            input{
+              font-size: 14px;
+              height: 100%;
+              width: 100%;
+            }
+        }
+        .ant-input-affix-wrapper-focused{
+            width: 400px;
+            & + .navigation{
+              width: @navigation_width - 200px;
+            }
+        }
+        //--------
+        .navigation{
+          height: @header_height;
+          width:@navigation_width;
+          //菜单样式
+          .ant-menu-light{
+              height: 100%;
+              background-color: #f5f5f5;
+              li{
+                  user-select: none;
+                  font-size: 15px;
+              }
+          }
+        }
+        //-------用户导航栏 通知和头像
+        .user_container{
+            //宽度写死防抖动
+            max-width: 150px;
+            min-width: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            user-select: none;
+            //评论图标
+            .anticon-comment{
+              font-size: 30px;
+              color: #8c8c8c;
+            }
+            // 用户头像
+            .ant-avatar-circle{
+                width: 35px;
+                height: 35px;
+                img{
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+}
+//content容器
+.ant-layout-content{
+    height: calc(100vh - @header_height);
+    margin-top: @header_height;
+    z-index: 5;
+    .site-layout-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        //overflow: auto;
+        .ant-back-top{
+            div{
+                height: 40px;
+                width: 40px;
+                line-height: 40px;
+                border-radius: 50%;
+                background-color: #434343;
+                color: #fff;
+                text-align:center;
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+
+    .ant-layout-header{
+        .logo_container{
+            display: none;
+        }
+        .header_nav_container{
+            width: 100%;
+            .ant-input-affix-wrapper{
+                width: 20%;
+                input{
+                    width: 100%;
+                }
+            }
+            .ant-input-affix-wrapper-focused{
+                width: 30%;
+                & + .navigation{
+                    width: 50%;
+                }
+            }
+            .navigation{
+                width: 60%;
+            }
+            .user_container{
+                max-width: 20%;
+                min-width: 20%;
+            }
+        }
+
+    }
+}
+
+//------------------

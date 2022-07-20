@@ -1,0 +1,258 @@
+@article-present:article-present;
+// 收藏夹多选框
+.collections-modal-container{
+    max-height: 200px;
+    overflow: auto;
+    .ant-checkbox-group{
+        width: 50%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        .ant-checkbox-group-item{
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            padding: 0 5px;
+            transition: background-color ease-in-out 0.2s;
+            border-radius: 5px;
+            &:hover{
+                background-color: #f0f0f0;
+            }
+        }
+    }
+    .ant-space-horizontal{
+        width: 100%;
+        margin-top: 10px;
+        padding: 0 25%;
+        div{
+            flex-grow: 1;
+            text-align: center;
+        }
+    }
+}
+
+.@{article-present}-container{
+    width: 1050px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    .article-action-nav{
+        position: fixed;
+        left: 5%;
+        top: 30%;
+        height: 250px;
+        width: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .@{article-present}-major-container{
+        width: 850px;
+        display: flex;
+        flex-direction: column;
+        margin-right: 50px;
+
+        //文章标题
+        .ant-card-head-title{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .ant-skeleton{
+            background-color: #fff;
+            width: 100%;
+            padding: 0 20px;
+            margin-bottom: 18px;
+        }
+        //两个容器
+        .ant-card{
+            margin-bottom: 18px;
+
+            .article-show-container{
+                width: 750px;
+                .ant-divider{
+                    margin-top: 5px;
+                }
+               .article-author-header{
+                   .ant-page-header-heading-tags{
+                       // 头部标签限制
+                       .ant-tag{
+                           max-width: 70px;
+                           overflow: hidden;
+                           text-overflow: ellipsis;
+                           white-space: nowrap;
+                       }
+                   }
+                   //页头描述
+                   .ant-page-header-content{
+                       color: #8c8c8c;
+                   }
+               }
+                // 文章内容换行
+                .article-content{
+                    word-break: break-all;
+                    word-wrap:break-word;
+                }
+
+            }
+            .article-comment-container{
+                min-height: 140px;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                .comment-title{
+                    font-weight: bold;
+                    font-size: 20px;
+                    margin-bottom: 10px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    //发送评论的控制选项
+                    .custom-comment-action{
+                        display: flex;
+                        justify-content: space-between;
+                        width: 160px;
+                    }
+
+                }
+                .custom-comment-form{
+
+                    .comment-input{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        .ant-input-textarea{
+                            width: 80%;
+                            padding-top: 10px;
+                            .ant-input{
+                                max-height: 80px;
+                                min-height: 80px;
+                                background-color: #f5f5f5;
+                            }
+                        }
+                    }
+                }
+                .comment-list{
+
+                    .ant-comment{
+                        margin: 5px 0;
+                        .ant-comment-content{
+                            // 用户发布时间
+                            .ant-comment-content-author-time{
+                                color: #8c8c8c;
+                            }
+
+                            //追评区背景
+                            .subcomment-container{
+                                background-color: #f8f8f8;
+                                padding: 0 15px;
+                                border-radius: 8px;
+                                .more-subcomment-button{
+                                    width: 100%;
+                                    margin-bottom: 10px;
+                                }
+
+                            }
+                            // 评论内容区 分为内容和评论发送器
+                            .comment-content-container{
+                                .comment{
+                                    margin: 5px 0;
+                                    font-family: -apple-system,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial
+                                }
+                                // 文章评论文字大小
+                                .comment-content{
+                                    color: #434343;
+                                }
+                                // 被回复者的评论
+                                .reply-comment{
+                                    border: 1px solid #bfbfbf;
+                                    border-radius: 4px;
+                                    background-color: #f7f7f7;
+                                    color: #8c8c8c;
+                                    padding: 5px;
+
+                                }
+                                // 用户敏感评论 将不会显示
+                                .no-reply-comment{
+                                    color:#ff4d4f;
+                                }
+                                .comment-editor{
+                                    padding: 10px 20px;
+                                    textarea{
+                                        min-height: 80px;
+                                        max-height: 80px;
+                                    }
+                                    .ant-btn-primary{
+                                        margin-top: 10px;
+                                        margin-right: 10px;
+                                    }
+                                }
+                            }
+                            // 底部图标
+                            .ant-comment-actions{
+                                margin-top: 5px;
+                                .anticon{
+                                    font-size: 14px;
+                                }
+                                .comment-action {
+                                    padding-right: 4px;
+                                    padding-left: 6px;
+                                    cursor: auto;
+                                }
+                            }
+
+                        }
+
+                    }
+                }
+            }
+        }
+
+    }
+    .article-minor-container{
+
+        .article-card-container{
+            position: sticky;
+            .article-card-item{
+                width: 250px;
+                margin-bottom: 15px;
+                background-color: #fff;
+
+            }
+            // markdown文章的目录
+            .article-markdown-catalog{
+                .md-catalog-link{
+                    padding: 10px 15px;
+                }
+            }
+        }
+
+        .markdown-sticky-box{
+            top: -119px;
+        }
+        .common-sticky-box{
+            top: 60px;
+        }
+
+    }
+
+}
+@media(max-width: 1200px){
+    .@{article-present}-container{
+        display: flex;
+        width: 100%;
+        padding: 0;
+        .@{article-present}-major-container{
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .article-minor-container,.article-action-nav{
+            display: none;
+        }
+    }
+
+}
+

@@ -1,0 +1,131 @@
+@editpage_nav_height:62px;
+@input_title_width:500px;
+.Editor_Container{
+  .ant-layout-header{
+    height:@editpage_nav_height;
+
+    width: 100%;
+    padding: 0 20px;
+    background-color: #f5f5f5;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    //头部左边标签
+    div:first-child{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: @input_title_width + 20px;
+      span{
+        display: block;
+        margin-right: 10px;
+      }
+      input{
+        width: @input_title_width;
+        font-size: 20px;
+      }
+    }
+
+    .user_editor_operation{
+      display: flex;
+      justify-content: space-around;
+      flex-direction: row;
+      align-items: center;
+      padding-left: 10px;
+      width: 320px;
+      .anticon-swap{
+        font-size: 20px;
+      }
+      span{
+        display: block;
+        margin: 0 5px;
+      }
+      // 用户头像
+      .ant-avatar-circle{
+        width: 35px;
+        height: 35px;
+        img{
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .ant-layout-content{
+    padding: 15px 20px;
+    height: calc(100vh - @editpage_nav_height);
+    overflow: hidden;
+    position: relative;
+    margin-top: @editpage_nav_height;
+    .editor-site-layout-content{
+      overflow: hidden;
+      height: 100%;
+      //markdown组件
+      .markdown_editor{
+        height: 100%;
+        box-shadow: 1px 1px 4px 2px #d9d9d9;
+        .md-preview-wrapper{
+          user-select: none;
+        }
+        .anticon-smile,.anticon-highlight{
+          font-size: 14px;
+          height: 24px;
+          width: 22px;
+          //line-height: 24px;
+          //margin-right: 2px;
+        }
+        // markdown表情
+        .emojis{
+          display: flex;
+          flex-wrap: wrap;
+          width: 300px;
+          li{
+            height: 30px;
+            width: 30px;
+            border: 1px solid #f0f0f0;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+            &::marker{
+              content: '';
+            }
+            &:hover{
+              background-color: #d9d9d9;
+            }
+          }
+        }
+      }
+      //　普通文章界面
+      .editor-wrapper{
+        height: 100%;
+        background-color: #fff;
+        box-shadow: 1px 1px 4px 2px #d9d9d9;
+        .bf-content{
+          height: 86%;
+        }
+      }
+
+    }
+  }
+}
+@media (max-width: 1000px){
+  .Editor_Container{
+    .ant-layout-header{
+      div:first-child{
+        width: 40%;
+        input{
+          width: 100%;
+          font-size: 16px;
+        }
+      }
+    }
+
+    .md-content{
+      flex-direction: column;
+    }
+  }
+
+
+}

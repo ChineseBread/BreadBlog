@@ -1,0 +1,91 @@
+.user-notice-container{
+    height: 100%;
+    width: 80%;
+    padding: 15px 20px;
+    .ant-card{
+        height: 100%;
+        .ant-card-body{
+            height: calc(100% - 58px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            //导航标签
+            .ant-tabs{
+                width: 65%;
+            }
+            //所有notice下的item
+            div[class $= notice-container]{
+                width: 65%;
+                max-height: 100%;
+                overflow: auto;
+                div[class $= item]{
+                    padding: 0 10px;
+                    border-radius: 5px;
+                    transition: background-color ease-out 0.1s;
+                    &:hover{
+                        background-color: #fbfbfb;
+                    }
+                }
+            }
+            .info-notice-container{
+                .comment-info-item{
+                    //用户发送的评论
+                    .reply-comment{
+                        margin-top: 5px;
+                        padding: 5px 10px;
+                        background-color: #f0f0f0;
+                        border-radius: 5px;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+                    // 回复按钮
+                    .ant-comment-actions{
+                        li{
+                            float: right;
+                            .anticon,.comment-action{
+                                margin-right: 5px;
+                            }
+                        }
+                    }
+
+
+                    .comment-editor{
+                        padding: 10px 20px;
+                        .ant-btn-primary{
+                            margin-top: 10px;
+                            margin-right: 10px;
+                        }
+                    }
+                }
+                .fans-info-item{
+                    .ant-comment-content-detail{
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                }
+            }
+            .article-name{
+                cursor: pointer;
+                color: #85a5ff;
+                transition: color ease-out 0.1s;
+                &:hover{
+                    color: #2f54eb;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 1000px) {
+    .user-notice-container{
+        width: 100%;
+        .ant-card{
+            .ant-card-body{
+                .ant-tabs,div[class $= notice-container]{
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+}

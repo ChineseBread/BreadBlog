@@ -1,0 +1,146 @@
+//文章选项删除和编辑
+.article-dropdown{
+    width: 100px;
+    .anticon{
+        margin-right: 20px;
+    }
+}
+
+.user-home-container{
+    //height: 100%; sticky不设置height
+    width: 1200px;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-evenly;
+
+    //左边list区域
+    .user-card-list-container{
+        width: 700px;
+        // 用户头部
+        .user-header-container{
+            margin-bottom: 10px;
+            background-color: #fff;
+            box-shadow: 1px 1px 5px -1px #d9d9d9;
+            position: sticky;
+            top: -190px;
+            z-index: 1;
+            // 头像区 头像和背景图
+            .user-avatar-container{
+                position: relative;
+                height: 200px;
+                .user-background{
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                    box-shadow: 0 2px 5px -2px #8c8c8c;
+                    button{
+                        position: absolute;
+                        top: 10px;
+                        right: 20px;
+                    }
+                    img{
+                        width: 100%;
+                    }
+                }
+                .ant-avatar-circle{
+                    height: 100px;
+                    width: 100px;
+                    position: absolute;
+                    box-shadow: 1px 1px 3px 1px #595959;
+                    top: 50px;
+                    left: 300px;
+                }
+            }
+            .user-info-container{
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                text-align: center;
+                font-size: 25px;
+                .author-name{
+                    margin-right: 10px;
+                }
+            }
+        }
+        //用户关注列表
+        .user-subscribe-list{
+            background-color: #fff;
+            .user-subscribe-item{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 15px;
+            }
+        }
+        // 用户动态列表
+        .user-dynamics-list{
+            .dynamic-description{
+                padding: 10px 20px;
+                border-bottom: 1px solid #f0f0f0;
+                color: #8c8c8c;
+                .time-from-now{
+                    margin-right: 5px;
+                }
+            }
+            .ant-result{
+                background-color: #fff;
+            }
+        }
+    }
+    //右边框
+    .user-minor-container{
+        width: 270px;
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .user-card-container{
+            position: sticky;
+            top: 60px;
+            .ant-card-head-title:hover{
+                animation: headShake;
+                animation-duration: 1s;
+            }
+            .user-minor-card{
+                width: 100%;
+                margin-bottom: 15px;
+                .tags-list-container{
+                    span{
+                        margin: 5px;
+                        cursor: pointer;
+                        &:hover{
+                            background-color: #d9d9d9;
+                            transition:background-color 0.1s ease-in-out;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
+@media (max-width: 1000px) {
+    .user-home-container{
+        width: 100%;
+        padding-top: 0;
+        .user-card-list-container{
+            width: 100%;
+            .user-header-container{
+                top: 50px;
+                .user-avatar-container{
+                    height: 70%;
+                    .ant-avatar-circle{
+                        width: 20%;
+                        height: 70%;
+                        left: 40%;
+                        top: 20%;
+                    }
+                }
+            }
+
+        }
+        .user-minor-container{
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,112 @@
+// 盒子阴影样式
+.box-shadow{
+    transition: box-shadow ease-out 0.2s;
+    box-shadow: 1px 1px 4px -1px #bfbfbf;
+    &:hover{
+        box-shadow: 1px 1px 6px -2px #8c8c8c;
+    }
+}
+
+//粒子
+#background{
+    background: linear-gradient(-120deg,#d6e4ff,#fff1f0, #f5f5f5);
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+}
+
+// 清楚滚动条
+.clear-scroll{
+    &::-webkit-scrollbar { width: 0 !important }
+}
+//字体样式
+.sounso-rare{
+    font-family: sounso-rare, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+.shangshou{
+    font-family: shangshou, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+//---------------文章列表
+.infinite-scroll-component__outerdiv{
+    width: 100%;
+}
+//无线滚动容器
+.infinite-scroll-component{
+    overflow: unset !important;
+}
+//no data
+.ant-list-empty-text{
+    background-color: #fff;
+    user-select: none;
+}
+//右边框时间显示
+.time-container{
+    display: flex;
+    height: 60px;
+    overflow: hidden;
+    .icon-a-qingtianbaitian,.icon-wanshang,.icon-bangwan,.icon-shangwu{
+        font-size: 40px;
+        color: #595959;
+    }
+    .time-info{
+        width: calc(100% - 40px);
+        text-align: center;
+        font-size: 20px;
+        line-height: 65px;
+        h1{
+            color:#595959;
+        }
+    }
+}
+//文章卡片
+.article-list-item{
+    width: 100%;
+    margin-bottom: 15px;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 2px 2px 4px -2px #d9d9d9;
+    position: relative;
+    &:hover{
+        background-color: #f9f9f9;
+        transition: background-color ease-out 0.2s;
+    }
+
+    .ant-avatar-circle{
+        cursor: pointer;
+    }
+    //文章换行省略
+    .article-list-item-content{
+        word-break: break-all;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3; /* 这里是超出几行省略 */
+        overflow: hidden;
+        cursor: pointer;
+    }
+    .ant-list-item-extra{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        img{
+            width: 100%;
+        }
+    }
+}
+@media (min-width: 576px) {
+    //单列模式
+    .single-column{
+        .article-list-item{
+            .ant-list-item-extra{
+                max-width: 200px;
+            }
+        }
+    }
+}
