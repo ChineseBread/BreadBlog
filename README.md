@@ -3,7 +3,7 @@
 目前做Next.js网站开发,博客系统先放一放
 # BreadBlog
 基于React开发的博客系统 [项目演示视频](https://www.bilibili.com/video/BV1k5411m7bf)
-
+该项目为[BreadNote](https://github.com/Watish/BreadNote)项目升级改版,将笔记功能融合进博客
 ### 技术栈:
 * React 18 with hooks
 * React Router V6
