@@ -10,7 +10,7 @@
 * TypeScript
 * Less
 * Ant-Design
-* posspx-to-rem(屏幕分辨率适配)
+* postpx-to-rem(屏幕分辨率适配)
 ### 包含以下功能
 #### 1. 公共文章
   * 文章按热度随机最新推送
