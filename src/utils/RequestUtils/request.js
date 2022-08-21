@@ -1,5 +1,8 @@
 import axios from "axios";
 import qs from 'qs'
+/**
+* @description type your own api url here all requests will be send by functions below
+*/
 function doRequest({url,data,method}){
     data = getQueryData(data)
     return new Promise((resolve, reject) => {
